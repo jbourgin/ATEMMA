@@ -101,14 +101,13 @@ if numSession == 1
     trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'w');
     ImageFileF = fopen([resultsFolder '/images' num2str(subID) 'Female.txt'],'w');
     ImageFileH = fopen([resultsFolder '/images' num2str(subID) 'Male.txt'],'w');
-    fprintf(outputfile, 'subID\t Session\t Trial\t Task\t Phase\t Emotion\t Gender\t Side\t imageFile\t response\t corResp \t RT \t StartTrial \t StartImage \t StartScreenResp \t StartRespPpt \n');
     fprintf(trigfile, 'Session\t startTrigger\t typeTrigger \n');
     fprintf(ImageFileF, 'Session\t Image \n');
     fprintf(ImageFileH, 'Session\t Image \n');
-    fclose(outputfile);
     fclose(trigfile);
+    fclose(ImageFileF);
+    fclose(ImageFileH);
 end
-outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'a');
 trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
 
 % Initialize the matrix where will be put the onsets.
@@ -139,9 +138,16 @@ try
     Screen('Preference', 'SkipSyncTests', 1);
     
     [window, wRect]=Screen('OpenWindow',screenNumber, 0,[],32,2);
-
+        
     [wW, wH]=WindowSize(window);
     HideCursor;
+    
+    if numSession == 1
+        fprintf(outputfile, 'coordinates screen: %d\t %d \n', wW, wH);
+        fprintf(outputfile, 'subID\t Session\t Trial\t Task\t Phase\t Emotion\t Gender\t Side\t imageFile\t response\t corResp \t RT \t StartTrial \t StartImage \t StartScreenResp \t StartRespPpt \n');
+        fclose(outputfile);
+    end
+    outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'a');
 
     Screen('FillRect', window, backgroundcolor);
     Screen('Flip', window);
@@ -310,6 +316,8 @@ try
             fprintf(ImageFileF, '%i\t %s \n', numSession, num2str(ListNumberFOk(indexImg)));
             fprintf(ImageFileH, '%i\t %s \n', numSession, num2str(ListNumberHOk(indexImg)));
         end
+        fclose(ImageFileF);
+        fclose(ImageFileH);
 
         %We propose to redo a calibration
         HideCursor;
