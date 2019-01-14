@@ -1,12 +1,13 @@
 dummymode = 1;%1 : mouse; 0 : eye-tracking
 waitForFixation = 0;
-godMode = 0; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
+godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
-%subjectWantsTrainingInGeneral = 0;
+classicSessions = [1,2];
+gazeSessions = [3,4];
 
 numDummy = 2; %number of dummy trials per minibloc
 DummyTimeOut = 8; %time duration of each dummy trial
-TrialDuration = 9; %time duration of a full trial (fixation cross + stimulus + response screen)
+TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + response screen)
 ImageTimeOut = 5; %time duration of stimulus presentation
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
 
@@ -25,12 +26,13 @@ hurryup=0;
 
 %Screen selection
 nbScreen = Screen('Screens');
-if max(size(nbScreen) > 2)
-    screenNumber=2;
-elseif max(size(nbScreen) > 1)
-    screenNumber=1;
+if max(size(nbScreen) > 1)
+    screenNumber = max(nbScreen);
+    mainScreen = min(nbScreen);
+    mono = 0;
 else
-    screenNumber=0;
+    screenNumber = min(nbScreen);
+    mono = 1;
 end
 
 %Background and text color
@@ -41,7 +43,7 @@ textColor = black;
 
 decHeightScreen = 6; %Value used for ellipse computation
 
-numBlocks = 2; %number of blocks per task
+numBlocks = 1; %number of blocks per session
 nTrialsPerBlock = 24; %number of trials per block
 nTrialsPerMiniBloc = 4; %number of trials per mini bloc.
 

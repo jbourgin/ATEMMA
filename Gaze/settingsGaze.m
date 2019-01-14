@@ -90,6 +90,7 @@ ConsignesGazeTraining2 = ['Essayez de cligner des yeux le moins possible\nlorsqu
     
 Answer = [emotionalCategoriesFr{1},' (1), ', emotionalCategoriesFr{2} ,' (2), ou ', emotionalCategoriesFr{3} ,' (3) ?'];
 
+EndSession = 'Merci, cette phase est terminée.';
 End = 'Merci, le test est terminé.';
 
 EndTraining = 'L''entraînement est terminé.';

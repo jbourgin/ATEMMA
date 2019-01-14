@@ -67,13 +67,13 @@ outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'a');
 trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
 
 % Initialize the matrix where will be put the onsets.
-names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic', 'Baseline'};
-durations = {5, 5, 5, 5, 5, 5, 5};
+names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic'};
+durations = {5, 5, 5, 5, 5, 5};
 
 global onsets;
 global firstTrig;
 firstTrig = 'None';
-onsets = {[],[],[],[],[],[],[]};
+onsets = {[],[],[],[],[],[]};
 
 % Initialize KbQueue which will be used to get keyboard presses.
 KbQueueCreate(listDevices);

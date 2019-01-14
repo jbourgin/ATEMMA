@@ -19,6 +19,7 @@ global names;
 global durations;
 global onsets;
 global subID;
+global numSession;
 
 if waitingTrigger
 	disp('Waiting for trigger');
@@ -46,7 +47,7 @@ if waitingTrigger
                 % We record the time value of the trigger press in file
                 % trigfile.
 				pressTrig = firstPress(KbName(triggerKeys{resk}));
-                fprintf(trigfile, '%f\t %s \n', pressTrig, 'Trigger');
+                fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'Trigger');
                 % We record the time value of the trigger press in the edffile
                 % as well.
                 if dummymode == 0
@@ -92,7 +93,7 @@ else
 			sca;
 			ShowCursor;
 			Priority(0);
-            fichier_out = [resultsFolder '/onsets' num2str(subID) '.mat'];
+            fichier_out = [resultsFolder '/onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
 			save(fichier_out, 'names', 'onsets', 'durations');
             fclose(outputfile);
             fclose(trigfile);
@@ -137,7 +138,7 @@ else
                 end
                 % We write the time value of the trigger press in the
                 % trigger file.
-				fprintf(trigfile, '%f\t %s \n',firstPress(KbName(triggerKeys{resk})), 'Informative');
+				fprintf(trigfile, '%i\t %f\t %s \n',numSession, firstPress(KbName(triggerKeys{resk})), 'Informative');
             end
         end
     end

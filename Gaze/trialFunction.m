@@ -23,6 +23,7 @@ global wH;
 global wRect;
 global outputfile;
 global subID;
+global numSession;
 
 UnchangingSettingsGaze;
 for miniBloc = 1:numMiniBloc
@@ -407,7 +408,7 @@ for miniBloc = 1:numMiniBloc
 					resp = 'None';
                 end
                 %We record informations in the subject file.
-                fprintf(outputfile, '%i\t %i\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %i\t %f\t %f\t %f\t %f\t %s\t \n',subID, trialCounter, char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), file, resp, corResp, rt*1000, startTrial, startImage, startRespTime, num2str(respTime));
+                fprintf(outputfile, '%i\t %i\t %i\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %i\t %f\t %f\t %f\t %f\t %s\t \n',subID, numSession, trialCounter, char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), file, resp, corResp, rt*1000, startTrial, startImage, startRespTime, num2str(respTime));
 				responseAlreadyRecorded = 1;
                 disp('Response time at time');
                 disp(num2str(respTime));

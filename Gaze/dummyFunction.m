@@ -15,6 +15,7 @@ global wW;
 global wRect;
 global outputfile;
 global subID;
+global numSession;
 
 for dummyNum = 1:numDummy
 
@@ -67,7 +68,7 @@ for dummyNum = 1:numDummy
     %start the trial, and then put its time of apparition in a matrix.
     if MRITest
         [~, ~, pressTrig] = KbQueueCheckWrapper(1);
-        onsets{7}(length(onsets{7})+1,1) = pressTrig;
+        %onsets{7}(length(onsets{7})+1,1) = pressTrig;
     end
 
     if dummymode == 0
@@ -98,7 +99,7 @@ for dummyNum = 1:numDummy
     Screen(window, 'FillRect', backgroundcolor);
 
     %Write trial informations in the subject file.
-    fprintf(outputfile, '%i\t None\t %s\t %s\t None\t None\t None\t Dummy\t None\t None\t None\t %f\t %f\t None\t None\t \n',subID, char(task), char(globalTask), startTrial, startDummy);
+    fprintf(outputfile, '%i\t %i\ None\t %s\t %s\t None\t None\t None\t Dummy\t None\t None\t None\t %f\t %f\t None\t None\t \n',subID, numSession, char(task), char(globalTask), startTrial, startDummy);
 
     if dummymode == 0
         WaitSecs(0.001);

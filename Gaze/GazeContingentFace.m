@@ -23,7 +23,7 @@ end
 %If we have done a training where each response was already assigned to a
 %given key, we get back this assignement and apply it to the main task.
 emotionalCategoriesFound = 0;
-emotionfilename = ['..' filesep 'Results' filesep 'emotion' num2str(subID) '.txt'];
+emotionfilename = ['..' filesep 'Results' filesep 'emotion' num2str(subID) 'Session' num2str(numSession) '.txt'];
 if exist(emotionfilename, 'file')
     emotionfile = importdata(emotionfilename, '\n');
     emotionalCategories = {emotionfile{1}, emotionfile{2}, emotionfile{3}};
@@ -35,7 +35,19 @@ end
 
 %If we have done sessions before this one, we get the numbers of the images
 %already displayed, in order to not redisplay them.
+ImageFileMatrixF = [];
+ImageFileMatrixH = [];
 if numSession > 1
+    ImageFilenameF = ['..' filesep 'Results' filesep 'images' num2str(subID) 'Female.txt'];
+    ImageFilenameH = ['..' filesep 'Results' filesep 'images' num2str(subID) 'Male.txt'];
+    ImageFilesF = importdata(ImageFilenameF, '\n');
+    ImageFilesH = importdata(ImageFilenameH, '\n');
+    for elt = length(ImageFilesF)
+        ImageFileMatrixF(length(ImageFileMatrixF)+1,1) = ImageFilesF(elt);
+    end
+    for elt = length(ImageFilesH)
+        ImageFileMatrixH(length(ImageFileMatrixH)+1,1) = ImageFilesH(elt);
+    end
 end
 
 % Load the variables required (number of subjects, images...)
@@ -51,17 +63,19 @@ if length(baseFileName) > 11
     fileName = [resultsFolder '/gc666.rtf'];
     subID = 666;
 end
-if exist(fileName,'file')
-    if ~IsOctave
-        resp=questdlg({['The file ' fileName ' already exists']; 'Do you want to overwrite it?'},...
-            'duplicate warning','cancel','ok','ok');
-    else
-        resp=input(['The file ' fileName ' already exists. Do you want to overwrite it? [Type ok for overwrite]'], 's');
-    end
+if numSession == 1
+    if exist(fileName,'file')
+        if ~IsOctave
+            resp=questdlg({['The file ' fileName ' already exists']; 'Do you want to overwrite it?'},...
+                'duplicate warning','cancel','ok','ok');
+        else
+            resp=input(['The file ' fileName ' already exists. Do you want to overwrite it? [Type ok for overwrite]'], 's');
+        end
 
-    if ~strcmp(resp,'ok') %abort experiment if overwriting was not confirmed
-        disp('Experiment aborted');
-        return
+        if ~strcmp(resp,'ok') %abort experiment if overwriting was not confirmed
+            disp('Experiment aborted');
+            return
+        end
     end
 end
 
@@ -82,23 +96,29 @@ end
 % Return the result file
 global outputfile;
 global trigfile;
-outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'w');
-trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'w');
-fprintf(outputfile, 'subID\t trial\t Task\t Phase\t Emotion\t Gender\t Side\t imageFile\t response\t corResp \t RT \t StartTrial \t StartImage \t StartScreenResp \t StartRespPpt \n');
-fprintf(trigfile, 'startTrigger\t typeTrigger \n');
-fclose(outputfile);
-fclose(trigfile);
+if numSession == 1
+    outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'w');
+    trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'w');
+    ImageFileF = fopen([resultsFolder '/images' num2str(subID) 'Female.txt'],'w');
+    ImageFileH = fopen([resultsFolder '/images' num2str(subID) 'Male.txt'],'w');
+    fprintf(outputfile, 'subID\t Session\t Trial\t Task\t Phase\t Emotion\t Gender\t Side\t imageFile\t response\t corResp \t RT \t StartTrial \t StartImage \t StartScreenResp \t StartRespPpt \n');
+    fprintf(trigfile, 'Session\t startTrigger\t typeTrigger \n');
+    fprintf(ImageFileF, 'Session\t Image \n');
+    fprintf(ImageFileH, 'Session\t Image \n');
+    fclose(outputfile);
+    fclose(trigfile);
+end
 outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'a');
 trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
 
 % Initialize the matrix where will be put the onsets.
-names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic', 'Baseline'};
-durations = {5, 5, 5, 5, 5, 5, 5};
+names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic'};
+durations = {5, 5, 5, 5, 5, 5};
 
 global onsets;
 global firstTrig;
 firstTrig = 'None';
-onsets = {[],[],[],[],[],[],[]};
+onsets = {[],[],[],[],[],[]};
 
 % Initialize KbQueue which will be used to get keyboard presses.
 KbQueueCreate(listDevices);
@@ -113,6 +133,11 @@ try
     global wH;
     global wW;
     global wRect;
+    
+    % Disable all visual alerts
+    Screen('Preference', 'VisualDebugLevel', 0);
+    Screen('Preference', 'SkipSyncTests', 1);
+    
     [window, wRect]=Screen('OpenWindow',screenNumber, 0,[],32,2);
 
     [wW, wH]=WindowSize(window);
@@ -208,17 +233,20 @@ try
     end
     
     % We loop on the two conditions (Gaze and Classic)
-    for numTask = 1:length(taskType)
-        if godMode == 0 || godMode == 2
-            if numTask == 1
-                disp('Appuyez sur Entrée pour continuer.');
-                showTextToPass(Consignes, 'keyboard');
-				showTextToPass(Consignes2, 'keyboard');
-            else
-                disp('Appuyez sur Entrée pour continuer.');
-                showTextToPass(ConsignesGazeTraining, 'keyboard');
-				showTextToPass(ConsignesGazeTraining2, 'keyboard');
-            end
+    %for numTask = 1:length(taskType)
+    if godMode == 0 || godMode == 2
+        if numSession < 3
+            disp('Appuyez sur Entrée pour continuer.');
+            showTextToPass(Consignes, 'keyboard');
+            showTextToPass(Consignes2, 'keyboard');
+            globalTask = taskType(1);
+        else
+            disp('Appuyez sur Entrée pour continuer.');
+            showTextToPass(ConsignesGazeTraining, 'keyboard');
+            showTextToPass(ConsignesGazeTraining2, 'keyboard');
+            globalTask = taskType(2);
+        end
+        %{
         else
             if numTask == 1
                 disp('Appuyez sur Entrée pour continuer.');
@@ -240,109 +268,90 @@ try
             end
         end
         globalTask = taskType(numTask);
-        %{
-        if subjectWantsTrainingInGeneral
-            showTextToPass(Training, 'keyboard');
-        end
-        % TRAINING
-        subjectWantsTraining = 1;
-        if subjectWantsTrainingInGeneral
-            timeBetweenTrials = 1;
-            while subjectWantsTraining
-                task = "Training";
-
-                %Line : emotion, column : gender, 3d dimension : side.
-                countSideTraining = ones(3,2,2);
-
-                % We force drift correction at each block beginning
-                if dummymode == 0
-                    showTextToPass(Drift, 'keyboard');
-                    EyelinkDoDriftCorrection(el);
-                end
-
-                trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, nTrialsTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, TrialTimeOut, 1, 0);
-                %Proposes training redo
-                disp(RedoExp);
-                while 1
-                    showText(Redo);
-                    [~, firstPress] = KbQueueCheckWrapper(0);
-                    if firstPress(KbName('backspace'))
-                        break;
-                    elseif firstPress(KbName('return'))
-                        subjectWantsTraining = 0;
-                        waitReleaseKeys();
-                        break;
-                    end
-                end
-            end
-            timeBetweenTrials = 0.01;
-        end
-        if subjectWantsTrainingInGeneral && godMode == 0
-            showTextToPass(BeginTask, 'keyboard');
-        end
-%}
-        % MAIN TASK
-        task = "Main task";
-        %We create the list of images for the current block
-        for numBloc = 1:numBlocks
-            countSide = ones(3,2,2);
-            countSide(:,:,:) = countSide(:,:,:) + 1;
-
-            ListBloc = {};
-            for elt = 1:(nTrialsPerBlock/(length(genderType)*length(emotionalCategories)))
-                numImageF = ListNumberImagesF(elt);
-                numImageH = ListNumberImagesH(elt);
-                imgNameAngryF = strcat('Femme','_','Angry',num2str(numImageF),'.png');
-                imgNameFearF = strcat('Femme','_','Fear',num2str(numImageF),'.png');
-                imgNameNeutralF = strcat('Femme','_','Neutral',num2str(numImageF),'.png');
-                imgNameAngryH = strcat('Homme','_','Angry',num2str(numImageH),'.png');
-                imgNameFearH = strcat('Homme','_','Fear',num2str(numImageH),'.png');
-                imgNameNeutralH = strcat('Homme','_','Neutral',num2str(numImageH),'.png');
-                ListBloc = [ListBloc,imgNameAngryF,imgNameFearF,imgNameNeutralF,imgNameAngryH,imgNameFearH,imgNameNeutralH];
-            end
-            %We remove the numbers used in the current block from the list of possible images
-            for indexImg = (nTrialsPerBlock/(length(genderType)*length(emotionalCategories))):-1:1 % To correct for last block (error matrix index)
-                ListNumberImagesF(indexImg) = [];
-                ListNumberImagesH(indexImg) = [];
-            end
-
-            %We propose to redo a calibration
-            HideCursor;
-            if dummymode == 0 && godMode == 2
-                proposeCalibration()
-            % We force drift correction at each block beginning
-                HideCursor;
-                showTextToPass(Drift, 'keyboard');
-                EyelinkDoDriftCorrection(el);
-            end
-
-            % We perform the trials for the current block.
-            trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerMiniBloc, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, nTrialsPerBlock/nTrialsPerMiniBloc, 1);
-
-            if numBloc < 2
-                if godMode == 0 || godMode == 2
-                    disp('Cliquez sur la souris pour continuer.');
-                    showTextToPass(Pause, 'mouse');
-                    showTextToPass(Pause2, 'mouse');
-                else
-                    startPause = Screen('Flip', window);
-                    while (GetSecs - startPause) < TrialDuration
-                        WaitSecs(0.01);
-                        showText(Pause);
-                        KbQueueCheckWrapper(0);
-                    end
-                    startPause2 = Screen('Flip', window);
-                    while (GetSecs - startPause2) < TrialDuration
-                        WaitSecs(0.01);
-                        showText(Pause2);
-                        KbQueueCheckWrapper(0);
-                    end
-                end
-            end
-        end
+        %}
     end
-    
-    showTextToPass(End, 'keyboard');
+    % MAIN TASK
+    task = "Main task";
+    %We create the list of images for the current block
+    for numBloc = 1:numBlocks
+        countSide = ones(3,2,2);
+        countSide(:,:,:) = countSide(:,:,:) + 1;
+
+        ListBloc = {};
+        ListNumberFOk = [];
+        ListNumberHOk = [];
+        for elt = 1:length(ListNumberImagesF)
+            if ~ismember(ListNumberImagesF(elt), ImageFileMatrixF)
+                ListNumberFOk(length(ListNumberFOk)+1) = ListNumberImagesF(elt);
+            end
+        end
+        for elt = 1:length(ListNumberImagesH)
+            if ~ismember(ListNumberImagesH(elt), ImageFileMatrixH)
+                ListNumberHOk(length(ListNumberHOk)+1) = ListNumberImagesH(elt);
+            end
+        end
+        for elt = 1:(nTrialsPerBlock/(length(genderType)*length(emotionalCategories)))
+            numImageF = ListNumberFOk(elt);
+            numImageH = ListNumberHOk(elt);
+            imgNameAngryF = strcat('Femme','_','Angry',num2str(numImageF),'.png');
+            imgNameFearF = strcat('Femme','_','Fear',num2str(numImageF),'.png');
+            imgNameNeutralF = strcat('Femme','_','Neutral',num2str(numImageF),'.png');
+            imgNameAngryH = strcat('Homme','_','Angry',num2str(numImageH),'.png');
+            imgNameFearH = strcat('Homme','_','Fear',num2str(numImageH),'.png');
+            imgNameNeutralH = strcat('Homme','_','Neutral',num2str(numImageH),'.png');
+            ListBloc = [ListBloc,imgNameAngryF,imgNameFearF,imgNameNeutralF,imgNameAngryH,imgNameFearH,imgNameNeutralH];
+        end
+        %We remove the numbers used in the current block from the list of possible images
+        ImageFileF = fopen([resultsFolder '/images' num2str(subID) 'Female.txt'],'a');
+        ImageFileH = fopen([resultsFolder '/images' num2str(subID) 'Male.txt'],'a');
+        for indexImg = (nTrialsPerBlock/(length(genderType)*length(emotionalCategories))):-1:1 % To correct for last block (error matrix index)
+            %ListNumberImagesF(indexImg) = [];
+            %ListNumberImagesH(indexImg) = [];
+            fprintf(ImageFileF, '%i\t %s \n', numSession, num2str(ListNumberFOk(indexImg)));
+            fprintf(ImageFileH, '%i\t %s \n', numSession, num2str(ListNumberHOk(indexImg)));
+        end
+
+        %We propose to redo a calibration
+        HideCursor;
+        if dummymode == 0 && godMode == 2
+            proposeCalibration()
+            % We force drift correction at each block beginning
+            HideCursor;
+            showTextToPass(Drift, 'keyboard');
+            EyelinkDoDriftCorrection(el);
+        end
+
+        % We perform the trials for the current block.
+        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerMiniBloc, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, nTrialsPerBlock/nTrialsPerMiniBloc, 1);
+        %{
+        if numBloc < 2
+            if godMode == 0 || godMode == 2
+                disp('Cliquez sur la souris pour continuer.');
+                showTextToPass(Pause, 'mouse');
+                showTextToPass(Pause2, 'mouse');
+            else
+                startPause = Screen('Flip', window);
+                while (GetSecs - startPause) < TrialDuration
+                    WaitSecs(0.01);
+                    showText(Pause);
+                    KbQueueCheckWrapper(0);
+                end
+                startPause2 = Screen('Flip', window);
+                while (GetSecs - startPause2) < TrialDuration
+                    WaitSecs(0.01);
+                    showText(Pause2);
+                    KbQueueCheckWrapper(0);
+                end
+            end
+        end
+        %}
+    end
+
+    if numSession < 4
+        showTextToPass(EndSession, 'keyboard');
+    else
+        showTextToPass(End, 'keyboard');
+    end
     KbQueueStop(listDevices);
 
     % Close experiment
@@ -369,7 +378,7 @@ try
     sca;
     ShowCursor;
     Priority(0);
-    fichier_out = [resultsFolder '/onsets' num2str(subID) '.mat'];
+    fichier_out = [resultsFolder '/onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
     save(fichier_out, 'names', 'onsets', 'durations');
     fclose(outputfile);
     fclose(trigfile);
@@ -384,7 +393,7 @@ catch
     sca;
     ShowCursor;
     Priority(0);
-	fichier_out = [resultsFolder '/onsets' num2str(subID) '.mat'];
+	fichier_out = [resultsFolder '/onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
     save(fichier_out, 'names', 'onsets', 'durations');
     psychrethrow(psychlasterror);
     fclose(outputfile);
