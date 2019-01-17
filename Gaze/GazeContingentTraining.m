@@ -13,6 +13,8 @@ UnchangingSettingsGaze;
 settingsGaze;
 trialCounter = 1;
 timeBetweenTrials = 1;
+global numSession;
+numSession = 'Training';
 
 % select subID
 global subID;
@@ -201,7 +203,7 @@ try
                 EyelinkDoDriftCorrection(el);
             end
 
-            trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, nTrialsTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, TrialTimeOut, 1, 0);
+            trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, nTrialsTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, TrialTimeOut, 0);
             %Proposes training redo
             disp(RedoExpTraining);
             while 1

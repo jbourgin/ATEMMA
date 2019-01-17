@@ -12,6 +12,8 @@ settingsGaze;
 
 trialCounter = 1;
 
+global numSession;
+numSession = 'test';
 %Input subject ID
 global subID;
 subID = str2double(input('Entrez le numéro du sujet : ', 's'));
@@ -59,8 +61,8 @@ global outputfile;
 global trigfile;
 outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'w');
 trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'w');
-fprintf(outputfile, 'subID\t trial\t Task\t Phase\t Emotion\t Gender\t Side\t imageFile\t response\t corResp \t RT \t StartTrial \t StartImage \t StartScreenResp \t StartRespPpt \n');
-fprintf(trigfile, 'startTrigger\t typeTrigger \n');
+fprintf(outputfile, 'subID\t Session\t trial\t Task\t Phase\t Emotion\t Gender\t Side\t imageFile\t response\t corResp \t RT \t StartTrial \t StartImage \t StartScreenResp \t StartRespPpt \n');
+fprintf(trigfile, 'Session\t startTrigger\t typeTrigger \n');
 fclose(outputfile);
 fclose(trigfile);
 outputfile = fopen([resultsFolder '/gc' num2str(subID) '.rtf'],'a');
@@ -68,7 +70,7 @@ trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
 
 % Initialize the matrix where will be put the onsets.
 names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic'};
-durations = {5, 5, 5, 5, 5, 5};
+durations = {0, 0, 0, 0, 0, 0};
 
 global onsets;
 global firstTrig;
@@ -195,7 +197,7 @@ try
             showTextToPass(ConsignesGazeTraining2, 'keyboard');
         end
         % MAIN TASK
-        task = "Main task";
+        task = "Test";
         %We create the list of images for the current block
         countSide = zeros(3,2,2);
         countSide(1,1,2) = 1;
@@ -215,7 +217,7 @@ try
         end
 
         % We perform the trials for the current block.
-        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, 3, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1, 1);
+        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, 3, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1);
     end
     
     showTextToPass(End, 'keyboard');

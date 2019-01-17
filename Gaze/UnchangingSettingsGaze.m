@@ -5,7 +5,8 @@ MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
 classicSessions = [1,2];
 gazeSessions = [3,4];
 
-numDummy = 2; %number of dummy trials per minibloc
+numDummy = 6; %number of dummy trials at the end of each session
+numTrialDummies = 8; %number of dummy trials during session
 DummyTimeOut = 8; %time duration of each dummy trial
 TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + response screen)
 ImageTimeOut = 5; %time duration of stimulus presentation
@@ -44,8 +45,7 @@ textColor = black;
 decHeightScreen = 6; %Value used for ellipse computation
 
 numBlocks = 1; %number of blocks per session
-nTrialsPerBlock = 24; %number of trials per block
-nTrialsPerMiniBloc = 4; %number of trials per mini bloc.
+nTrialsPerBlock = 32; %number of trials per block
 
 %Ellipse and stimulus dimensions.
 heightEllipse = 470;

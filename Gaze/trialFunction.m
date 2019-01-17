@@ -1,5 +1,5 @@
 %Function called to display blocks of trials.
-function [trialCounter, ListImages] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, numTrials, ListImages, imFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, numMiniBloc, MRItrial)
+function [trialCounter, ListImages] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, numTrials, ListImages, imFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, MRItrial)
 %trialCounter -> int. Trial number.
 %ListImages -> List of char.
 %Answer -> char. Text.
@@ -12,7 +12,6 @@ function [trialCounter, ListImages] = trialFunction(Answer, emotionalCategories,
 %task -> char.
 %timeBetweenTrials -> double.
 %TrialTimeOut -> double.
-%numMiniBloc -> integer. Number of mini blocks (one block contains 4 experimental and 2 dummy trials).
 %MRItrial -> bool. True if the test is performed in the MRI (we wait for triggers), else false.
 
 global onsets;
@@ -26,10 +25,21 @@ global subID;
 global numSession;
 
 UnchangingSettingsGaze;
-for miniBloc = 1:numMiniBloc
-	trainingScore = 0;
-    for trialNum = 1:numTrials
-
+trainingScore = 0;
+for trialNum = 1:numTrials
+    trialDone = 1;
+    if strcmp('Main', task)
+        possibleTrial = {'Dummy', 'Exp', 'Exp', 'Exp'};
+        randListTrial = randperm(length(possibleTrial));
+        randTrial = possibleTrial{randListTrial(1)};
+        if numTrialDummies > 0 && trialCounter > 1 && (strcmp(randTrial, 'Dummy') || (strcmp(randTrial, 'Exp') && (trialNum+numTrialDummies)>numTrials))
+            dummyFunction(timeBetweenTrials, task, globalTask);
+            numTrialDummies = numTrialDummies - 1;
+        else
+            trialDone = 0;
+        end
+    end
+    if ~trialDone || strcmp('Training', task) || strcmp('Test', task)
         if dummymode == 0
             % Sending a 'TRIALID' message to mark the start of a trial.
             Eyelink('Message', 'TRIALID %d', trialCounter);
@@ -196,7 +206,7 @@ for miniBloc = 1:numMiniBloc
             end
             onsets{cellNum}(length(onsets{cellNum})+1,1) = pressTrig;
         end
-		
+
         if dummymode == 0
             Eyelink('Message', 'stop fixation');
         end
@@ -350,9 +360,9 @@ for miniBloc = 1:numMiniBloc
 
             KbQueueCheckWrapper(0);
         end
-        
+
         if dummymode == 0
-			Eyelink('Message', 'stop image showing');
+            Eyelink('Message', 'stop image showing');
         end
 
         %Reset screen to display fixation cross at the beginning
@@ -365,9 +375,9 @@ for miniBloc = 1:numMiniBloc
         HideCursor;
 
         startRespTime = Screen('Flip', window); % Start of trial for response
-		if dummymode == 0
-			Eyelink('Message', 'start response screen at time %s', num2str(startRespTime));
-		end
+        if dummymode == 0
+            Eyelink('Message', 'start response screen at time %s', num2str(startRespTime));
+        end
         while GetSecs - startRespTime <= TrialTimeOut
             WaitSecs(0.01);
             showText(Answer);
@@ -391,7 +401,7 @@ for miniBloc = 1:numMiniBloc
                             respTime = firstPress(responseKeys{resk});
                         end
                     end
-                    
+
                     if resp ~= 0
                         if dummymode == 0
                             Eyelink('Message', '{"Le sujet a repondu"} at time %s', num2str(respTime));
@@ -404,12 +414,12 @@ for miniBloc = 1:numMiniBloc
             %the first time only), we record it and do not leave the loop.
             if (resp ~= 0 && responseAlreadyRecorded == 0) || (respTime - startRespTime >= TrialTimeOut && responseAlreadyRecorded == 0)
                 rt = respTime - startRespTime;
-				if resp == 0
-					resp = 'None';
+                if resp == 0
+                    resp = 'None';
                 end
                 %We record informations in the subject file.
-                fprintf(outputfile, '%i\t %i\t %i\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %i\t %f\t %f\t %f\t %f\t %s\t \n',subID, numSession, trialCounter, char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), file, resp, corResp, rt*1000, startTrial, startImage, startRespTime, num2str(respTime));
-				responseAlreadyRecorded = 1;
+                fprintf(outputfile, '%i\t %s\t %i\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %i\t %f\t %f\t %f\t %f\t %s\t \n',subID, num2str(numSession), trialCounter, char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), file, resp, corResp, rt*1000, startTrial, startImage, startRespTime, num2str(respTime));
+                responseAlreadyRecorded = 1;
                 disp('Response time at time');
                 disp(num2str(respTime));
                 disp(rt);
@@ -422,18 +432,18 @@ for miniBloc = 1:numMiniBloc
             WaitSecs(0.001);
             Eyelink('Message', 'BLANK_SCREEN');
             % stop the recording of eye-movements for the current trial
-            Eyelink('Message', 'Task, GlobalTask, Emotion, Gender, Side, SubResp, CorResp, RespTime');
-            Eyelink('Message', '%s, %s, %s, %s, %s, %s, %i, %s', char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), char(resp), corResp, num2str(rt*1000));
+            Eyelink('Message', 'Variable categories: Task, Session, GlobalTask, Emotion, Gender, Side, SubResp, CorResp, RespTime');
+            Eyelink('Message', 'Variable values: %s %i %s %s %s %s %s %i %s', char(task), numSession, char(globalTask), char(randEmo), char(randGender), char(randSide), char(resp), corResp, num2str(rt*1000));
             Eyelink('Message', 'stop_trial');
             Eyelink('StopRecording');
         end
         trialCounter = trialCounter + 1;
-		
+
         %If we are not in MRI (i.e., if we are in a training), we send
         %feedback to the participant on the correctness of his response.
-		if ~MRItrial
-			Screen(window, 'FillRect', backgroundcolor);
-			startFeedback = Screen('Flip', window);
+        if ~MRItrial
+            Screen(window, 'FillRect', backgroundcolor);
+            startFeedback = Screen('Flip', window);
             if strcmp(resp, 'None')
                 feedbackText = ['Vous n''avez pas répondu.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
             elseif str2num(resp) ~= corResp
@@ -442,24 +452,25 @@ for miniBloc = 1:numMiniBloc
                 feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2num(resp)} ,'. Bonne réponse !'];
                 trainingScore = trainingScore + 1;
             end
-			while GetSecs - startFeedback < 5
-				showText(feedbackText)
-			end
-		end
-
+            while GetSecs - startFeedback < 5
+                showText(feedbackText)
+            end
+        end
     end
-    %After the experimental trials, we send the dummy ones (cross fixation
-    %at the center of the screen).
-    if MRItrial
+end
+%After the experimental trials, we send the dummy ones (cross fixation
+%at the center of the screen).
+if MRItrial && strcmp('Main', task)
+    for dummyNum = 1:numDummy
         dummyFunction(timeBetweenTrials, task, globalTask);
-    %If we are in a training, we show the participant his
-    %score. Accordingly, we will or will not redo a training.
-	else
-		startFeedbackScore = Screen('Flip', window);
-		feedbackScore = ['Votre score est de ', num2str(trainingScore), ' sur ' , num2str(numTrials), '.'];
-		while GetSecs - startFeedbackScore < 5
-			showText(feedbackScore)
-		end
+    end
+%If we are in a training, we show the participant his
+%score. Accordingly, we will or will not redo a training.
+elseif strcmp('Training', task)
+    startFeedbackScore = Screen('Flip', window);
+    feedbackScore = ['Votre score est de ', num2str(trainingScore), ' sur ' , num2str(numTrials), '.'];
+    while GetSecs - startFeedbackScore < 5
+        showText(feedbackScore)
     end
 end
 end

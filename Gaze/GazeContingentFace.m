@@ -16,21 +16,29 @@ end
 %Input session number
 global numSession;
 numSession = str2double(input('Entrez le numéro de session (1, 2, 3 ou 4): ', 's'));
-while isnan(numSession) || fix(numSession) ~= numSession  || numSession > 4 %(floor(log10(numSession)) + 1) ~= 1
-    numSession = str2double(input('Le numéro n''est pas un entier ou est trop élevé. Entrez le numéro de session: ', 's'));
+onsetfilename = ['..' filesep 'Results' filesep 'onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
+while exist(onsetfilename, 'file') || isnan(numSession) || fix(numSession) ~= numSession  || numSession > 4 %(floor(log10(numSession)) + 1) ~= 1
+    numSession = str2double(input('Le numéro n''est pas un entier ou est trop élevé ou la session existe déjà pour ce sujet. Entrez le numéro de session: ', 's'));
+    onsetfilename = ['..' filesep 'Results' filesep 'onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
 end
 
 %If we have done a training where each response was already assigned to a
 %given key, we get back this assignement and apply it to the main task.
 emotionalCategoriesFound = 0;
-emotionfilename = ['..' filesep 'Results' filesep 'emotion' num2str(subID) 'Session' num2str(numSession) '.txt'];
+emotionfilename = ['..' filesep 'Results' filesep 'emotion' num2str(subID) '.txt'];
 if exist(emotionfilename, 'file')
     emotionfile = importdata(emotionfilename, '\n');
     emotionalCategories = {emotionfile{1}, emotionfile{2}, emotionfile{3}};
-else
+elseif numSession == 1
     emotionalCategories = {'Neutral','Angry','Fear'};
     % Randomize the assignement of categories to buttons
     emotionalCategories = emotionalCategories(randperm(length(emotionalCategories)));
+    %Save key assignement in a file.
+    emotionfile = fopen(['..' filesep 'Results' filesep 'emotion' num2str(subID) '.txt'],'w');
+    fprintf(emotionfile, '%s\n%s\n%s\n', emotionalCategories{1}, emotionalCategories{2}, emotionalCategories{3});
+    fclose(emotionfile);
+else
+    disp('Il y a un problème : nous sommes après la première session et le participant n''a pas de touches fixes assignées aux émotions !')
 end
 
 %If we have done sessions before this one, we get the numbers of the images
@@ -102,8 +110,8 @@ if numSession == 1
     ImageFileF = fopen([resultsFolder '/images' num2str(subID) 'Female.txt'],'w');
     ImageFileH = fopen([resultsFolder '/images' num2str(subID) 'Male.txt'],'w');
     fprintf(trigfile, 'Session\t startTrigger\t typeTrigger \n');
-    fprintf(ImageFileF, 'Session\t Image \n');
-    fprintf(ImageFileH, 'Session\t Image \n');
+    %fprintf(ImageFileF, 'Session\t Image \n');
+    %fprintf(ImageFileH, 'Session\t Image \n');
     fclose(trigfile);
     fclose(ImageFileF);
     fclose(ImageFileH);
@@ -112,7 +120,7 @@ trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
 
 % Initialize the matrix where will be put the onsets.
 names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic'};
-durations = {5, 5, 5, 5, 5, 5};
+durations = {0, 0, 0, 0, 0, 0};
 
 global onsets;
 global firstTrig;
@@ -277,7 +285,7 @@ try
         %}
     end
     % MAIN TASK
-    task = "Main task";
+    task = "Main";
     %We create the list of images for the current block
     for numBloc = 1:numBlocks
         countSide = ones(3,2,2);
@@ -296,7 +304,7 @@ try
                 ListNumberHOk(length(ListNumberHOk)+1) = ListNumberImagesH(elt);
             end
         end
-        for elt = 1:(nTrialsPerBlock/(length(genderType)*length(emotionalCategories)))
+        for elt = 1:((nTrialsPerBlock-numTrialDummies)/(length(genderType)*length(emotionalCategories)))
             numImageF = ListNumberFOk(elt);
             numImageH = ListNumberHOk(elt);
             imgNameAngryF = strcat('Femme','_','Angry',num2str(numImageF),'.png');
@@ -307,17 +315,6 @@ try
             imgNameNeutralH = strcat('Homme','_','Neutral',num2str(numImageH),'.png');
             ListBloc = [ListBloc,imgNameAngryF,imgNameFearF,imgNameNeutralF,imgNameAngryH,imgNameFearH,imgNameNeutralH];
         end
-        %We remove the numbers used in the current block from the list of possible images
-        ImageFileF = fopen([resultsFolder '/images' num2str(subID) 'Female.txt'],'a');
-        ImageFileH = fopen([resultsFolder '/images' num2str(subID) 'Male.txt'],'a');
-        for indexImg = (nTrialsPerBlock/(length(genderType)*length(emotionalCategories))):-1:1 % To correct for last block (error matrix index)
-            %ListNumberImagesF(indexImg) = [];
-            %ListNumberImagesH(indexImg) = [];
-            fprintf(ImageFileF, '%i\t %s \n', numSession, num2str(ListNumberFOk(indexImg)));
-            fprintf(ImageFileH, '%i\t %s \n', numSession, num2str(ListNumberHOk(indexImg)));
-        end
-        fclose(ImageFileF);
-        fclose(ImageFileH);
 
         %We propose to redo a calibration
         HideCursor;
@@ -330,7 +327,7 @@ try
         end
 
         % We perform the trials for the current block.
-        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerMiniBloc, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, nTrialsPerBlock/nTrialsPerMiniBloc, 1);
+        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerBlock, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1);
         %{
         if numBloc < 2
             if godMode == 0 || godMode == 2
@@ -354,6 +351,16 @@ try
         end
         %}
     end
+    
+    %We remove the numbers used in the current block from the list of possible images
+    ImageFileF = fopen([resultsFolder '/images' num2str(subID) 'Female.txt'],'a');
+    ImageFileH = fopen([resultsFolder '/images' num2str(subID) 'Male.txt'],'a');
+    for indexImg = ((nTrialsPerBlock-numTrialDummies)/(length(genderType)*length(emotionalCategories))):-1:1 % To correct for last block (error matrix index)
+        fprintf(ImageFileF, '%s \n', num2str(ListNumberFOk(indexImg)));
+        fprintf(ImageFileH, '%s \n', num2str(ListNumberHOk(indexImg)));
+    end
+    fclose(ImageFileF);
+    fclose(ImageFileH);
 
     if numSession < 4
         showTextToPass(EndSession, 'keyboard');

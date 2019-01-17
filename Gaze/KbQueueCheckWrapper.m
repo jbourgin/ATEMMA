@@ -138,7 +138,7 @@ else
                 end
                 % We write the time value of the trigger press in the
                 % trigger file.
-				fprintf(trigfile, '%i\t %f\t %s \n',numSession, firstPress(KbName(triggerKeys{resk})), 'Informative');
+				fprintf(trigfile, '%s\t %f\t %s \n',num2str(numSession), firstPress(KbName(triggerKeys{resk})), 'Informative');
             end
         end
     end
