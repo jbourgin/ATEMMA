@@ -1,4 +1,4 @@
-dummymode = 1;%1 : mouse; 0 : eye-tracking
+dummymode = 0;%1 : mouse; 0 : eye-tracking
 waitForFixation = 0;
 godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).

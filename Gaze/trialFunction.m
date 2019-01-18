@@ -362,7 +362,7 @@ for trialNum = 1:numTrials
         end
 
         if dummymode == 0
-            Eyelink('Message', 'stop image showing');
+            Eyelink('Message', 'stop image showing at time %s', num2str(GetSecs));
         end
 
         %Reset screen to display fixation cross at the beginning
@@ -433,7 +433,7 @@ for trialNum = 1:numTrials
             Eyelink('Message', 'BLANK_SCREEN');
             % stop the recording of eye-movements for the current trial
             Eyelink('Message', 'Variable categories: Task, Session, GlobalTask, Emotion, Gender, Side, SubResp, CorResp, RespTime');
-            Eyelink('Message', 'Variable values: %s %i %s %s %s %s %s %i %s', char(task), numSession, char(globalTask), char(randEmo), char(randGender), char(randSide), char(resp), corResp, num2str(rt*1000));
+            Eyelink('Message', 'Variable values: %s %s %s %s %s %s %s %i %s', char(task), num2str(numSession), char(globalTask), char(randEmo), char(randGender), char(randSide), char(resp), corResp, num2str(rt*1000));
             Eyelink('Message', 'stop_trial');
             Eyelink('StopRecording');
         end
