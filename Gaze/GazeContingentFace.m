@@ -318,7 +318,7 @@ try
 
         %We propose to redo a calibration
         HideCursor;
-        if strcmp(globalTask, taskType(2)) %&& dummymode == 0 && godMode == 2
+        if strcmp(globalTask, taskType(2)) && dummymode == 0 && godMode == 2
             calibrationNotOk = 1;
             while calibrationNotOk
                 showTextToPass(TestGaze, 'keyboard');
