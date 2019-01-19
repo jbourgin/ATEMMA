@@ -21,7 +21,7 @@ global onsets;
 global subID;
 global numSession;
 
-if waitingTrigger
+if waitingTrigger == 1 || waitingTrigger == 2 || waitingTrigger == 3
 	disp('Waiting for trigger');
 
     while 1
@@ -47,7 +47,13 @@ if waitingTrigger
                 % We record the time value of the trigger press in file
                 % trigfile.
 				pressTrig = firstPress(KbName(triggerKeys{resk}));
-                fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'Trigger');
+                if waitingTrigger == 1
+                    fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'Trigger');
+                elseif waitingTrigger == 2
+                    fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'Dummy');
+                elseif waitingTrigger == 3
+                    fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'GazeVerif');
+                end
                 % We record the time value of the trigger press in the edffile
                 % as well.
                 if dummymode == 0
@@ -57,7 +63,7 @@ if waitingTrigger
                 % variable firstTrig, which will be used to calculate the
                 % time between this initial trigger and the subsequent
                 % ones.
-                if strcmp(firstTrig, 'None')
+                if strcmp(firstTrig, 'None') && waitingTrigger == 1
                     firstTrig = pressTrig;
                 end
                 pressTrig = pressTrig - firstTrig;

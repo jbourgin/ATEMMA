@@ -203,7 +203,7 @@ try
                 EyelinkDoDriftCorrection(el);
             end
 
-            trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, nTrialsTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, TrialTimeOut, 0);
+            trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, nTrialsTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, TrialTimeOut, 0, 0);
             %Proposes training redo
             disp(RedoExpTraining);
             while 1

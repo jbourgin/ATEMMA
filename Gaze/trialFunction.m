@@ -1,5 +1,5 @@
 %Function called to display blocks of trials.
-function [trialCounter, ListImages] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, numTrials, ListImages, imFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, MRItrial)
+function [trialCounter, ListImages] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, numTrials, ListImages, imFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, MRItrial, gazeVerif)
 %trialCounter -> int. Trial number.
 %ListImages -> List of char.
 %Answer -> char. Text.
@@ -26,26 +26,32 @@ global numSession;
 
 UnchangingSettingsGaze;
 trainingScore = 0;
+
+
+if strcmp('Training', task)
+    responseKeys = {49, 66, 50, 89, 51, 71, 97, 98, 99};
+end
+
 for trialNum = 1:numTrials
     trialDone = 1;
-    if strcmp('Main', task)
+    if strcmp('Main', task) && gazeVerif == 0
         possibleTrial = {'Dummy', 'Exp', 'Exp', 'Exp'};
         randListTrial = randperm(length(possibleTrial));
         randTrial = possibleTrial{randListTrial(1)};
-        if numTrialDummies > 0 && trialCounter > 1 && (strcmp(randTrial, 'Dummy') || (strcmp(randTrial, 'Exp') && (trialNum+numTrialDummies)>numTrials))
+        if numTrialDummies > 0 && trialNum > 1 && (strcmp(randTrial, 'Dummy') || (strcmp(randTrial, 'Exp') && (trialNum+numTrialDummies)>numTrials))
             dummyFunction(timeBetweenTrials, task, globalTask);
             numTrialDummies = numTrialDummies - 1;
         else
             trialDone = 0;
         end
     end
-    if ~trialDone || strcmp('Training', task) || strcmp('Test', task)
+    if ~trialDone || strcmp('Training', task) || strcmp('Test', task) || gazeVerif
         if dummymode == 0
             % Sending a 'TRIALID' message to mark the start of a trial.
-            Eyelink('Message', 'TRIALID %d', trialCounter);
+            Eyelink('Message', 'TRIALID %s', num2str(trialCounter));
 
             % This supplies the title at the bottom of the eyetracker display
-            Eyelink('command', 'record_status_message "TRIAL %d"', trialCounter);
+            Eyelink('command', 'record_status_message "TRIAL %s"', num2str(trialCounter));
 
             % start recording eye position (preceded by a short pause so that
             % the tracker can finish the mode transition)
@@ -126,14 +132,16 @@ for trialNum = 1:numTrials
         end
 
         %Determine the coordinates according to the side of the screen on which the image will be
-        %displayed.
+        %displayed (the coordinates are for the cross: they correspond to
+        %the opposite side of the image)
         centerX = 0;
         if strcmp(randSide,'Left')
-            centerX = wW - (wW/2);
-            shiftHorizontal = wW/4;
-        elseif strcmp(randSide,'Right')
             centerX = wW + (wW/2);
             shiftHorizontal = (- wW)/4;
+        elseif strcmp(randSide,'Right')
+            centerX = wW - (wW/2);
+            shiftHorizontal = wW/4;
+            
         end
 
         %Image texture.
@@ -183,28 +191,34 @@ for trialNum = 1:numTrials
 
         if MRItrial && MRITest
             %We wait for the trigger.
-            [~, ~, pressTrig] = KbQueueCheckWrapper(1);
+            if gazeVerif == 0
+                [~, ~, pressTrig] = KbQueueCheckWrapper(1);
+            else
+                KbQueueCheckWrapper(3);
+            end
             %We put the time value of the trigger (minus the time value of the
             %first trigger) in a matrix, in the cell corresponding to the
             %current trial condition.
-            if strcmp(globalTask, 'Gaze')
-                if strcmp(randEmo, 'Angry')
-                    cellNum = 1;
-                elseif strcmp(randEmo, 'Fear')
-                    cellNum = 2;
-                elseif strcmp(randEmo, 'Neutral')
-                    cellNum = 3;
+            if gazeVerif == 0
+                if strcmp(globalTask, 'Gaze')
+                    if strcmp(randEmo, 'Angry')
+                        cellNum = 1;
+                    elseif strcmp(randEmo, 'Fear')
+                        cellNum = 2;
+                    elseif strcmp(randEmo, 'Neutral')
+                        cellNum = 3;
+                    end
+                else
+                    if strcmp(randEmo, 'Angry')
+                        cellNum = 4;
+                    elseif strcmp(randEmo, 'Fear')
+                        cellNum = 5;
+                    elseif strcmp(randEmo, 'Neutral')
+                        cellNum = 6;
+                    end
                 end
-            else
-                if strcmp(randEmo, 'Angry')
-                    cellNum = 4;
-                elseif strcmp(randEmo, 'Fear')
-                    cellNum = 5;
-                elseif strcmp(randEmo, 'Neutral')
-                    cellNum = 6;
-                end
+                onsets{cellNum}(length(onsets{cellNum})+1,1) = pressTrig;
             end
-            onsets{cellNum}(length(onsets{cellNum})+1,1) = pressTrig;
         end
 
         if dummymode == 0
@@ -219,7 +233,7 @@ for trialNum = 1:numTrials
         startImage = Screen('Flip', window); % Start of image showing
 
         if dummymode == 0
-            Eyelink('Message', 'start_trial %i %s at time %s', trialCounter, file, num2str(startImage));
+            Eyelink('Message', 'start_trial %s %s at time %s', num2str(trialCounter), file, num2str(startImage));
         end
         % If we are in dummymode, we display the mouse cursor to simulate
         % eye movement.
@@ -391,11 +405,11 @@ for trialNum = 1:numTrials
                     for resk = 1:length(responseKeys)
                         if firstPress(responseKeys{resk})
                             resp = responseKeys{resk};
-                            if resp == 49 || resp == 66
+                            if resp == 49 || resp == 66 || resp == 97
                                 resp = '1';
-                            elseif resp == 50 || resp == 89
+                            elseif resp == 50 || resp == 89 || resp == 98
                                 resp = '2';
-                            elseif resp == 51 || resp == 71
+                            elseif resp == 51 || resp == 71 || resp == 99
                                 resp = '3';
                             end
                             respTime = firstPress(responseKeys{resk});
@@ -418,7 +432,7 @@ for trialNum = 1:numTrials
                     resp = 'None';
                 end
                 %We record informations in the subject file.
-                fprintf(outputfile, '%i\t %s\t %i\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %i\t %f\t %f\t %f\t %f\t %s\t \n',subID, num2str(numSession), trialCounter, char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), file, resp, corResp, rt*1000, startTrial, startImage, startRespTime, num2str(respTime));
+                fprintf(outputfile, '%i\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %s\t %i\t %f\t %f\t %f\t %f\t %s\t \n',subID, num2str(numSession), num2str(trialCounter), char(task), char(globalTask), char(randEmo), char(randGender), char(randSide), file, resp, corResp, rt*1000, startTrial, startImage, startRespTime, num2str(respTime));
                 responseAlreadyRecorded = 1;
                 disp('Response time at time');
                 disp(num2str(respTime));
@@ -437,7 +451,9 @@ for trialNum = 1:numTrials
             Eyelink('Message', 'stop_trial');
             Eyelink('StopRecording');
         end
-        trialCounter = trialCounter + 1;
+        if gazeVerif == 0
+            trialCounter = trialCounter + 1;
+        end
 
         %If we are not in MRI (i.e., if we are in a training), we send
         %feedback to the participant on the correctness of his response.
@@ -460,13 +476,13 @@ for trialNum = 1:numTrials
 end
 %After the experimental trials, we send the dummy ones (cross fixation
 %at the center of the screen).
-if MRItrial && strcmp('Main', task)
+if MRItrial && strcmp('Main', task) && gazeVerif == 0
     for dummyNum = 1:numDummy
         dummyFunction(timeBetweenTrials, task, globalTask);
     end
 %If we are in a training, we show the participant his
 %score. Accordingly, we will or will not redo a training.
-elseif strcmp('Training', task)
+elseif strcmp('Training', task) && gazeVerif == 0
     startFeedbackScore = Screen('Flip', window);
     feedbackScore = ['Votre score est de ', num2str(trainingScore), ' sur ' , num2str(numTrials), '.'];
     while GetSecs - startFeedbackScore < 5

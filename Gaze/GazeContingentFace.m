@@ -318,16 +318,45 @@ try
 
         %We propose to redo a calibration
         HideCursor;
-        if dummymode == 0 && godMode == 2
+        if strcmp(globalTask, taskType(2)) %&& dummymode == 0 && godMode == 2
+            calibrationNotOk = 1;
+            while calibrationNotOk
+                showTextToPass(TestGaze, 'keyboard');
+                showTextToPass(TestGaze2, 'keyboard');
+                fakeCountSide = ones(3,2,2);
+                trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, 1, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, TrialTimeOut, 1, 1);
+                proposeCalibration()
+                disp(RedoGazeTest);
+                while 1
+                    WaitSecs(0.01);
+                    [pressed, firstPress] = KbQueueCheckWrapper(0);
+                    if pressed
+                        if firstPress(KbName('n')) || firstPress(KbName('N'))
+                            calibrationNotOk = 0;
+                            break;
+                        elseif firstPress(KbName('o')) || firstPress(KbName('O'))
+                            break;
+                        end
+                    end
+                end
+            end
+        end
+        if dummymode == 0 && godMode == 2 && globalTask == taskType(1)
             proposeCalibration()
+        end
+        if dummymode == 0 && godMode == 2
             % We force drift correction at each block beginning
             HideCursor;
             showTextToPass(Drift, 'keyboard');
             EyelinkDoDriftCorrection(el);
         end
+        for dummyScan = 1:numDummyScans
+            showText(waitingDummies);
+            KbQueueCheckWrapper(2);
+        end
 
         % We perform the trials for the current block.
-        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerBlock, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1);
+        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerBlock, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1, 0);
         %{
         if numBloc < 2
             if godMode == 0 || godMode == 2
