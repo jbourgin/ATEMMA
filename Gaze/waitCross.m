@@ -39,7 +39,7 @@ if waitForFixation == 1
         while varLoop < 50 && recordingTime < limitRecordingTime
             recordingTime = recordingTime + 1;
             WaitSecs(0.02);
-            KbQueueCheckWrapper(0);
+            KbQueueCheckWrapper(0, 'Informative');
             if dummymode == 0
                 if Eyelink( 'NewFloatSampleAvailable') > 0
                     % get the sample in the form of an event structure
@@ -87,7 +87,7 @@ if waitForFixation == 1
 else
     while (GetSecs - beginCross) < timeBetweenTrials
         WaitSecs(0.01);
-        KbQueueCheckWrapper(0);
+        KbQueueCheckWrapper(0, 'Informative');
         Screen(window, 'FillRect', backgroundcolor);
         if isdummy ~= 1
             drawCross(centerX/2,centerY/2);

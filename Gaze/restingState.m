@@ -36,7 +36,7 @@ try
         % don't overload the system in realtime-priority:
         WaitSecs(0.1);
         
-        [~, firstPress] = KbQueueCheckWrapper(0);
+        [~, firstPress] = KbQueueCheckWrapper(0, 'Informative');
         if firstPress(KbName('x'))
             break;
         end

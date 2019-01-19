@@ -30,7 +30,7 @@ end
 beginCross = GetSecs;
 while varFixated == 0
     WaitSecs(0.01);
-    KbQueueCheckWrapper(0);
+    KbQueueCheckWrapper(0, 'Informative');
     Screen(window, 'FillRect', backgroundcolor);
     drawCross(centerX/2,wH/2);
     Screen('Flip', window);

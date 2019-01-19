@@ -209,7 +209,7 @@ try
             while 1
                 WaitSecs(0.01);
                 showText(RedoTraining);
-                [~, firstPress] = KbQueueCheckWrapper(0);
+                [~, firstPress] = KbQueueCheckWrapper(0, 'Informative');
                 if firstPress(KbName('backspace'))
                     break;
                 elseif firstPress(KbName('return'))

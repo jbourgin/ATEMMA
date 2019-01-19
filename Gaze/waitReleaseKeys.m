@@ -2,7 +2,7 @@
 function waitReleaseKeys()
 while 1
     WaitSecs(0.01);
-    [pressed, ~] = KbQueueCheckWrapper(0);
+    [pressed, ~] = KbQueueCheckWrapper(0, 'Informative');
     if ~pressed
         break;
     end

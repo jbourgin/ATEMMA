@@ -12,18 +12,18 @@ while 1
     WaitSecs(0.01);
     
     if strcmp(stopsignal, 'keyboard')
-        [~, firstPress] = KbQueueCheckWrapper(0);
+        [~, firstPress] = KbQueueCheckWrapper(0, 'Informative');
         if firstPress(KbName('return'))
             waitReleaseKeys();
             break;
         end
     elseif strcmp(stopsignal, 'mouse')
         [~, ~, buttons]=GetMouse(window);
-        [~, ~] = KbQueueCheckWrapper(0);
+        [~, ~] = KbQueueCheckWrapper(0, 'Informative');
         if any(buttons)
             while 2
                 WaitSecs(0.01);
-                [~, ~] = KbQueueCheckWrapper(0);
+                [~, ~] = KbQueueCheckWrapper(0, 'Informative');
                 [~, ~, buttons]=GetMouse(window);
                 if ~any(buttons)
                     break;

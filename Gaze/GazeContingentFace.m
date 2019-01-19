@@ -271,13 +271,13 @@ try
                 while (GetSecs - startInstructions) < TrialDuration
                     WaitSecs(0.01);
                     showText(ConsignesGazeTraining);
-                    KbQueueCheckWrapper(0);
+                    KbQueueCheckWrapper(0, 'Informative');
                 end
                 startInstructions2 = Screen('Flip', window);
                 while (GetSecs - startInstructions2) < TrialDuration
                     WaitSecs(0.01);
                     showText(ConsignesGazeTraining2);
-                    KbQueueCheckWrapper(0);
+                    KbQueueCheckWrapper(0, 'Informative');
                 end
             end
         end
@@ -329,7 +329,7 @@ try
                 disp(RedoGazeTest);
                 while 1
                     WaitSecs(0.01);
-                    [pressed, firstPress] = KbQueueCheckWrapper(0);
+                    [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
                     if pressed
                         if firstPress(KbName('n')) || firstPress(KbName('N'))
                             calibrationNotOk = 0;
@@ -352,7 +352,7 @@ try
         end
         for dummyScan = 1:numDummyScans
             showText(waitingDummies);
-            KbQueueCheckWrapper(2);
+            KbQueueCheckWrapper(1, 'Dummy');
         end
 
         % We perform the trials for the current block.
@@ -368,13 +368,13 @@ try
                 while (GetSecs - startPause) < TrialDuration
                     WaitSecs(0.01);
                     showText(Pause);
-                    KbQueueCheckWrapper(0);
+                    KbQueueCheckWrapper(0, 'Informative');
                 end
                 startPause2 = Screen('Flip', window);
                 while (GetSecs - startPause2) < TrialDuration
                     WaitSecs(0.01);
                     showText(Pause2);
-                    KbQueueCheckWrapper(0);
+                    KbQueueCheckWrapper(0, 'Informative');
                 end
             end
         end

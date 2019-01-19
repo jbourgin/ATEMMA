@@ -65,7 +65,7 @@ startTrial = waitCross(centerX, centerY, eyeUsed, timeBetweenTrials, 0);
 %If we're interested in getting triggers, we wait for the trigger before we
 %start the trial, and then put its time of apparition in a matrix.
 if MRITest
-    [~, ~, pressTrig] = KbQueueCheckWrapper(1);
+    [~, ~, pressTrig] = KbQueueCheckWrapper(1, 'Baseline');
     %onsets{7}(length(onsets{7})+1,1) = pressTrig;
 end
 
@@ -89,7 +89,7 @@ while GetSecs - startDummy < DummyTimeOut
     % We wait 1 ms each loop-iteration so that we
     % don't overload the system in realtime-priority.
     WaitSecs(0.01);
-    KbQueueCheckWrapper(0);
+    KbQueueCheckWrapper(0, 'Informative');
 end
 
 

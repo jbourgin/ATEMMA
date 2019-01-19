@@ -9,7 +9,7 @@ disp(FailedFixation);
 showText(AdjCamera);
 while 1
     WaitSecs(0.01);
-    [pressed, firstPress] = KbQueueCheckWrapper(0);
+    [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
     if pressed && (firstPress(KbName('c')) || firstPress(KbName('C')) || firstPress(KbName('d')) || firstPress(KbName('D')) || firstPress(KbName('n')) || firstPress(KbName('N')))
         if firstPress(KbName('c')) || firstPress(KbName('C'))
             actionRedone = 'c';

@@ -1,5 +1,5 @@
 % Detects keyboard presses. Wrapper around KbQueueCheck.
-function [pressed, firstPress, pressTrig] = KbQueueCheckWrapper(waitingTrigger)
+function [pressed, firstPress, pressTrig] = KbQueueCheckWrapper(waitingTrigger, triggerType)
 % pressed -> bool. True if a key was pressed, else false.
 % firstPress -> list. List of keys containing time values indicating the
 % first time they were pressed since last call to KbQueueCheck. Each index
@@ -21,8 +21,8 @@ global onsets;
 global subID;
 global numSession;
 
-if waitingTrigger == 1 || waitingTrigger == 2 || waitingTrigger == 3
-	disp('Waiting for trigger');
+if waitingTrigger
+    disp('Waiting for trigger');
 
     while 1
 		WaitSecs(0.001);
@@ -30,40 +30,34 @@ if waitingTrigger == 1 || waitingTrigger == 2 || waitingTrigger == 3
 		[pressed, firstPress, ~, ~, ~] = KbQueueCheck(listDevices);
 
         % We first determine if there was a keypress.
-		if pressed
+        if pressed
 			triggerGot = 0;
             % If so, we determine if this keypress corresponds to a
             % trigger.
             for resk = 1:length(triggerKeys)
-				if firstPress(KbName(triggerKeys{resk}))
+                if firstPress(KbName(triggerKeys{resk}))
 					disp('We got a trigger that triggered (!) at time:');
                     disp(num2str(firstPress(KbName(triggerKeys{resk}))));
 					disp(triggerKeys{resk});
 					triggerGot = 1;
 					break;
-				end
+                end
             end
 			if triggerGot
                 % We record the time value of the trigger press in file
                 % trigfile.
 				pressTrig = firstPress(KbName(triggerKeys{resk}));
-                if waitingTrigger == 1
-                    fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'Trigger');
-                elseif waitingTrigger == 2
-                    fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'Dummy');
-                elseif waitingTrigger == 3
-                    fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, 'GazeVerif');
-                end
+                fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, triggerType);
                 % We record the time value of the trigger press in the edffile
                 % as well.
                 if dummymode == 0
-					Eyelink('Message', 'MRI trigger that triggered got at time %s', num2str(pressTrig));
+					Eyelink('Message', 'MRI %s that triggered at time %s', triggerType, num2str(pressTrig));
                 end
                 % If this was the first trigger, we put its time value in a
                 % variable firstTrig, which will be used to calculate the
                 % time between this initial trigger and the subsequent
                 % ones.
-                if strcmp(firstTrig, 'None') && waitingTrigger == 1
+                if strcmp(firstTrig, 'None') && strcmp(triggerType, 'Trigger')
                     firstTrig = pressTrig;
                 end
                 pressTrig = pressTrig - firstTrig;

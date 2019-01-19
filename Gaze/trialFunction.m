@@ -191,10 +191,10 @@ for trialNum = 1:numTrials
 
         if MRItrial && MRITest
             %We wait for the trigger.
-            if gazeVerif == 0
-                [~, ~, pressTrig] = KbQueueCheckWrapper(1);
+            if gazeVerif
+                KbQueueCheckWrapper(1, 'gazeVerif');
             else
-                KbQueueCheckWrapper(3);
+                [~, ~, pressTrig] = KbQueueCheckWrapper(1, 'Trigger');
             end
             %We put the time value of the trigger (minus the time value of the
             %first trigger) in a matrix, in the cell corresponding to the
@@ -372,7 +372,7 @@ for trialNum = 1:numTrials
             % don't overload the system in realtime-priority:
             WaitSecs(0.01);
 
-            KbQueueCheckWrapper(0);
+            KbQueueCheckWrapper(0, 'Informative');
         end
 
         if dummymode == 0
@@ -397,7 +397,7 @@ for trialNum = 1:numTrials
             showText(Answer);
 
             % Check for response keys
-            [pressed, firstPress] = KbQueueCheckWrapper(0);
+            [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
             if resp == 0
                 respTime = GetSecs;
 
@@ -462,10 +462,10 @@ for trialNum = 1:numTrials
             startFeedback = Screen('Flip', window);
             if strcmp(resp, 'None')
                 feedbackText = ['Vous n''avez pas répondu.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
-            elseif str2num(resp) ~= corResp
-                feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2num(resp)} ,'.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
-            elseif str2num(resp) == corResp
-                feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2num(resp)} ,'. Bonne réponse !'];
+            elseif str2double(resp) ~= corResp
+                feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2double(resp)} ,'.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
+            elseif str2double(resp) == corResp
+                feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2double(resp)} ,'. Bonne réponse !'];
                 trainingScore = trainingScore + 1;
             end
             while GetSecs - startFeedback < 5
