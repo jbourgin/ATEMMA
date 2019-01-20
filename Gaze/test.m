@@ -217,7 +217,9 @@ try
         end
 
         % We perform the trials for the current block.
-        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, 3, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1, 0);
+        for numTrial = 1:3
+            [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0);
+        end
     end
     
     showTextToPass(End, 'keyboard');

@@ -260,29 +260,6 @@ try
             showTextToPass(ConsignesGazeTraining2, 'keyboard');
             globalTask = taskType(2);
         end
-        %{
-        else
-            if numTask == 1
-                disp('Appuyez sur Entrée pour continuer.');
-                showTextToPass(Consignes, 'keyboard');
-				showTextToPass(Consignes2, 'keyboard');
-            else
-                startInstructions = Screen('Flip', window);
-                while (GetSecs - startInstructions) < TrialDuration
-                    WaitSecs(0.01);
-                    showText(ConsignesGazeTraining);
-                    KbQueueCheckWrapper(0, 'Informative');
-                end
-                startInstructions2 = Screen('Flip', window);
-                while (GetSecs - startInstructions2) < TrialDuration
-                    WaitSecs(0.01);
-                    showText(ConsignesGazeTraining2);
-                    KbQueueCheckWrapper(0, 'Informative');
-                end
-            end
-        end
-        globalTask = taskType(numTask);
-        %}
     end
     % MAIN TASK
     task = "Main";
@@ -318,13 +295,16 @@ try
 
         %We propose to redo a calibration
         HideCursor;
+        %For the gaze task, we first make sure that the camera is correctly
+        %calibrated on the participant's gaze.
         if strcmp(globalTask, taskType(2)) && dummymode == 0 && godMode == 2
             calibrationNotOk = 1;
+            TotalListTraining = initializeTrainingList();
             while calibrationNotOk
                 showTextToPass(TestGaze, 'keyboard');
                 showTextToPass(TestGaze2, 'keyboard');
                 fakeCountSide = ones(3,2,2);
-                trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, 1, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, TrialTimeOut, 1, 1);
+                trialFunction(Answer, emotionalCategories, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1);
                 proposeCalibration()
                 disp(RedoGazeTest);
                 while 1
@@ -356,29 +336,32 @@ try
         end
 
         % We perform the trials for the current block.
-        trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, nTrialsPerBlock, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, TrialTimeOut, 1, 0);
-        %{
-        if numBloc < 2
-            if godMode == 0 || godMode == 2
-                disp('Cliquez sur la souris pour continuer.');
-                showTextToPass(Pause, 'mouse');
-                showTextToPass(Pause2, 'mouse');
-            else
-                startPause = Screen('Flip', window);
-                while (GetSecs - startPause) < TrialDuration
-                    WaitSecs(0.01);
-                    showText(Pause);
-                    KbQueueCheckWrapper(0, 'Informative');
-                end
-                startPause2 = Screen('Flip', window);
-                while (GetSecs - startPause2) < TrialDuration
-                    WaitSecs(0.01);
-                    showText(Pause2);
-                    KbQueueCheckWrapper(0, 'Informative');
+        for trialNum = 1:nTrialsPerBlock
+            trialDone = 0;
+            %We choose between a dummy and an experimental trial.
+            if numTrialDummies > 0 && trialNum > 1
+                possibleTrial = {'Dummy', 'Exp', 'Exp', 'Exp'};
+                randListTrial = randperm(length(possibleTrial));
+                randTrial = possibleTrial{randListTrial(1)};
+                if strcmp(randTrial, 'Dummy')
+                    dummyFunction(timeBetweenTrials, task, globalTask);
+                    numTrialDummies = numTrialDummies - 1;
+                    trialDone = 1;
+                elseif strcmp(randTrial, 'Exp') && (trialNum+numTrialDummies)>nTrialsPerBlock
+                    dummyFunction(timeBetweenTrials, task, globalTask);
+                    numTrialDummies = numTrialDummies - 1;
+                    trialDone = 1;
                 end
             end
+            if ~trialDone
+                [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0);
+            end
         end
-        %}
+        %After the experimental trials, we send the dummy ones (cross fixation
+        %at the center of the screen).
+        for dummyNum = 1:numDummy
+            dummyFunction(timeBetweenTrials, task, globalTask);
+        end
     end
     
     %We remove the numbers used in the current block from the list of possible images

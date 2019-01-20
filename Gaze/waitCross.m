@@ -2,14 +2,13 @@
 %corresponding to the timeBetweenTrials value (or until the subject looks
 %at the fixation cross).
 function beginCross = waitCross(centerX, centerY, eyeUsed, timeBetweenTrials, isdummy)
-%beginCross -> integer. Starting time of the fixation cross presentation.
-%centerX -> integer (pixel value). Horizontal coordinate of the cross center
-%centerY -> integer (pixel value). Vertical coordinate of the cross center
-%eyeUsed -> Got from Eyelink('EyeAvailable'). Determines which eye is recorded
-%(left, right or binocular).
-%timeBetweenTrials -> double. Maximum time pf fixation cross presentation
-%allowed.
-%isdummy -> boolean. True if is dummy trial, else false.
+% beginCross -> integer. Starting time of the fixation cross presentation.
+% centerX -> integer (pixel value). Horizontal coordinate of the cross center
+% centerY -> integer (pixel value). Vertical coordinate of the cross center
+% eyeUsed -> Got from Eyelink('EyeAvailable'). Determines which eye is recorded
+% (left, right or binocular).
+% timeBetweenTrials -> double. Maximum time pf fixation cross presentation allowed.
+% isdummy -> boolean. True if is dummy trial, else false.
 
 UnchangingSettingsGaze;
 global window;
