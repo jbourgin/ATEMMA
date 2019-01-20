@@ -12,7 +12,7 @@ emotionalCategories = emotionalCategories(randperm(length(emotionalCategories)))
 UnchangingSettingsGaze;
 settingsGaze;
 trialCounter = 1;
-timeBetweenTrials = 1;
+timeBetweenTrials = 2;
 global numSession;
 numSession = 'Training';
 
@@ -193,6 +193,7 @@ try
         subjectWantsTraining = 1;
         while subjectWantsTraining
             task = "Training";
+            TotalListTraining = initializeTrainingList();
 
             %Line : emotion, column : gender, 3d dimension : side.
             countSideTraining = ones(3,2,2);
@@ -202,17 +203,43 @@ try
                 showTextToPass(Drift, 'keyboard');
                 EyelinkDoDriftCorrection(el);
             end
-
-            trialCounter = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, nTrialsTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, TrialTimeOut, 0, 0);
+            
+            %We perform the training trials.
+            trainingScore = 0;
+            for trialNum = 1:nTrialsTraining
+                [trialCounter, TotalListTraining, countSideTraining, resp, corResp] = trialFunction(Answer, emotionalCategories, trialCounter, countSideTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, 0, 0);
+                %We send feedback to the participant on the correctness of his response.
+                Screen(window, 'FillRect', backgroundcolor);
+                startFeedback = Screen('Flip', window);
+                if strcmp(resp, 'None')
+                    feedbackText = ['Vous n''avez pas répondu.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
+                elseif str2double(resp) ~= corResp
+                    feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2double(resp)} ,'.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
+                elseif str2double(resp) == corResp
+                    feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2double(resp)} ,'. Bonne réponse !'];
+                    trainingScore = trainingScore + 1;
+                end
+                while GetSecs - startFeedback < 5
+                    showText(feedbackText)
+                end
+            end
+            %If we are in a training, we show the participant his
+            %score. Accordingly, we will or will not redo a training.
+            startFeedbackScore = Screen('Flip', window);
+            feedbackScore = ['Votre score est de ', num2str(trainingScore), ' sur ' , num2str(nTrialsTraining), '.'];
+            while GetSecs - startFeedbackScore < 5
+                showText(feedbackScore)
+            end
+            
             %Proposes training redo
             disp(RedoExpTraining);
             while 1
                 WaitSecs(0.01);
                 showText(RedoTraining);
                 [~, firstPress] = KbQueueCheckWrapper(0, 'Informative');
-                if firstPress(KbName('backspace'))
+                if firstPress(KbName('o')) || firstPress(KbName('O'))
                     break;
-                elseif firstPress(KbName('return'))
+                elseif firstPress(KbName('n')) || firstPress(KbName('N'))
                     subjectWantsTraining = 0;
                     waitReleaseKeys()
                     break;

@@ -1,30 +1,7 @@
 KbName('UnifyKeyNames');
 
-imageFormat = 'png';
-
 timeBetweenTrials = 0.01; %1
-TrialTimeOut = 3; %3
 timeBetweenTrialsStandard = 0.01; %1
-
-%%% Get the image files for Training. Images must contain only one .png.
-imageFolderTraining = ['..' filesep 'Training' filesep];
-FemmeAngryListTraining = dir(fullfile(imageFolderTraining,['Femme_Angry*.' imageFormat]));
-FemmeAngryListTraining = {FemmeAngryListTraining(:).name};
-FemmeFearListTraining = dir(fullfile(imageFolderTraining,['Femme_Fear*.' imageFormat]));
-FemmeFearListTraining = {FemmeFearListTraining(:).name};
-FemmeNeutralListTraining = dir(fullfile(imageFolderTraining,['Femme_Neutral*.' imageFormat]));
-FemmeNeutralListTraining = {FemmeNeutralListTraining(:).name};
-
-HommeAngryListTraining = dir(fullfile(imageFolderTraining,['Homme_Angry*.' imageFormat]));
-HommeAngryListTraining = {HommeAngryListTraining(:).name};
-HommeFearListTraining = dir(fullfile(imageFolderTraining,['Homme_Fear*.' imageFormat]));
-HommeFearListTraining = {HommeFearListTraining(:).name};
-HommeNeutralListTraining = dir(fullfile(imageFolderTraining,['Homme_Neutral*.' imageFormat]));
-HommeNeutralListTraining = {HommeNeutralListTraining(:).name};
-TotalListTraining = [FemmeAngryListTraining,FemmeFearListTraining,FemmeNeutralListTraining,...
-    HommeAngryListTraining,HommeFearListTraining,HommeNeutralListTraining];
-
-nTrialsTraining = 6;
 
 imageFolder = ['..' filesep 'Task' filesep];
 FemmeAngryList = dir(fullfile(imageFolder,['Femme_Angry*.' imageFormat]));
@@ -108,8 +85,8 @@ Pause2 = ['Lorsqu''une croix apparaît à gauche\nou à droite de l''écran, fixez-l
 Redo = 'Souhaitez-vous refaire un entraînement ?';
 RedoTraining = 'Souhaitez-vous refaire un entraînement ?';
      
-RedoExp = 'Appuyez sur la touche Retour arrière si vous souhaitez refaire l''entraînement. Appuyez sur Entrée pour passer au test.';
-RedoExpTraining = 'Appuyez sur la touche Retour arrière si vous souhaitez refaire l''entraînement. Appuyez sur Entrée pour continuer.';
+RedoExp = 'Appuyez sur la touche O si vous souhaitez refaire l''entraînement. Appuyez sur N pour passer au test.';
+RedoExpTraining = 'Appuyez sur la touche O si vous souhaitez refaire l''entraînement. Appuyez sur N pour continuer.';
 
 Oculo = ['Vous allez passer un test dans lequel\n' ...
     'nous allons mesurer les mouvements de vos yeux.\n\n' ...

@@ -8,6 +8,7 @@ function [pressed, firstPress, pressTrig] = KbQueueCheckWrapper(waitingTrigger, 
 % last call to KbQueueCheck.
 % waitingTrigger -> boolean. True if we have to wait for the trigger to
 % continue the experiment, else false.
+% triggerType -> char.
 
 % Loading constant variables of the experiment.
 UnchangingSettingsGaze;

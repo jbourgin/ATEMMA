@@ -1,6 +1,6 @@
 % Function dedicated to dummy trials where only a fixation cross is shown.
 % These dummy phases occur regularly and are used as baseline.
-function trialCounter = dummyFunction(timeBetweenTrials, task, globalTask)
+function dummyFunction(timeBetweenTrials, task, globalTask)
 % timeBetweenTrials -> double (in seconds). Inter-trial time.
 % task -> char. Main task or Training.
 % globalTask -> char. Gaze or Classic.

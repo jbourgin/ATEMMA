@@ -1,7 +1,6 @@
 function [timeNecessary] = waitCrossExercise(eyeUsed)
-%timeNecessary -> double. Time necessary for the participant to look at the
-%fixation cross.
-%eyeUsed -> integer.
+% timeNecessary -> double. Time necessary for the participant to look at the fixation cross.
+% eyeUsed -> integer.
 
 UnchangingSettingsGaze;
 global window;
