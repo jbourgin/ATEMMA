@@ -6,6 +6,7 @@ close all;
 global window;
 
 emotionalCategories = {'Neutral','Angry','Fear'};
+
 UnchangingSettingsGaze;
 settingsGaze;
 
