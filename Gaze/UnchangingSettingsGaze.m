@@ -15,6 +15,19 @@ ImageTimeOut = 5; %time duration of stimulus presentation
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
 numDummyScans = 4;
 
+OptimizationOrder = [1, 2, 3, 4];
+OrderVariables = {'Neutral', 'Fear', 'Angry', 'Dummy'};
+VariableTrialValues = {{'Neutral','Fear','Dummy','Dummy','Angry','Neutral','Angry','Angry','Neutral','Fear','Dummy','Dummy','Angry','Dummy','Dummy','Fear','Fear','Neutral','Fear','Neutral','Angry','Angry','Dummy','Dummy','Fear','Fear','Neutral','Angry','Neutral','Angry','Fear','Neutral'},...
+    {'Fear','Angry','Angry','Dummy','Dummy','Fear','Fear','Neutral','Fear','Neutral','Angry','Neutral','Dummy','Dummy','Angry','Neutral','Angry','Neutral','Fear','Angry','Dummy','Angry','Neutral','Dummy','Dummy','Fear','Dummy','Angry','Neutral','Fear','Neutral','Fear'},...
+    {'Angry','Dummy','Dummy','Fear','Neutral','Angry','Neutral','Fear','Neutral','Angry','Neutral','Fear','Fear','Dummy','Dummy','Neutral','Fear','Dummy','Angry','Angry','Neutral','Dummy','Dummy','Fear','Angry','Fear','Neutral','Angry','Dummy','Angry','Neutral','Fear'},...
+    {'Neutral','Angry','Dummy','Angry','Dummy','Angry','Neutral','Fear','Neutral','Fear','Dummy','Dummy','Neutral','Fear','Neutral','Angry','Angry','Dummy','Dummy','Fear','Dummy','Fear','Fear','Dummy','Angry','Neutral','Fear','Neutral','Angry','Neutral','Angry','Fear'}};
+
+%{
+VariableTrialValues = {{[1,6,9,18,20,27,29,32], [2,10,16,17,19,25,26,31], [5,7,8,13,21,22,28,30], [3,4,11,12,14,15,23,24]}, ...
+    {[8,10,12,16,18,23,29,31], [1,6,7,9,19,26,30,32], [2,3,11,15,17,20,22,28], [4,5,13,14,21,24,25,27]}, ...
+    {[5,7,9,11,16,21,27,31], [4,8,12,13,17,24,26,32], [1,6,10,19,20,25,28,30], [2,3,14,15,18,22,23,29]}, ...
+    {[1,7,9,13,15,26,28,30], [8,10,14,20,22,23,27,32], [2,4,6,16,17,25,29,31], [3,5,11,12,18,19,21,24]}};
+%}
 resultsFolder = [ '..' filesep 'Results'];
 
 listDevices = []; %list of keyboard devices. Do not need necessarily to be filled.

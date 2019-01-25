@@ -1,5 +1,5 @@
 %Function called to display blocks of trials.
-function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer, emotionalCategories, trialCounter, count, ListImages, imFolder, globalTask, task, timeBetweenTrials, MRItrial, gazeVerif)
+function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer, emotionalCategories, trialCounter, count, ListImages, imFolder, globalTask, task, timeBetweenTrials, MRItrial, gazeVerif, randEmo)
 % trialCounter -> int. Trial number.
 % ListImages -> List of char. List of images.
 % count -> matrix of doubles. A given cell is decremented when a trial of a given type (e.g., Fear-Man-Right) is performed.
@@ -15,6 +15,7 @@ function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer
 % MRItrial -> bool. True if the test is performed in the MRI (we wait for triggers), else false.
 % gazeVerif -> bool. True if we are performing a gaze training (to check for
 % the calibration accuracy).
+% randEmo -> char. Facial expression, selected from the optimization sequence.
 
 global onsets;
 global window;
@@ -57,7 +58,7 @@ else
 end
 
 %We select the image to display.
-[count, indexImg, randSide, randEmo, randGender] = imageSelection(count, ListImages, emotionalCategories);
+[count, indexImg, randSide, randEmo, randGender] = imageSelection(count, ListImages, emotionalCategories, randEmo);
 
 %We determine the correct response.
 if strcmp(char(emotionalCategories{1}), char(randEmo))

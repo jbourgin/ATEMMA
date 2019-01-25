@@ -218,7 +218,7 @@ try
 
         % We perform the trials for the current block.
         for numTrial = 1:3
-            [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0);
+            [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0, 'None');
         end
     end
     

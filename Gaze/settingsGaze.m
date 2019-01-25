@@ -65,7 +65,7 @@ ConsignesGazeTraining2 = ['Essayez de cligner des yeux le moins possible\nlorsqu
     'De temps en temps vous verrez apparaître\nune croix au centre de l''écran.\n' ...
     'Essayez de fixer cette croix\ntout en vous relaxant.'];
     
-Answer = [emotionalCategoriesFr{1},' (1), ', emotionalCategoriesFr{2} ,' (2), ou ', emotionalCategoriesFr{3} ,' (3) ?'];
+Answer = [emotionalCategoriesFr{1},' (1) ', emotionalCategoriesFr{2} ,' (2) ou ', emotionalCategoriesFr{3} ,' (3) ?'];
 
 EndSession = 'Merci, cette phase est terminée.';
 End = 'Merci, le test est terminé.';

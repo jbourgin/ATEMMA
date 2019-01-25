@@ -45,17 +45,24 @@ end
 %already displayed, in order to not redisplay them.
 ImageFileMatrixF = [];
 ImageFileMatrixH = [];
+OptiMatrix = [];
 if numSession > 1
     ImageFilenameF = ['..' filesep 'Results' filesep 'images' num2str(subID) 'Female.txt'];
     ImageFilenameH = ['..' filesep 'Results' filesep 'images' num2str(subID) 'Male.txt'];
     ImageFilesF = importdata(ImageFilenameF, '\n');
     ImageFilesH = importdata(ImageFilenameH, '\n');
-    for elt = length(ImageFilesF)
+    for elt = 1:length(ImageFilesF)
         ImageFileMatrixF(length(ImageFileMatrixF)+1,1) = ImageFilesF(elt);
     end
-    for elt = length(ImageFilesH)
+    for elt = 1:length(ImageFilesH)
         ImageFileMatrixH(length(ImageFileMatrixH)+1,1) = ImageFilesH(elt);
     end
+    Optimizationfile = ['..' filesep 'Results' filesep 'optimization' num2str(subID) '.txt'];
+    OptimizationSeq = importdata(Optimizationfile, '\n');
+    for elt = 1:length(OptimizationSeq)
+        OptiMatrix(length(OptiMatrix)+1) = OptimizationSeq(elt);
+    end
+    currentSeq = OptiMatrix(numSession);
 end
 
 % Load the variables required (number of subjects, images...)
@@ -115,8 +122,18 @@ if numSession == 1
     fclose(trigfile);
     fclose(ImageFileF);
     fclose(ImageFileH);
+    randOptimization = OptimizationOrder(randperm(length(OptimizationOrder)));
+    currentSeq = randOptimization(1);
+    Optimizationfile = fopen(['..' filesep 'Results' filesep 'optimization' num2str(subID) '.txt'],'w');
+    for elt = randOptimization
+        fprintf(Optimizationfile, '%s \n', num2str(elt));
+    end
+    fclose(Optimizationfile);
 end
 trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
+
+%Selects condition presentation sequence
+optiSeq = VariableTrialValues{currentSeq};
 
 % Initialize the matrix where will be put the onsets.
 names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic'};
@@ -304,7 +321,7 @@ try
                 showTextToPass(TestGaze, 'keyboard');
                 showTextToPass(TestGaze2, 'keyboard');
                 fakeCountSide = ones(3,2,2);
-                trialFunction(Answer, emotionalCategories, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1);
+                trialFunction(Answer, emotionalCategories, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1, 'None');
                 proposeCalibration()
                 disp(RedoGazeTest);
                 while 1
@@ -337,6 +354,7 @@ try
 
         % We perform the trials for the current block.
         for trialNum = 1:nTrialsPerBlock
+            %{
             trialDone = 0;
             %We choose between a dummy and an experimental trial.
             if numTrialDummies > 0 && trialNum > 1
@@ -355,6 +373,12 @@ try
             end
             if ~trialDone
                 [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0);
+            end
+            %}
+            if strcmp(optiSeq{trialNum}, 'Dummy')
+                dummyFunction(timeBetweenTrials, task, globalTask);
+            else
+                [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0, optiSeq{trialNum});
             end
         end
         %After the experimental trials, we send the dummy ones (cross fixation

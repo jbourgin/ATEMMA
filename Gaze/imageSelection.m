@@ -1,4 +1,4 @@
-function [count, indexImg, randSide, randEmo, randGender] = imageSelection(count, ListImages, emotionalCategories)
+function [count, indexImg, randSide, randEmo, randGender] = imageSelection(count, ListImages, emotionalCategories, stimEmo)
 % count -> matrix of doubles. A given cell is decremented when a trial of a given type (e.g., Fear-Man-Right) is performed.
 % indexImg -> int. Index of the image to return.
 % randSide -> char. Side of the current trial.
@@ -12,8 +12,12 @@ noRandSideFound = 1;
 noRandNumberFound = 1;
 %We search a random image to present.
 while noRandSideFound
-    randListEmo = randperm(length(emotionalCategories));
-    randEmo = emotionalCategories{randListEmo(1)};
+    if strcmp(stimEmo, 'None')
+        randListEmo = randperm(length(emotionalCategories));
+        randEmo = emotionalCategories{randListEmo(1)};
+    else
+        randEmo = stimEmo;
+    end
     randListGender = randperm(length(genderType));
     randGender = genderType{randListGender(1)};
     randListSide = randperm(length(sideScreen));
