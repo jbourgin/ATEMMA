@@ -4,6 +4,10 @@ function GazeContingentTraining()
 clear all;
 close all;
 
+if ~exist(['..' filesep 'Results'], 'dir')
+    mkdir(['..' filesep 'Results'])
+end
+
 emotionalCategories = {'Neutral','Angry','Fear'};
 % Randomize the assignement of categories to buttons
 emotionalCategories = emotionalCategories(randperm(length(emotionalCategories)));

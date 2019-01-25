@@ -5,6 +5,9 @@ clear all;
 close all;
 
 %emotionOrder = 0;
+if ~exist(['..' filesep 'Results'], 'dir')
+    mkdir(['..' filesep 'Results'])
+end
 
 %Input subject ID
 global subID;

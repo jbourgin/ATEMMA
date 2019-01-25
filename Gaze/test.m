@@ -4,6 +4,10 @@ function test()
 clear all;
 close all;
 
+if ~exist(['..' filesep 'Results'], 'dir')
+    mkdir(['..' filesep 'Results'])
+end
+
 emotionalCategories = {'Neutral','Angry','Fear'};
 
 % Load the variables required (number of subjects, images...)
