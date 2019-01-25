@@ -338,7 +338,7 @@ try
                 end
             end
         end
-        if dummymode == 0 && godMode == 2 && globalTask == taskType(1)
+        if dummymode == 0 && godMode == 2 && strcmp(globalTask, taskType(1))
             proposeCalibration()
         end
         if dummymode == 0 && godMode == 2
