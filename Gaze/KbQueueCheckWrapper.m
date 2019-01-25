@@ -48,7 +48,7 @@ if waitingTrigger
                 % We record the time value of the trigger press in file
                 % trigfile.
 				pressTrig = firstPress(KbName(triggerKeys{resk}));
-                fprintf(trigfile, '%i\t %f\t %s \n', numSession, pressTrig, triggerType);
+                fprintf(trigfile, '%s\t %f\t %s \n', num2str(numSession), pressTrig, triggerType);
                 % We record the time value of the trigger press in the edffile
                 % as well.
                 if dummymode == 0
@@ -98,7 +98,7 @@ else
 			save(fichier_out, 'names', 'onsets', 'durations');
             fclose(outputfile);
             fclose(trigfile);
-			if dummymode == 0
+            if dummymode == 0
                 global edfFile;
 				Eyelink('Command', 'set_idle_mode');
 				WaitSecs(0.5);
