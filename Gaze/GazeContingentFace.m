@@ -163,7 +163,7 @@ try
     
     % Disable all visual alerts
     Screen('Preference', 'VisualDebugLevel', 0);
-    Screen('Preference', 'SkipSyncTests', 1);
+    Screen('Preference', 'SkipSyncTests', 0);
     
     [window, wRect]=Screen('OpenWindow',screenNumber, 0,[],32,2);
         
