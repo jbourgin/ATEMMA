@@ -8,13 +8,8 @@ if ~exist(['..' filesep 'Results'], 'dir')
     mkdir(['..' filesep 'Results'])
 end
 
-emotionalCategories = {'Neutral','Angry','Fear'};
-% Randomize the assignement of categories to buttons
-emotionalCategories = emotionalCategories(randperm(length(emotionalCategories)));
-
 % Loads the variables required (number of subjects, images...)
 UnchangingSettingsGaze;
-settingsGaze;
 trialCounter = 1;
 timeBetweenTrials = 2;
 global numSession;
@@ -26,6 +21,22 @@ subID = str2double(input('Entrez le numéro du sujet : ', 's'));
 while isnan(subID) || fix(subID) ~= subID
   subID = str2double(input('Le numéro n''est pas un entier. Entrez le numéro du sujet: ', 's'));
 end
+
+emotionfilename = ['..' filesep 'Results' filesep 'emotion' num2str(subID) '.txt'];
+if exist(emotionfilename, 'file')
+    emotionfile = importdata(emotionfilename, '\n');
+    emotionalCategories = {emotionfile{1}, emotionfile{2}, emotionfile{3}};
+else
+    emotionalCategories = {'Neutral','Angry','Fear'};
+    % Randomize the assignement of categories to buttons
+    emotionalCategories = emotionalCategories(randperm(length(emotionalCategories)));
+    %Save key assignement in a file.
+    emotionfile = fopen([resultsFolder '/emotion' num2str(subID) '.txt'],'w');
+    fprintf(emotionfile, '%s\n%s\n%s\n', emotionalCategories{1}, emotionalCategories{2}, emotionalCategories{3});
+    fclose(emotionfile);
+end
+
+settingsGaze;
 
 %warn if duplicate sub ID
 fileName=[resultsFolder '/gct' num2str(subID) '.rtf'];
@@ -61,11 +72,6 @@ if dummymode == 0
     edfFile = answer{1};
     fprintf('EDFFile: %s\n', edfFile );
 end
-
-%Save key assignement in a file.
-emotionfile = fopen([resultsFolder '/emotion' num2str(subID) '.txt'],'w');
-fprintf(emotionfile, '%s\n%s\n%s\n', emotionalCategories{1}, emotionalCategories{2}, emotionalCategories{3});
-fclose(emotionfile);
 
 % Return the result file
 global outputfile;
@@ -186,12 +192,14 @@ try
 
     disp('Appuyez sur Entrée pour continuer.');
     showTextToPass(Consignes, 'keyboard');
+    showTextToPass(Consignes2, 'keyboard');
     
     for numTask = 1:length(taskType)
         % TRAINING
         if numTask == 2
             disp('Appuyez sur Entrée pour continuer.');
             showTextToPass(ConsignesGazeTraining, 'keyboard');
+            showTextToPass(ConsignesGazeTraining2, 'keyboard');
         end
         globalTask = taskType(numTask);
         subjectWantsTraining = 1;
