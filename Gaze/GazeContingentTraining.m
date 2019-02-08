@@ -10,8 +10,6 @@ end
 
 % Loads the variables required (number of subjects, images...)
 UnchangingSettingsGaze;
-trialCounter = 1;
-timeBetweenTrials = 2;
 global numSession;
 numSession = 'Training';
 
@@ -37,6 +35,8 @@ else
 end
 
 settingsGaze;
+trialCounter = 1;
+timeBetweenTrials = 2;
 
 %warn if duplicate sub ID
 fileName=[resultsFolder '/gct' num2str(subID) '.rtf'];
