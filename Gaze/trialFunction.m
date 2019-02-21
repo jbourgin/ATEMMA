@@ -1,5 +1,5 @@
 %Function called to display blocks of trials.
-function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer, emotionalCategories, trialCounter, count, ListImages, imFolder, globalTask, task, timeBetweenTrials, MRItrial, gazeVerif, randEmo)
+function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, ListImages, imFolder, globalTask, task, timeBetweenTrials, MRItrial, gazeVerif, randEmo)
 % trialCounter -> int. Trial number.
 % ListImages -> List of char. List of images.
 % count -> matrix of doubles. A given cell is decremented when a trial of a given type (e.g., Fear-Man-Right) is performed.
@@ -94,13 +94,15 @@ end
 %Determine the coordinates according to the side of the screen on which the image will be
 %displayed (the coordinates are for the cross: they correspond to
 %the opposite side of the image)
+%Currently, centerX corresponds to the horizontal coordinate of the cross x
+%2. To change eventually (wW + (wW/4) -> wW/8*5) + change in waitCross function
 centerX = 0;
 if strcmp(randSide,'Left')
-    centerX = wW + (wW/2);
-    shiftHorizontal = (- wW)/4;
+    centerX = wW + (wW/3);
+    shiftHorizontal = (- wW)/6;
 elseif strcmp(randSide,'Right')
-    centerX = wW - (wW/2);
-    shiftHorizontal = wW/4;
+    centerX = wW - (wW/3);
+    shiftHorizontal = wW/6;
 
 end
 
@@ -297,11 +299,15 @@ if dummymode == 0
 end
 while GetSecs - startRespTime <= TrialTimeOut
     WaitSecs(0.01);
-    showText(Answer);
 
     % Check for response keys
     [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
+    if resp ~= 0
+        responseText = ['Vous avez répondu ', emotionalCategoriesFr{str2double(resp)}, '.'];
+        showText(responseText);
+    end
     if resp == 0
+        showText(Answer);
         respTime = GetSecs;
 
         if pressed

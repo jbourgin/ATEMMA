@@ -46,14 +46,16 @@ Priority(priorityLevel);
 
 %Draw fixation cross. We first select its position (on the left or
 %right side of the screen).
+%Currently, centerX corresponds to the horizontal coordinate of the cross x
+%2. To change eventually (wW + (wW/4) -> wW/8*5) + change in waitCross function
 centerX = 0;
 listPosition = {'Left', 'Right'};
 randListPosition = randperm(length(listPosition));
 position = listPosition{randListPosition(1)};
 if strcmp(position,'Left')
-    centerX = wW - (wW/2);
+    centerX = wW - (wW/3);
 elseif strcmp(position,'Right')
-    centerX = wW + (wW/2);
+    centerX = wW + (wW/3);
 end
 %The cross is displayed a little bit (value shiftY) below the vertical center of the
 %screen.

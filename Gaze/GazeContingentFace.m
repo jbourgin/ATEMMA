@@ -324,7 +324,7 @@ try
                 showTextToPass(TestGaze, 'keyboard');
                 showTextToPass(TestGaze2, 'keyboard');
                 fakeCountSide = ones(3,2,2);
-                trialFunction(Answer, emotionalCategories, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1, 'None');
+                trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1, 'None');
                 proposeCalibration()
                 disp(RedoGazeTest);
                 while 1
@@ -375,13 +375,13 @@ try
                 end
             end
             if ~trialDone
-                [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0);
+                [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0);
             end
             %}
             if strcmp(optiSeq{trialNum}, 'Dummy')
                 dummyFunction(timeBetweenTrials, task, globalTask);
             else
-                [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0, optiSeq{trialNum});
+                [trialCounter, ListBloc, countSide] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSide, ListBloc, imageFolder, globalTask, task, timeBetweenTrials, 1, 0, optiSeq{trialNum});
             end
         end
         %After the experimental trials, we send the dummy ones (cross fixation

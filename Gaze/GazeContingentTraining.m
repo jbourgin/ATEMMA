@@ -219,7 +219,7 @@ try
             %We perform the training trials.
             trainingScore = 0;
             for trialNum = 1:nTrialsTraining
-                [trialCounter, TotalListTraining, countSideTraining, resp, corResp] = trialFunction(Answer, emotionalCategories, trialCounter, countSideTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, 0, 0, 'None');
+                [trialCounter, TotalListTraining, countSideTraining, resp, corResp] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, 0, 0, 'None');
                 %We send feedback to the participant on the correctness of his response.
                 Screen(window, 'FillRect', backgroundcolor);
                 startFeedback = Screen('Flip', window);
