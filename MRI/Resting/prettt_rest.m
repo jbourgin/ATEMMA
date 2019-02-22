@@ -2,6 +2,7 @@
 % > Anat/Resting)
 clear all
 clear classes
+addpath('D:\ATEMMA\MRI\Resting\')
 dataDir = 'D:\MRI_faces\Files_ready\';
 cd(dataDir);
 categories = {'AD', 'Old'}; % Old

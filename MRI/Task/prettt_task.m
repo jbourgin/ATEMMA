@@ -8,7 +8,7 @@ workingDir = 'D:\MRI_faces\';
 dataDir = char(strcat(workingDir, 'Files_ready\'));
 cd(workingDir);
 categories = {'AD', 'Old'};
-preprocess = 0;
+preprocess = 1;
 artprocess = 1;
 transformFiles = 1;
 
