@@ -139,13 +139,13 @@ trigfile = fopen([resultsFolder '/trig' num2str(subID) '.rtf'],'a');
 optiSeq = VariableTrialValues{currentSeq};
 
 % Initialize the matrix where will be put the onsets.
-names = {'Angry-Gaze', 'Fear-Gaze', 'Neutral-Gaze', 'Angry-Classic', 'Fear-classic', 'Neutral-Classic'};
-durations = {0, 0, 0, 0, 0, 0};
+names = {'Angry', 'Fear', 'Neutral'};
+durations = {0, 0, 0};
 
 global onsets;
 global firstTrig;
 firstTrig = 'None';
-onsets = {[],[],[],[],[],[]};
+onsets = {[],[],[]};
 
 % Initialize KbQueue which will be used to get keyboard presses.
 KbQueueCreate(listDevices);

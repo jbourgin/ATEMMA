@@ -1,12 +1,14 @@
 % Create a subjList. Récupérer les files anat et scan (AD > subject_number
 % > Anat/Resting)
+% http://www.ece.northwestern.edu/local-apps/matlabhelp/techdoc/ref/addpath.html
 clear all
 clear classes
+addpath('D:\ATEMMA\MRI\Task\')
 workingDir = 'D:\MRI_faces\';
 dataDir = char(strcat(workingDir, 'Files_ready\'));
 cd(workingDir);
 categories = {'AD', 'Old'};
-preprocess = 1;
+preprocess = 0;
 artprocess = 1;
 transformFiles = 1;
 
@@ -64,10 +66,10 @@ for category = categories
                 end
                 disp(funFilesList);
                 change_dir_subject(scanDir);
-                if length(funFilesList) == 1
-                    preprocessing_job1(funFilesList, anatFile, scanDir);
-                elseif length(funFilesList) == 2
-					preprocessing_job2(funFilesList, anatFile, scanDir);
+                if length(funFilesList) == 4
+					preprocessing_job(funFilesList, anatFile, scanDir);
+                else
+                    disp('Number of sessions different from 4');
                 end
                 change_dir_global();
                 clear funFilesList;
@@ -82,6 +84,7 @@ for category = categories
 				onsetfiles = dir(fullfile(onsetDir, '*.mat'));
 				onsetFilesList = [];
 				for a = 1:length(onsetfiles)
+                    disp(onsetfiles(a).name);
 					onsetFilesList{a} = fullfile(onsetDir, onsetfiles(a).name);
 				end
                 niiFiles = dir(fullfile(scanDir, '*.nii'));
@@ -114,21 +117,21 @@ for category = categories
                 end
                 disp(movFilesList);
 				onsetFilesList = [];
-				for m = 1:length(matFiles)
-					baseFileName = matFiles(m).name;
-					if startsWith(baseFileName, sprintf('onsets_', char(subj)))
-						onsetFilesList{m} = fullfile(onsetDir, onsetfiles(m).name);
-					end
+                for m = 1:length(matFiles)
+                    baseFileName = matFiles(m).name;
+                    if startsWith(baseFileName, sprintf('onsets', char(subj)))
+                        onsetFilesList{m} = fullfile(onsetDir, onsetfiles(m).name);
+                    end
                 end
                 disp(onsetFilesList);
 				statDir = char(strcat(scanDir, 'stats'));
                 if ~exist(statDir, 'dir')
                     mkdir(statDir)
                 end
-                if length(spmFilesList) == 1
-					firstLevelSpecification1(spmFilesList, onsetFilesList, movFilesList, statDir)
-                elseif length(spmFilesList) == 2
-					firstLevelSpecification2(spmFilesList, onsetFilesList, movFilesList, statDir)
+                if length(spmFilesList) == 4
+					firstLevelSpecification(spmFilesList, onsetFilesList, movFilesList, statDir)
+                else
+                    disp('Number of sessions different from 4');
                 end
 				clear matFiles;
 				matFiles = dir(fullfile(statDir, '*.mat'));

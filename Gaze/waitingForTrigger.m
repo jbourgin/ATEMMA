@@ -14,7 +14,25 @@ end
 %first trigger) in a matrix, in the cell corresponding to the
 %current trial condition.
 if gazeVerif == 0
-    if strcmp(globalTask, 'Gaze')
+    if length(onsets) == 6
+        if strcmp(globalTask, 'Gaze')
+            if strcmp(randEmo, 'Angry')
+                cellNum = 1;
+            elseif strcmp(randEmo, 'Fear')
+                cellNum = 2;
+            elseif strcmp(randEmo, 'Neutral')
+                cellNum = 3;
+            end   
+        else
+            if strcmp(randEmo, 'Angry')
+                cellNum = 4;
+            elseif strcmp(randEmo, 'Fear')
+                cellNum = 5;
+            elseif strcmp(randEmo, 'Neutral')
+                cellNum = 6;
+            end
+        end
+    elseif length(onsets) == 3
         if strcmp(randEmo, 'Angry')
             cellNum = 1;
         elseif strcmp(randEmo, 'Fear')
@@ -22,14 +40,7 @@ if gazeVerif == 0
         elseif strcmp(randEmo, 'Neutral')
             cellNum = 3;
         end
-    else
-        if strcmp(randEmo, 'Angry')
-            cellNum = 4;
-        elseif strcmp(randEmo, 'Fear')
-            cellNum = 5;
-        elseif strcmp(randEmo, 'Neutral')
-            cellNum = 6;
-        end
     end
     onsets{cellNum}(length(onsets{cellNum})+1,1) = pressTrig;
+end
 end

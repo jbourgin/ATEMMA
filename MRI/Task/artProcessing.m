@@ -1,4 +1,4 @@
-function artProcessing(subj, number_vol, dataDir, scanDir, spmfiles);
+function artProcessing(subj, number_vol, dataDir, scanDir, spmfiles)
 % ART_BATCH
 % batch processing of multiple subjects from SPM.mat files (one per subject)
 %
@@ -16,7 +16,7 @@ function artProcessing(subj, number_vol, dataDir, scanDir, spmfiles);
 global_mean=1;                % global mean type (1: Standard 2: User-defined Mask)
 motion_file_type=0;           % motion file type (0: SPM .txt file 1: FSL .par file 2:Siemens .txt file)
 global_threshold=3.0;%9-3       % threshold for outlier detection based on global signal
-motion_threshold=2.0;%1-2         % threshold for outlier detection based on motion estimates
+motion_threshold=3.0;%1-2         % threshold for outlier detection based on motion estimates
 rot_threshold=0.02;
 %rotation_threshold=0.02;
 use_diff_motion=1;            % 1: uses scan-to-scan motion to determine outliers; 0: uses absolute motion
