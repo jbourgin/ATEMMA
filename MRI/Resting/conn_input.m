@@ -39,10 +39,12 @@ BATCH.Setup.covariates.names = {'motion'};
 BATCH.Setup.conditions.names = {'rest'};
 
 %We set the second level covariates
-BATCH.Setup.subjects.effect_names = {'AllSubjects', 'AD', 'Old'};
+BATCH.Setup.subjects.effect_names = {'AllSubjects', 'AD', 'Old', 'PercentPos', 'PercentNeg'}; % % fixation on each type of emotional image (compared to neutral). Maybe the calculation needs to be redone (do the mean % (calculate the % for each trial)). Other variables to add ?
 BATCH.Setup.subjects.effects{1} = [ones(1, nAD), ones(1, nOld)];
 BATCH.Setup.subjects.effects{2} = [ones(1, nAD), zeros(1, nOld)];
 BATCH.Setup.subjects.effects{3} = [zeros(1, nAD), ones(1, nOld)];
+BATCH.Setup.subjects.effects{4} = [52.0956286917797];
+BATCH.Setup.subjects.effects{5} = [58.86289476];
 %BATCH.Setup.subjects.effects{4} = [59	67	65	63	73	69	56	76	78	79	68	84	70	77	69	33	30	39	34	48	52	45	30	44	39	36	35];
 %BATCH.Setup.subjects.effects{5} = [59	67	65	63	73	69	56	76	78	79	68	84	70	77	69, zeros(1, nYoung)];
 %BATCH.Setup.subjects.effects{6} = [zeros(1, nOld), 33	30	39	34	48	52	45	30	44	39	36	35];
