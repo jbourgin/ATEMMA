@@ -1,7 +1,7 @@
 %Renames s6w files in sw (for conn analysis).
 clear all
 categories = {'Old', 'Young'};
-dataDir = 'D:/Resting_Elena/Files_ready/';
+dataDir = 'D:/MRI_faces/Files_ready/';
 
 for category = categories
     curDir = char(strcat(dataDir, category, '/'));

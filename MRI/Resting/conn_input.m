@@ -14,7 +14,7 @@ BATCH.filename = fullfile(dataDir, 'conn_MRI_faces.mat');
 Batch.Setup.isnew = 1;
 
 %Sets TR value
-BATCH.Setup.RT = 1;
+BATCH.Setup.RT = 2.5;
 
 %Sets number of subjects
 BATCH.Setup.nsubjects = nsubjects;

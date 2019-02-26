@@ -2,12 +2,10 @@ function [matlabbatch] = firstLevelSpecification(filesList, onsetFile, movFile, 
 
 matlabbatch{1}.spm.stats.fmri_spec.dir = {scanDir};
 matlabbatch{1}.spm.stats.fmri_spec.timing.units = 'secs';
-matlabbatch{1}.spm.stats.fmri_spec.timing.RT = 1;
+matlabbatch{1}.spm.stats.fmri_spec.timing.RT = 2.5;
 matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t = 16;
 matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t0 = 8;
-%%
 matlabbatch{1}.spm.stats.fmri_spec.sess.scans = {filesList}';
-%%
 matlabbatch{1}.spm.stats.fmri_spec.sess.cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
 matlabbatch{1}.spm.stats.fmri_spec.sess.multi = {onsetFile};
 matlabbatch{1}.spm.stats.fmri_spec.sess.regress = struct('name', {}, 'val', {});
