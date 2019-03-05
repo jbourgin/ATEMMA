@@ -94,6 +94,9 @@ try
     global wH;
     global wW;
     global wRect;
+    
+    Screen('Preference', 'VisualDebugLevel', 0);
+    Screen('Preference', 'SkipSyncTests', skipSyncTest);
     [window, wRect]=Screen('OpenWindow',screenNumber, 0,[],32,2);
 
     [wW, wH]=WindowSize(window);
