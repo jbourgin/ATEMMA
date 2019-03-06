@@ -10,6 +10,11 @@ emotionalCategories = {'Neutral','Angry','Fear'};
 UnchangingSettingsGaze;
 settingsGaze;
 
+subID = str2double(input('Entrez le numéro du sujet : ', 's'));
+while isnan(subID) || fix(subID) ~= subID
+  subID = str2double(input('Le numéro n''est pas un entier. Entrez le numéro du sujet: ', 's'));
+end
+
 KbQueueCreate(listDevices);
 KbQueueStart(listDevices);
 
@@ -18,6 +23,7 @@ try
 	AssertOpenGL;
 
     % Open a double buffered fullscreen window.
+    Screen('Preference', 'VisualDebugLevel', 0);
     Screen('Preference', 'SkipSyncTests', skipSyncTest);
     [window, wRect]=Screen('OpenWindow',screenNumber, 0,[],32,2);
 

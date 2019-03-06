@@ -71,6 +71,8 @@ end
 
 %Read image
 file = ListImages{indexImg};
+%This is our alpha blending mode
+%Screen(window,'BlendFunction',GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 [img,~,alpha] = imread(fullfile(imFolder,file));
 %We determine the dimensions of the image.
 [height,width] = size(img);
@@ -103,11 +105,11 @@ if strcmp(randSide,'Left')
 elseif strcmp(randSide,'Right')
     centerX = wW - (wW/3);
     shiftHorizontal = wW/6;
-
 end
 
 %Image texture.
 imageTexture=Screen('MakeTexture',window, img);
+%imageTexture2=Screen('MakeTexture',window, copyImg);
 
 tRect=Screen('Rect', imageTexture);
 [ctRect, dx, dy]=CenterRect(tRect, wRect);
