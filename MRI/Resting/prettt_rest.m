@@ -112,21 +112,7 @@ for category = categories
                     matFile = 'None';
                 end
                 artProcessing(subj, number_vol, dataDir, scanDir, artfile, movFile, matFile, art_without_model);
-                %clear subj;
-                clear number_vol;
-                clear scanDir;
-                clear artfile;
-                clear movFile;
-                clear matFile;
-                clear onsetFile;
-                clear spmfiles;
-                clear matFiles;
-                clear textFiles;
-                clear tempFile;
-                clear artfile;
-                clear niiFiles;
-                clear fullFileName;
-                clear baseFileName;
+                clearvars -except dataDir categories category preprocess artprocess transformFiles art_without_model curDir subj subjList
             end
         end
         %disp('------ Preprocessing ended ------');

@@ -143,20 +143,8 @@ for category = categories
 					end
 				end
                 artProcessing(subj, number_vol, dataDir, scanDir, matFile);
-                %clear subj;
-                clear number_vol;
-                clear scanDir;
-                clear artfile;
-                clear movFilesList;
-                clear matFiles;
-				clear textFiles;
-				clear niiFiles;
-				clear matFile;
-                clear onsetFilesList;
-                clear spmFilesList;
-                clear num_swra;
-				clear baseFileName;
-				clear fullFileName;
+                clearvars -except dataDir workingDir categories category preprocess artprocess transformFiles curDir subj subjList
+
             end
         end
         %disp('------ Preprocessing ended ------');
