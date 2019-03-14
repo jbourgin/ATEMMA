@@ -2,7 +2,7 @@ dummymode = 1;%1 : mouse; 0 : eye-tracking
 waitForFixation = 0;
 godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
-skipSyncTest = 1;
+skipSyncTest = 0;
 
 imageFormat = 'png';
 imageFolderTraining = ['..' filesep 'Training' filesep];
@@ -14,7 +14,7 @@ TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + 
 TrialTimeOut = 3; % response time
 ImageTimeOut = 5; %time duration of stimulus presentation
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
-numDummyScans = 8;
+numDummyScans = 4;
 
 OptimizationOrder = [1, 2, 3, 4];
 OrderVariables = {'Neutral', 'Fear', 'Angry', 'Dummy'};
@@ -125,8 +125,7 @@ TestGaze = ['Avant de commencer,\n' ...
 TestGaze2 = ['Explorez l''ovale qui va apparaître\net essayez de déterminer l''émotion exprimée.\n\n' ...
     'N''hésitez pas à nous indiquer si vous avez\nl''impression que la partie de l''ovale\naffichée ne correspond pas à l''endroit où\nvous regardez.'];
 
-ConsignesGazeTraining = ['La consigne reste la même pour ce second test :\n'...
-    'Vous allez voir apparaître une croix\nà droite ou à gauche de l''écran.\n' ...
+ConsignesGazeTraining = ['Vous allez voir apparaître une croix\nà droite ou à gauche de l''écran.\n' ...
     'Vous pouvez cligner des yeux, puis\nfixez bien la croix lorsque vous êtes prêt.\n' ...
     'Cette fois, vous n''allez pas voir apparaître le visage,\nmais un ovale blanc rempli de petits points noirs.\n' ...
     'Explorez l''intérieur de l''ovale\npour dévoiler les éléments du visage.'];

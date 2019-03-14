@@ -350,11 +350,12 @@ try
             showTextToPass(Drift, 'keyboard');
             EyelinkDoDriftCorrection(el);
         end
+		%{
         for dummyScan = 1:numDummyScans
             showText(waitingDummies);
             KbQueueCheckWrapper(1, 'Dummy');
         end
-
+		%}
         % We perform the trials for the current block.
         for trialNum = 1:nTrialsPerBlock
             %{
