@@ -317,7 +317,7 @@ try
         HideCursor;
         %For the gaze task, we first make sure that the camera is correctly
         %calibrated on the participant's gaze.
-        if dummymode == 1 && godMode == 2
+        if dummymode == 0 && godMode == 2
             calibrationNotOk = 1;
             TotalListTraining = initializeTrainingList();
             while calibrationNotOk
