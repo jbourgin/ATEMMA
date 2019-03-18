@@ -247,6 +247,9 @@ try
             end
             
             %Proposes training redo
+            if dummymode == 0
+                proposeCalibration()
+            end
             disp(RedoExpTraining);
             while 1
                 WaitSecs(0.01);
