@@ -2,7 +2,7 @@ dummymode = 1;%1 : mouse; 0 : eye-tracking
 waitForFixation = 0;
 godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
-skipSyncTest = 0;
+skipSyncTest = 1;
 
 imageFormat = 'png';
 imageFolderTraining = ['..' filesep 'Training' filesep];
@@ -14,7 +14,7 @@ TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + 
 TrialTimeOut = 3; % response time
 ImageTimeOut = 5; %time duration of stimulus presentation
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
-numDummyScans = 4;
+numDummyScans = 1;
 
 OptimizationOrder = [1, 2, 3, 4];
 OrderVariables = {'Neutral', 'Fear', 'Angry', 'Dummy'};
@@ -121,6 +121,8 @@ waitingDummies = 'Nous finissons quelques réglages.\nLe test va commencer\nd''ic
 TestGaze = ['Avant de commencer,\n' ...
     'Nous allons vérifier que la caméra est\nbien ajustée sur vos yeux.\n\n' ...
     'Pour cela, nous allons vous montrer\nun exemple de la phase suivante de test.\n'];
+
+TestClassic2 = 'Explorez le visage qui va apparaître\net essayez de déterminer l''émotion exprimée.';
 
 TestGaze2 = ['Explorez l''ovale qui va apparaître\net essayez de déterminer l''émotion exprimée.\n\n' ...
     'N''hésitez pas à nous indiquer si vous avez\nl''impression que la partie de l''ovale\naffichée ne correspond pas à l''endroit où\nvous regardez.'];

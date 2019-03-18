@@ -317,12 +317,17 @@ try
         HideCursor;
         %For the gaze task, we first make sure that the camera is correctly
         %calibrated on the participant's gaze.
-        if strcmp(globalTask, taskType(2)) && dummymode == 0 && godMode == 2
+        if dummymode == 0 && godMode == 2
             calibrationNotOk = 1;
             TotalListTraining = initializeTrainingList();
             while calibrationNotOk
-                showTextToPass(TestGaze, 'keyboard');
-                showTextToPass(TestGaze2, 'keyboard');
+                if strcmp(globalTask, taskType(2)) 
+                    showTextToPass(TestGaze, 'keyboard');
+                    showTextToPass(TestGaze2, 'keyboard');
+                else
+                    showTextToPass(TestGaze, 'keyboard');
+                    showTextToPass(TestClassic2, 'keyboard');
+                end
                 fakeCountSide = ones(3,2,2);
                 trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1, 'None');
                 proposeCalibration()
@@ -350,12 +355,10 @@ try
             showTextToPass(Drift, 'keyboard');
             EyelinkDoDriftCorrection(el);
         end
-		%{
         for dummyScan = 1:numDummyScans
             showText(waitingDummies);
             KbQueueCheckWrapper(1, 'Dummy');
         end
-		%}
         % We perform the trials for the current block.
         for trialNum = 1:nTrialsPerBlock
             %{
