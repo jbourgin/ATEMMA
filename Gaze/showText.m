@@ -5,7 +5,8 @@ function showText(text)
 UnchangingSettingsGaze;
 global window;
 
-Screen('TextSize', window, 45);
+Screen('TextSize', window, sizeText);
+Screen('TextFont', window, char(fontText));
 % Draw a centered text.
 DrawFormattedText(window, text, 'center', 'center',textColor,[],[],[],2);
 Screen('Flip',window);
