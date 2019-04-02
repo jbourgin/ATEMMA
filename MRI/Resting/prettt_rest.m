@@ -28,8 +28,8 @@ for category = categories
             disp(strcat('Subject: ', subj));
             clear matlabbatch;
             if preprocess == 1
-                scanDir = char(strcat(curDir, subj, '\', 'Resting', '\'));
-                anatDir = char(strcat(curDir, subj, '\', 'Anat', '\'));
+                scanDir = char(strcat(curDir, subj, '\', 'Resting\Resting', '\'));
+                anatDir = char(strcat(curDir, subj, '\', 'Resting\Anat', '\'));
                 spmfiles = dir(fullfile(scanDir, '*.nii'));
                 spmfile = char(strcat(scanDir, spmfiles.name));
                 anatFiles = dir(fullfile(anatDir, '*.nii'));
@@ -60,11 +60,11 @@ for category = categories
                 clear anatFiles2;
             end
             if artprocess == 1
-                scanDir = char(strcat(curDir, subj, '\', 'Resting', '\'));
+                scanDir = char(strcat(curDir, subj, '\', 'Resting\Resting', '\'));
                 if art_without_model == 0
                     names = {'Baseline'};
                     durations = {2.5};
-                    onsets = {[0:2.5:377.5]};
+                    onsets = {[0:2.5:1497.5]};
                     fichier_out = [scanDir 'onsets' char(subj) '.mat'];
                     save(fichier_out, 'names', 'onsets', 'durations');
                 end

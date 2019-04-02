@@ -28,9 +28,9 @@ for category = categories
         if ~contains(char(subj), '.')
             disp(strcat('Subject: ', subj));
 			clear matlabbatch;
-			scanDir = char(strcat(curDir, subj, '\', 'Task', '\'));
+			scanDir = char(strcat(curDir, subj, '\', 'Task\Task', '\'));
             if preprocess == 1
-                anatDir = char(strcat(curDir, subj, '\', 'Anat', '\'));
+                anatDir = char(strcat(curDir, subj, '\', 'Task\Anat', '\'));
                 spmfiles = dir(fullfile(scanDir, '*.nii'));
 				spmFilesList = [];
                 for a = 1:length(spmfiles)

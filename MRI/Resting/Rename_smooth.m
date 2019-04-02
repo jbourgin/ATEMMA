@@ -15,7 +15,7 @@ for category = categories
     end
     for subj = subjList
         if ~contains(char(subj), '.')
-            scanDir = char(strcat(curDir, subj, '/', 'Resting', '/'));
+            scanDir = char(strcat(curDir, subj, '/', 'Resting/Resting', '/'));
             scanFiles = dir(fullfile(scanDir, '*.nii'));
             %anatDir = char(strcat(curDir, subj, '/', 'Anat', '/'));
             %anatFiles = dir(fullfile(anatDir, '*.nii'));

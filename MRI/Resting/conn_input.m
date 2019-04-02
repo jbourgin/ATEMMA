@@ -84,7 +84,7 @@ for category = categories
             counterSubj = counterSubj + 1;
             
             %We select the functional volumes
-            scanDir = char(strcat(curDir, subj, '/', 'Resting', '/'));
+            scanDir = char(strcat(curDir, subj, '/', 'Resting/Resting', '/'));
             niiFiles = dir(fullfile(scanDir, '*.nii'));
             textFiles = dir(fullfile(scanDir, '*.mat'));
             %textFiles = dir(fullfile(scanDir, '*.txt'));
@@ -120,7 +120,7 @@ for category = categories
             clear scanDir;
             
             %We select the anatomical volumes
-            anatDir = char(strcat(curDir, subj, '/', 'Anat', '/'));
+            anatDir = char(strcat(curDir, subj, '/', 'Resting/Anat', '/'));
             niiFiles = dir(fullfile(anatDir, '*.nii'));
             for k = 1:length(niiFiles)
                 baseFileName = niiFiles(k).name;
