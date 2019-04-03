@@ -4,7 +4,7 @@ godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or m
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
 skipSyncTest = 0;
 
-sizeText = 45;
+sizeText = 38;
 fontText = 'Arial';
 
 imageFormat = 'png';
