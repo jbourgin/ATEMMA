@@ -63,8 +63,8 @@ for category = categories
                 scanDir = char(strcat(curDir, subj, '\', 'Resting\Resting', '\'));
                 if art_without_model == 0
                     names = {'Baseline'};
-                    durations = {2.5};
-                    onsets = {[0:2.5:1497.5]};
+                    durations = {1.05};
+                    onsets = {[0:1.05:628.95]};
                     fichier_out = [scanDir 'onsets' char(subj) '.mat'];
                     save(fichier_out, 'names', 'onsets', 'durations');
                 end
