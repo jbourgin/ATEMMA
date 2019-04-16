@@ -87,8 +87,15 @@ for category = categories
                     disp(onsetfiles(a).name);
 					onsetFilesList{a} = fullfile(onsetDir, onsetfiles(a).name);
                     load(fullfile(onsetDir, onsetfiles(a).name), 'durations', 'names', 'onsets');
-                    durations = {10, 10, 10};
+                    names = {'Angry', 'Fear', 'Neutral', 'AngryResp', 'FearResp', 'NeutralResp', 'AngryFix', 'FearFix', 'NeutralFix'};
+                    durations = {5, 5, 5, 3, 3, 3, 2, 2, 2};
                     fichier_out = fullfile(onsetDir, onsetfiles(a).name);
+                    for elt = 1:length(onsets)
+                        for elt2 = 1:length(onsets{elt})
+                            onsets{elt+3}(elt2,1) = onsets{elt}(elt2)+5;
+                            onsets{elt+6}(elt2,1) = onsets{elt}(elt2)+8;
+                        end
+                    end
                     save (fichier_out, 'names', 'onsets', 'durations')
 				end
                 niiFiles = dir(fullfile(scanDir, '*.nii'));
