@@ -86,6 +86,10 @@ for category = categories
 				for a = 1:length(onsetfiles)
                     disp(onsetfiles(a).name);
 					onsetFilesList{a} = fullfile(onsetDir, onsetfiles(a).name);
+                    load(fullfile(onsetDir, onsetfiles(a).name), 'durations', 'names', 'onsets');
+                    durations = {10, 10, 10};
+                    fichier_out = fullfile(onsetDir, onsetfiles(a).name);
+                    save (fichier_out, 'names', 'onsets', 'durations')
 				end
                 niiFiles = dir(fullfile(scanDir, '*.nii'));
                 textFiles = dir(fullfile(scanDir, '*.txt'));
