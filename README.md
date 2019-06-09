@@ -1,8 +1,12 @@
 # Gaze-Contingent Experiment
-Jessica Bourgin
-Laboratoire de Psychologie et Neurocognition
-CNRS UMR 5105
-University Savoie Mont Blanc
+In this experiment, faces are displayed in two conditions:
+* Classical: faces are displayed in full
+
+![Screenshot](images/fullFace.png)
+
+* Gaze Contingent: only a part of the face is displayed, depending on where the gaze of the participant (or the mouse in dummy mode) is located on the screen.
+
+![Screenshot](images/gazeFace.png)
 
 ## Requirements
 
