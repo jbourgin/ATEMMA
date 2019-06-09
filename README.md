@@ -10,7 +10,7 @@ This experiment was tested on Matlab R2018a and R2018b. It was tested on Windows
 
 ## Usage
 
-To test the experiment, type
+To test the experiment, go into Gaze folder and type
 
 ```
 test()
@@ -65,3 +65,7 @@ You need also to define which keys correspond to triggers or to a stop key. In t
 2. Or the fixation cross presentation reaches a time threshold.
 
 `waitReleaseKeys` : waits until none of the keyboard keys are pressed anymore.
+
+## MRI
+
+Scripts provided in the MRI folder are dedicated to fMRI pre-processing and are currently under development.
