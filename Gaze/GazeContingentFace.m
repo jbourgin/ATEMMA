@@ -4,6 +4,8 @@ function GazeContingentFace()
 clear all;
 close all;
 
+rng('shuffle');
+
 %emotionOrder = 0;
 if ~exist(['..' filesep 'Results'], 'dir')
     mkdir(['..' filesep 'Results'])

@@ -4,6 +4,8 @@ function GazeContingentTraining()
 clear all;
 close all;
 
+rng('shuffle');
+
 if ~exist(['..' filesep 'Results'], 'dir')
     mkdir(['..' filesep 'Results'])
 end
