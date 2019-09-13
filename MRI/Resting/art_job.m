@@ -1,12 +1,15 @@
-function artProcessing(subj, number_vol, dataDir, scanDir, artfile, movFile, spmfiles, art_without_model);
+function art_job(subj, number_vol, scanDir, artfile, movFile, spmfiles)
+
+global art_without_model;
+global dataDir;
 % ART_BATCH
 % batch processing of multiple subjects from SPM.mat files (one per subject)
 %
 % art_batch; prompts the user to select a list of SPM.mat files (one per
 % subject) and runs ART using the default options on all of the subjects
 % data.
-% 
-% art_batch(spm_files) 
+%
+% art_batch(spm_files)
 % uses the SPM.mat files listed in the spm_files cell array
 %
 % see code for additional options
@@ -15,19 +18,19 @@ function artProcessing(subj, number_vol, dataDir, scanDir, artfile, movFile, spm
 %%%%%%%%%%%% ART PARAMETERS (edit to desired values) %%%%%%%%%%%%
 global_mean=1;                % global mean type (1: Standard 2: User-defined Mask)
 motion_file_type=0;           % motion file type (0: SPM .txt file 1: FSL .par file 2:Siemens .txt file)
-global_threshold=3.0;%9-3       % threshold for outlier detection based on global signal
-motion_threshold=3.0;%1-2         % threshold for outlier detection based on motion estimates
-rot_threshold=0.02;
-%rotation_threshold=0.02;
-use_diff_motion=1;            % 1: uses scan-to-scan motion to determine outliers; 0: uses absolute motion
+global_threshold=3.0;%9-3       % threshold for outlier detection based on global signal. Std
+motion_threshold=1;%1        % threshold for outlier detection based on motion estimates. Mm
+rot_threshold=0.025;%0.0174533
+%rotation_threshold=0.02; Rad%0.0174533
+use_diff_motion=1;            % 1: uses scan-to-scan motion to determine outliers; 0: uses absolute motion.
 use_diff_global=1;            % 1: uses scan-to-scan global signal change to determine outliers; 0: uses absolute global signal values
-use_norms=1;%0                  % 1: uses composite motion measure (largest voxel movement) to determine outliers; 0: uses raw motion measures (translation/rotation parameters) 
-mask_file=[];                 % set to user-defined mask file(s) for global signal estimation (if global_mean is set to 2) 
+use_norms=1;%0                  % 1: uses composite motion measure (largest voxel movement) to determine outliers; 0: uses raw motion measures (translation/rotation parameters)
+mask_file=[];                 % set to user-defined mask file(s) for global signal estimation (if global_mean is set to 2)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 STEPS=[1,1];
-threshExclude = 0.10;
+threshExclude = 0.25;
 
-if art_without_model == 1
+if art_without_model
     out = scanDir;
     FileID = fopen(strcat(scanDir, 'art_params.cfg'), 'w');
 
@@ -35,7 +38,7 @@ if art_without_model == 1
     fprintf(FileID, 'global_mean: %d\n', global_mean);
     fprintf(FileID, 'global_threshold: %f\n', global_threshold);
     fprintf(FileID, 'motion_threshold: %f\n', motion_threshold);
-    %fprintf(FileID, 'rotation_threshold: %f\n', rot_threshold);
+    fprintf(FileID, 'rotation_threshold: %f\n', rot_threshold);
     fprintf(FileID, 'motion_file_type: %d\n', motion_file_type);
     fprintf(FileID,'motion_fname_from_image_fname: 1\n');
     fprintf(FileID,'use_diff_motion: %d\n',use_diff_motion);
@@ -79,7 +82,7 @@ else
             fprintf(fid,'global_mean: %d\n',global_mean);
             fprintf(fid,'global_threshold: %f\n',global_threshold);
             fprintf(fid,'motion_threshold: %f\n',motion_threshold);
-            %fprintf(fid, 'rotation_threshold: %f\n', rot_threshold);
+            fprintf(fid, 'rotation_threshold: %f\n', rot_threshold);
             fprintf(fid,'motion_file_type: %d\n',motion_file_type);
             fprintf(fid,'motion_fname_from_image_fname: 1\n');
             fprintf(fid,'use_diff_motion: %d\n',use_diff_motion);
@@ -111,7 +114,10 @@ else
     % Force ART to save the plots                                        %
     %====================================================================%
     plot_name = strcat(scanDir,'art_plots.jpg');
-
+    plotart = gcf;
+    orient(plotart,'landscape')
+    print('-dpsc2', plotart, '-append', 'artfile') %, '-bestfit'
+    print('-dpsc2', '-f1', '-append', 'artfile')
     saveas(gcf, plot_name);
     close(gcf);
 end
@@ -126,8 +132,8 @@ for k = 1:length(matFiles)
     fullFileName = fullfile(scanDir, baseFileName);
     if startsWith(baseFileName, 'art_regression_outliers') == 1 && startsWith(baseFileName, 'art_regression_outliers_and') == 0
         outliersFile = fullFileName;
-    end;
-end;
+    end
+end
 load(outliersFile);
 
 num_outliers = size(R, 2);
@@ -145,8 +151,7 @@ if num_outliers > thresh
     ExcludedFile = fopen([dataDir 'Excluded_art.txt'], 'a');
     fprintf(ExcludedFile, '%s %d%s \n', char(subj), exclusion, '%');
     fclose(ExcludedFile);
-
-end;
+end
 
 clear('R');
 clear outliersFile;
@@ -160,8 +165,8 @@ end
 function [filename_path,filename_name,filename_ext]=art_fileparts(varargin)
 
 filename_name=''; filename_ext='';
-if ~nargin, filename_path=pwd; return; 
-elseif nargin==1, filename=varargin{1}; 
+if ~nargin, filename_path=pwd; return;
+elseif nargin==1, filename=varargin{1};
 else filename=fullfile(varargin{:});
 end
 if isempty(filename), filename_path=pwd; return; end

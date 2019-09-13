@@ -1,7 +1,6 @@
-function [matlabbatch] = change_dir_subject(scanDir)
+function [matlabbatch] = checkreg_job(files)
 
-matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir = {scanDir};
-
+matlabbatch{1}.spm.util.checkreg.data = files;
 spm('defaults', 'FMRI');
 spm_jobman('initcfg');
 spm_jobman('run', matlabbatch);

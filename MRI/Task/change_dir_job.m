@@ -1,6 +1,6 @@
-function [matlabbatch] = change_dir_global()
+function [matlabbatch] = change_dir_job(goDir)
 
-matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir = {'D:\MRI_faces\'};
+matlabbatch{1}.cfg_basicio.file_dir.dir_ops.cfg_cd.dir = {goDir};
 
 spm('defaults', 'FMRI');
 spm_jobman('initcfg');

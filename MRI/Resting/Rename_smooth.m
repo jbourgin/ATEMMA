@@ -1,21 +1,14 @@
 %Renames s6w files in sw (for conn analysis).
 clear all
-categories = {'Old', 'Young'};
-dataDir = 'D:/MRI_faces/Files_ready/';
+categories = {'AD', 'CN', 'YA'};
+dataDir = '/media/jessica/SSD_DATA/IRM_Gaze/Files_ready/';
 
 for category = categories
     curDir = char(strcat(dataDir, category, '/'));
-    subjList = {};
-    %We create the list of subject names
-    files = dir(curDir);
-    dirFlags = [files(:).isdir]; 
-    subFolders = files(dirFlags);
-    for k = 1:length(subFolders)
-        subjList{k} = [subFolders(k).name];
-    end
+    subjList = createSubjList(category);
     for subj = subjList
         if ~contains(char(subj), '.')
-            scanDir = char(strcat(curDir, subj, '/', 'Resting/Resting', '/'));
+            scanDir = char(strcat(curDir, subj, '/', 'Resting', '/'));
             scanFiles = dir(fullfile(scanDir, '*.nii'));
             %anatDir = char(strcat(curDir, subj, '/', 'Anat', '/'));
             %anatFiles = dir(fullfile(anatDir, '*.nii'));
