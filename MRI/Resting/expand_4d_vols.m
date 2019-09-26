@@ -1,8 +1,5 @@
 function out = expand_4d_vols(nii_file, type_file, high_threshold)
     nb_vols = spm_select_get_nbframes(nii_file);
-    if contains(nii_file,'VP18')
-        high_threshold = 230;
-    end
     global nb_vol_removed;
     out = {};
     for k = 1:nb_vols

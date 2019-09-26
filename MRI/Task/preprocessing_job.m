@@ -3,7 +3,7 @@ function [matlabbatch] = preprocessing_job(filesList, anatFile)
 global TR_rsfiles;
 global spmdir;
 
-matlabbatch{1}.spm.spatial.realign.estwrite.data = {filesList{1}, filesList{2}, filesList{3}, filesList{4}}';                                  
+matlabbatch{1}.spm.spatial.realign.estwrite.data = {filesList{1}, filesList{2}, filesList{3}, filesList{4}}';                               
 matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.quality = 0.9;
 matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.sep = 4;
 matlabbatch{1}.spm.spatial.realign.estwrite.eoptions.fwhm = 5;

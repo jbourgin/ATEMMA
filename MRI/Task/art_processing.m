@@ -9,7 +9,8 @@ function art_processing(subj, curDir)
     onsetFilesList = [];
     artfilesList = [];
     number_vol = 0;
-    for c = 1:4
+    %for c = 1:4
+    for c = 1:2
         spmfilesArt{c} = getFile(scanDir, '*.nii', sprintf('s6wa%s_Task_Session%i', char(subj), c));
         artfilesList{c} = getFile(scanDir, '*.nii', sprintf('wa%s_Task_Session%i', char(subj), c));
         movFilesList{c} = getFile(scanDir, '*.txt', sprintf('rp_%s_Task_Session%i', char(subj), c));
@@ -25,11 +26,11 @@ function art_processing(subj, curDir)
     if ~exist(statDir, 'dir')
         mkdir(statDir)
     end
-    if length(spmfilesArt) == 4
-        firstLevelSpecification(spmfilesArt, onsetFilesList, movFilesList, statDir)
-    else
-        disp('Number of sessions different from 4');
-    end
+    %if length(spmfilesArt) == 4
+    firstLevelSpecificationClassic(spmfilesArt, onsetFilesList, movFilesList, statDir)
+    %else
+        %disp('Number of sessions different from 4');
+    %end
     
     matFile = getFile(statDir, '*.mat', 'SPM');
     

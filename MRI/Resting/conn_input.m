@@ -4,7 +4,12 @@ addpath('/home/jessica/ATEMMA/MRI/Resting/')
 
 global dataDir;
 dataDir = strcat('/media/jessica/SSD_DATA/IRM_Gaze/Files_ready/');
-categories = {'AD', 'CN', 'YA'};
+categories = {'AD', 'CN'};
+
+volDir = '/media/jessica/SSD_DATA/Volbrain_mri/';
+volfiles = dir(volDir);
+dirFlags = [volfiles(:).isdir];
+volfolders = volfiles(dirFlags);
 
 for category = categories
     subjList = createSubjList(category);
@@ -13,13 +18,36 @@ for category = categories
             nAD = length(subjList);
         elseif strcmp(category, 'CN')
             nCN = length(subjList);
-        elseif strcmp(category, 'YA')
-            nYA = length(subjList);
         end
     end
 end
 
-nsubjects = nAD + nCN + nYA;
+nsubjects = nAD + nCN;
+
+csvfile = readtable(strcat(dataDir, 'final_subjects_resting_scores.csv'));
+
+names = {'Age', 'Genre', 'Amy', 'AmyL', 'AmyR', 'ICV', 'GDS'};
+my_mat = zeros(nsubjects, length(names));
+
+i = 0;
+for category = categories
+    subjList = createSubjList(category);
+    for subj = subjList
+        i = i + 1;
+        for elt = 1:length(csvfile.Sujets)
+            if strcmp(char(subj), csvfile.Sujets(elt))
+                my_mat(i, find(strcmp(names,'Genre'))) = csvfile.Genre(elt);
+                my_mat(i, find(strcmp(names,'Age'))) = csvfile.Age(elt);
+                my_mat(i, find(strcmp(names,'GDS'))) = csvfile.GDS(elt);
+                my_mat(i, find(strcmp(names,'ICV'))) = csvfile.Tissue_IC(elt);
+                my_mat(i, find(strcmp(names,'Amy'))) = csvfile.NormalizedAmygdala(elt);
+                my_mat(i, find(strcmp(names,'AmyL'))) = csvfile.NormalizedAmygdala_left(elt);
+                my_mat(i, find(strcmp(names,'AmyR'))) = csvfile.NormalizedAmygdala_right(elt);
+            end
+        end
+    end
+end
+
 
 %Sets file to write
 BATCH.filename = fullfile(dataDir, 'conn_MRI_faces.mat');
@@ -51,18 +79,32 @@ BATCH.Setup.covariates.names = {'motion'};
 BATCH.Setup.conditions.names = {'rest'};
 
 %We set the second level covariates
-BATCH.Setup.subjects.effect_names = {'AllSubjects', 'AD', 'CN', 'YA'}; % % fixation on each type of emotional image (compared to neutral). Maybe the calculation needs to be redone (do the mean % (calculate the % for each trial)). Other variables to add ?
-BATCH.Setup.subjects.effects{1} = [ones(1, nAD), ones(1, nOld)];
-BATCH.Setup.subjects.effects{2} = [ones(1, nAD), zeros(1, nOld)];
-BATCH.Setup.subjects.effects{3} = [zeros(1, nAD), ones(1, nOld)];
+BATCH.Setup.subjects.effect_names = cat(2, {'AllSubjects', 'AD', 'CN'}, names); % % fixation on each type of emotional image (compared to neutral). Maybe the calculation needs to be redone (do the mean % (calculate the % for each trial)). Other variables to add ?
+BATCH.Setup.subjects.effects{1} = [ones(1, nAD), ones(1, nCN)];
+BATCH.Setup.subjects.effects{2} = [ones(1, nAD), zeros(1, nCN)];
+BATCH.Setup.subjects.effects{3} = [zeros(1, nAD), ones(1, nCN)];
+for i = 1:length(names)
+    BATCH.Setup.subjects.effects{i+3} = transpose(my_mat(:,i));
+end
+
+atlasDir = '/media/jessica/SSD_DATA/AtlasFull/';
+atlasnames = {};
+atlas = {};
+atlasfolders = dir(atlasDir);
+count = 0;
+for k = 1:length(atlasfolders)
+    if contains(char(atlasfolders(k).name), 'ROI')
+        count = count + 1;
+        atlasnames{count} = atlasfolders(k).name;
+        atlas{count} = fullfile(atlasDir, atlasfolders(k).name);
+    end
+end
+
 %Setup ROIs
-BATCH.Setup.rois.names = {'atlas', 'networks', 'aal', 'dmn', 'AICHA'};
-BATCH.Setup.rois.files{1} = 'D:\Matlab\spm\toolbox\conn\rois\atlas.nii';
-BATCH.Setup.rois.files{2} = 'D:\Matlab\spm\toolbox\conn\rois\networks.nii';
-BATCH.Setup.rois.files{3} = 'D:\Matlab\spm\toolbox\conn\utils\otherrois\aal.nii';
-BATCH.Setup.rois.files{4} = 'D:\Matlab\spm\toolbox\conn\utils\otherrois\dmn.nii';
-%BATCH.Setup.rois.files{5} = 'C:\toolbox\spm\toolbox\conn\utils\otherrois\AICHA.nii';
-BATCH.Setup.rois.files{5} = 'D:\Matlab\spm\toolbox\conn\utils\otherrois\AICHA.nii';
+BATCH.Setup.rois.names = cat(2,atlasnames,'left_amy','right_amy');
+for k = 1:length(atlas)
+    BATCH.Setup.rois.files{k} = atlas{k};
+end
 
 %Loop through categories and subjects and associate functional and structural files
 counterSubj = 0;
@@ -75,14 +117,14 @@ for category = categories
 
         %We select the functional volumes
         scanDir = char(strcat(curDir, subj, '/', 'Resting', '/'));
-        spmfile = getFile(scanDir, '*.nii', sprintf('swar%s', char(subj)));
+        spmfile = getFile(scanDir, '*.nii', sprintf('swa%s', char(subj)));
         movFile = getFile(scanDir, '*.mat', 'art_regression_outliers_and_movement');
         disp(strcat('Functional volume :  ', spmfile));
         BATCH.Setup.functionals{counterSubj}{1} = spmfile;
         BATCH.Setup.covariates.files{1}{counterSubj}{1} = movFile;
 
         %We select the anatomical volumes
-        anatDir = char(strcat(curDir, subj, '/', 'Anat', '/'));
+        anatDir = char(strcat(curDir, subj, '/', 'Anat_rest', '/'));
         anatFile = getFile(anatDir, '*.nii', sprintf('wm%s', char(subj)));
         spmfileC1 = getFile(anatDir, '*.nii', sprintf('mwc1%s', char(subj)));
         spmfileC2 = getFile(anatDir, '*.nii', sprintf('mwc2%s', char(subj)));
@@ -95,8 +137,14 @@ for category = categories
         BATCH.Setup.masks.Grey{counterSubj} = spmfileC1;
         BATCH.Setup.masks.White{counterSubj} = spmfileC2;
         BATCH.Setup.masks.CSF{counterSubj} = spmfileC3;
-
-            
+        
+        for j = 1:length(volfolders)
+            if startsWith(volfolders(j).name, sprintf('%s', char(subj)))
+                volsubjfiles = dir(strcat(volDir, volfolders(j).name));
+                BATCH.Setup.rois.files{length(atlasnames)+1}{counterSubj} = getFile(strcat(volDir, volfolders(j).name), '*.nii', sprintf('%s_left_amy', char(subj)));
+                BATCH.Setup.rois.files{length(atlasnames)+2}{counterSubj} = getFile(strcat(volDir, volfolders(j).name), '*.nii', sprintf('%s_right_amy', char(subj)));
+            end
+        end           
     end
 end
 

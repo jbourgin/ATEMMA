@@ -11,7 +11,7 @@ global spmdir;
 spmdir = '/home/jessica/software/spm12/';
 
 preprocess = true(1);
-artprocess = true(1);
+artprocess = false(1);
 
 global TR_rsfiles;
 TR_rsfiles = 2.5;
@@ -25,6 +25,7 @@ for category = categories
     curDir = char(strcat(dataDir, category, '/'));
     subjList = createSubjList(category);
     for subj = subjList
+        %Le faire à part en modifiant preprocessing_job
         if ~contains(char(subj),'PT19')
             disp(strcat('Subject: ', subj));
             if preprocess

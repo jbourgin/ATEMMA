@@ -8,11 +8,13 @@ function preprocess_function(subj, curDir)
     % Rename anat file
     anatFiles = dir(fullfile(anatDir, '*.nii'));
     anatFiles2 = char(strcat(anatDir, anatFiles.name));
-    anatFile = expand_4d_vols(anatFiles2, 'Ok', 'Not relevant');
-    replace_name = strcat(char(subj),'_T1','.nii');
-    mat_name = char(strcat(anatDir, replace_name(1:end-4), '.mat'));
-    transforming_files(anatFile, anatFiles2, replace_name, mat_name);
-    clear anatFile;
+    %anatFile = expand_4d_vols(anatFiles2, 'Ok', 'Not relevant');
+    %replace_name = strcat(char(subj),'_T1','.nii');
+    %mat_name = char(strcat(anatDir, replace_name(1:end-4), '.mat'));
+    %transforming_files(anatFile, anatFiles2, replace_name, mat_name);
+    replace_name = strcat(anatDir, char(subj),'_T1','.nii');
+    movefile(anatFiles2, replace_name); 
+    %clear anatFile;
     clear replace_name;
     clear mat_name;
     anatFileRaw = getFile(anatDir, '*.nii', sprintf('%s_T1', char(subj)));
@@ -21,10 +23,12 @@ function preprocess_function(subj, curDir)
     % Rename fun file and removing first volumes
     spmfiles = dir(fullfile(scanDir, '*.nii'));
     spmfiles2 = char(strcat(scanDir, spmfiles.name));
-    funFilesRaw = expand_4d_vols(spmfiles2, 'Not Ok', 1000);
-    replace_name = strcat(char(subj),'_Resting','.nii');
-    mat_name = char(strcat(scanDir, replace_name(1:end-4), '.mat'));
-    transforming_files(funFilesRaw, spmfiles2, replace_name, mat_name);
+    %funFilesRaw = expand_4d_vols(spmfiles2, 'Not Ok', 1000);
+    %replace_name = strcat(char(subj),'_Resting','.nii');
+    %mat_name = char(strcat(scanDir, replace_name(1:end-4), '.mat'));
+    %transforming_files(funFilesRaw, spmfiles2, replace_name, mat_name);
+    replace_name = strcat(scanDir, char(subj),'_Resting','.nii');
+    movefile(spmfiles2, replace_name); 
     spmfileRaw = getFile(scanDir, '*.nii', sprintf('%s', char(subj)));
     funFiles = expand_4d_vols(char(spmfileRaw), 'Ok', 'Not relevant');
     
