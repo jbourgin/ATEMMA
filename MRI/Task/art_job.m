@@ -81,8 +81,8 @@ end
 plot_name = strcat(scanDir,'art_plots.jpg');
 plotart = gcf;
 orient(plotart,'landscape')
-print('-dpsc2', plotart, '-append', 'artfile') %, '-bestfit'
 print('-dpsc2', '-f1', '-append', 'artfile')
+print('-dpsc2', plotart, '-append', 'artfile') %, '-bestfit'
 saveas(gcf, plot_name);
 close(gcf);
 

@@ -10,8 +10,11 @@ categories = {'AD', 'CN', 'YA'};
 global spmdir;
 spmdir = '/home/jessica/software/spm12/';
 
-preprocess = true(1);
-artprocess = false(1);
+global unauthorizedEye;
+unauthorizedEye = ['PT19','CB05','RM01','VM09','RC01','PR02'];
+
+preprocess = false(1);
+artprocess = true(1);
 
 global TR_rsfiles;
 TR_rsfiles = 2.5;
@@ -26,16 +29,16 @@ for category = categories
     subjList = createSubjList(category);
     for subj = subjList
         %Le faire à part en modifiant preprocessing_job
-        if ~contains(char(subj),'PT19')
-            disp(strcat('Subject: ', subj));
-            if preprocess
-                preprocess_function(subj, curDir);
-                disp('-------- Preprocessing ended --------');
-            end
-            if artprocess
-                art_processing(subj, curDir);
-                disp('-------- ART ended --------');
-            end
+        %if ~contains(char(subj),'PT19')
+        disp(strcat('Subject: ', subj));
+        if preprocess
+            preprocess_function(subj, curDir);
+            disp('-------- Preprocessing ended --------');
         end
+        if artprocess
+            art_processing(subj, curDir);
+            disp('-------- ART ended --------');
+        end
+        %end
     end
 end
