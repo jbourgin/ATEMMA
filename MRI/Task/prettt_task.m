@@ -20,6 +20,10 @@ global TR_rsfiles;
 TR_rsfiles = 2.5;
 global nb_vol_removed;
 nb_vol_removed = 0;
+global baseline;
+baseline = true(1);
+global duration
+duration = 5;
 
 %set(0,'DefaultFigureVisible','off');
 

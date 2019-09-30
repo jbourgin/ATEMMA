@@ -1,6 +1,7 @@
 function art_processing(subj, curDir)
     
     global unauthorizedEye;
+    global baseline;
     scanDir = char(strcat(curDir, subj, '/', 'Task', '/'));
     onsetDuration(subj, curDir);
     onsetDir = char(strcat(curDir, subj, '/', 'Onsets', '/'));
@@ -12,7 +13,7 @@ function art_processing(subj, curDir)
     number_vol = 0;
     %for c = 1:4
     for c = 1:2
-        spmfilesArt{c} = getFile(scanDir, '*.nii', sprintf('s6wa%s_Task_Session%i', char(subj), c));
+        spmfilesArt{c} = getFile(scanDir, '*.nii', sprintf('s8wa%s_Task_Session%i', char(subj), c));
         artfilesList{c} = getFile(scanDir, '*.nii', sprintf('wa%s_Task_Session%i', char(subj), c));
         movFilesList{c} = getFile(scanDir, '*.txt', sprintf('rp_%s_Task_Session%i', char(subj), c));
         onsetFilesList{c} = getFile(onsetDir, '*.mat', sprintf('onsets%sSession%i.mat', char(subj), c));
@@ -38,6 +39,12 @@ function art_processing(subj, curDir)
     if length(spmfilesArt) == 2
         firstLevelSpecificationClassic(spmfilesArt, onsetFilesList, movFilesList, statDir)
         print('-dpsc2', '-f1', '-append', 'artfile')
+        if baseline
+            statDirBaseline = char(strcat(scanDir, 'statsDirBaseline'));
+            onsetbaseline(subj, curDir);
+            firstLevelSpecificationClassicBaseline(spmfilesArt, onsetFilesList, movFilesList, statDirBaseline)
+            print('-dpsc2', '-f1', '-append', 'artfile')
+        end
         if ~contains(curDir, 'YA')
             onsetpmod(subj, curDir, false(1));
             firstLevelSpecificationClassicResponse(spmfilesArt, onsetFilesList, movFilesList, statDirResp)

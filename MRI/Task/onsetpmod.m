@@ -45,6 +45,9 @@ for a = 1:length(onsetfiles)
         end
     end
     fichier_out = sprintf('%s/onsets%sSession%i.mat', onsetDir, char(subj), a);
+    durations = durations(1:3);
+    names = names(1:3);
+    onsets = onsets(1:3);
     save (fichier_out, 'durations', 'names', 'onsets', 'pmod')
 end
 end

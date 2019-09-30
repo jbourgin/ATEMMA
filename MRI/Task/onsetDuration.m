@@ -1,6 +1,7 @@
 function onsetDuration(subj, curDir)
 
-new_durations = {10, 10, 10};
+global duration;
+new_durations = {duration, duration, duration};
 onsetDir = char(strcat(curDir, subj, '/', 'Onsets', '/'));
 onsetfiles = dir(fullfile(onsetDir, '*.mat'));
 onsetFilesList = [];
