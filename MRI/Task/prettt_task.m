@@ -23,7 +23,7 @@ nb_vol_removed = 0;
 global baseline;
 baseline = true(1);
 global duration
-duration = 5;
+duration = 10;
 
 %set(0,'DefaultFigureVisible','off');
 
