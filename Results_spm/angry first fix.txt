@@ -5,7 +5,7 @@ Threshold
 -- p value = 0.001
 -- intensity = 4.7853
 -- cluster size = 10
-Number of clusters found: 4
+Number of clusters found: 5
 ----------------------
 Cluster 1
 Number of voxels: 37
@@ -62,6 +62,20 @@ Peak intensity: 6.354
     1	Left Cerebrum
 ----------------------
 Cluster 4
+Number of voxels: 14
+Peak MNI coordinate: 30 -42  22
+Peak MNI coordinate region:  // Right Cerebrum // Parietal Lobe // Sub-Gyral // White Matter // undefined // undefined
+Peak intensity: -9.7493
+# voxels	structure
+   14	--TOTAL # VOXELS--
+   14	White Matter
+   14	Right Cerebrum
+   11	Extra-Nuclear
+   11	Sub-lobar
+    3	Sub-Gyral
+    3	Parietal Lobe
+----------------------
+Cluster 5
 Number of voxels: 19
 Peak MNI coordinate: -54  -4  22
 Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Precentral Gyrus // White Matter // undefined // Precentral_L (aal)

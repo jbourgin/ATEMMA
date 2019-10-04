@@ -5,7 +5,7 @@ Threshold
 -- p value = 0.001
 -- intensity = 4.7853
 -- cluster size = 10
-Number of clusters found: 3
+Number of clusters found: 5
 ----------------------
 Cluster 1
 Number of voxels: 11
@@ -55,3 +55,30 @@ Peak intensity: 6.4716
     2	Cerebro-Spinal Fluid
     2	Caudate Head
     2	Lateral Ventricle
+----------------------
+Cluster 4
+Number of voxels: 38
+Peak MNI coordinate: 18 -36  24
+Peak MNI coordinate region:  // Right Cerebrum // Sub-lobar // Extra-Nuclear // White Matter // Corpus Callosum // undefined
+Peak intensity: -10.2023
+# voxels	structure
+   38	--TOTAL # VOXELS--
+   38	White Matter
+   38	Right Cerebrum
+   35	Extra-Nuclear
+   35	Sub-lobar
+   15	Corpus Callosum
+    3	Cingulate Gyrus
+    3	Limbic Lobe
+----------------------
+Cluster 5
+Number of voxels: 10
+Peak MNI coordinate: -20 -10  34
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Sub-Gyral // White Matter // undefined // undefined
+Peak intensity: -5.6773
+# voxels	structure
+   10	--TOTAL # VOXELS--
+   10	Left Cerebrum
+   10	Sub-Gyral
+   10	White Matter
+   10	Frontal Lobe

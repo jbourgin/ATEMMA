@@ -1,0 +1,70 @@
+/media/bourginj/Elements/IRM_Gaze/stats/patients/angry-pt19/spmT_0001.nii,1
+Type: T
+df: 13
+Threshold
+-- p value = 0.001
+-- intensity = 3.852
+-- cluster size = 10
+Number of clusters found: 4
+----------------------
+Cluster 1
+Number of voxels: 11
+Peak MNI coordinate: -52 -12 -18
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Sub-Gyral // White Matter // undefined // Temporal_Mid_L (aal)
+Peak intensity: 4.9589
+# voxels	structure
+   11	--TOTAL # VOXELS--
+   11	Left Cerebrum
+   11	Temporal Lobe
+   11	Temporal_Mid_L (aal)
+    9	White Matter
+    7	Middle Temporal Gyrus
+    4	Sub-Gyral
+    2	brodmann area 21
+    2	Gray Matter
+----------------------
+Cluster 2
+Number of voxels: 69
+Peak MNI coordinate: -60 -32   0
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Middle Temporal Gyrus // Gray Matter // undefined // Temporal_Mid_L (aal)
+Peak intensity: 6.2294
+# voxels	structure
+   69	--TOTAL # VOXELS--
+   69	Left Cerebrum
+   69	Middle Temporal Gyrus
+   69	Temporal Lobe
+   69	Temporal_Mid_L (aal)
+   43	White Matter
+   26	Gray Matter
+   13	brodmann area 21
+    4	brodmann area 22
+----------------------
+Cluster 3
+Number of voxels: 16
+Peak MNI coordinate: 26 -30  34
+Peak MNI coordinate region:  // Right Cerebrum // Frontal Lobe // Sub-Gyral // White Matter // undefined // undefined
+Peak intensity: -4.6697
+# voxels	structure
+   16	--TOTAL # VOXELS--
+   16	Right Cerebrum
+   16	Sub-Gyral
+   16	White Matter
+   16	Frontal Lobe
+----------------------
+Cluster 4
+Number of voxels: 18
+Peak MNI coordinate: 30 -48  56
+Peak MNI coordinate region:  // Right Cerebrum // Parietal Lobe // Inferior Parietal Lobule // White Matter // undefined // Parietal_Sup_R (aal)
+Peak intensity: -4.717
+# voxels	structure
+   18	--TOTAL # VOXELS--
+   18	Parietal Lobe
+   18	Right Cerebrum
+   16	White Matter
+    9	Inferior Parietal Lobule
+    9	Sub-Gyral
+    8	Parietal_Sup_R (aal)
+    7	Postcentral_R (aal)
+    3	Parietal_Inf_R (aal)
+    2	brodmann area 40
+    2	Gray Matter
