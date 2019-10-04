@@ -1,0 +1,57 @@
+/media/bourginj/Elements/IRM_Gaze/stats/neutral-first_fix/spmT_0001.nii,1
+Type: T
+df: 7
+Threshold
+-- p value = 0.001
+-- intensity = 4.7853
+-- cluster size = 10
+Number of clusters found: 3
+----------------------
+Cluster 1
+Number of voxels: 11
+Peak MNI coordinate: 0 -46 -30
+Peak MNI coordinate region:  // Left Cerebellum // Cerebellum Anterior Lobe // undefined // undefined // undefined // Vermis_10 (aal)
+Peak intensity: 5.6689
+# voxels	structure
+   11	--TOTAL # VOXELS--
+    8	Vermis_10 (aal)
+    6	Cerebellum Anterior Lobe
+    6	Right Cerebellum
+    5	Cerebro-Spinal Fluid
+    5	Sub-lobar
+    5	Fourth Ventricle
+    5	Left Cerebellum
+    1	Culmen
+----------------------
+Cluster 2
+Number of voxels: 10
+Peak MNI coordinate: 12  22   6
+Peak MNI coordinate region:  // Right Cerebrum // Sub-lobar // Caudate // Gray Matter // Caudate Head // Caudate_R (aal)
+Peak intensity: 6.7819
+# voxels	structure
+   10	--TOTAL # VOXELS--
+   10	Right Cerebrum
+   10	Sub-lobar
+    7	Caudate_R (aal)
+    6	Caudate Head
+    6	Caudate
+    6	Gray Matter
+    4	Lateral Ventricle
+    4	Cerebro-Spinal Fluid
+----------------------
+Cluster 3
+Number of voxels: 10
+Peak MNI coordinate: -10  18   8
+Peak MNI coordinate region:  // Left Cerebrum // Sub-lobar // Caudate // Gray Matter // Caudate Body // Caudate_L (aal)
+Peak intensity: 6.4716
+# voxels	structure
+   10	--TOTAL # VOXELS--
+   10	Left Cerebrum
+   10	Sub-lobar
+    9	Caudate_L (aal)
+    8	Caudate
+    8	Gray Matter
+    6	Caudate Body
+    2	Cerebro-Spinal Fluid
+    2	Caudate Head
+    2	Lateral Ventricle

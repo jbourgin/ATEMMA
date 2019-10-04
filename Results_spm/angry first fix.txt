@@ -1,0 +1,80 @@
+/media/bourginj/Elements/IRM_Gaze/stats/angry-first_fix/spmT_0001.nii,1
+Type: T
+df: 7
+Threshold
+-- p value = 0.001
+-- intensity = 4.7853
+-- cluster size = 10
+Number of clusters found: 4
+----------------------
+Cluster 1
+Number of voxels: 37
+Peak MNI coordinate: -58   6   4
+Peak MNI coordinate region:  // Left Cerebrum // Frontal-Temporal Space // undefined // undefined // undefined // Rolandic_Oper_L (aal)
+Peak intensity: 8.822
+# voxels	structure
+   37	--TOTAL # VOXELS--
+   37	Left Cerebrum
+   31	Rolandic_Oper_L (aal)
+   20	Temporal Lobe
+   18	Superior Temporal Gyrus
+   17	Frontal-Temporal Space
+   10	Gray Matter
+    9	brodmann area 22
+    6	Frontal_Inf_Oper_L (aal)
+    3	White Matter
+----------------------
+Cluster 2
+Number of voxels: 12
+Peak MNI coordinate: -22 -52  12
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Sub-Gyral // White Matter // undefined // Precuneus_L (aal)
+Peak intensity: 6.9174
+# voxels	structure
+   12	--TOTAL # VOXELS--
+   12	Left Cerebrum
+   11	White Matter
+    8	Sub-lobar
+    7	Precuneus_L (aal)
+    7	Extra-Nuclear
+    5	Calcarine_L (aal)
+    4	Sub-Gyral
+    4	Temporal Lobe
+    1	Lateral Ventricle
+    1	Cerebro-Spinal Fluid
+----------------------
+Cluster 3
+Number of voxels: 25
+Peak MNI coordinate: 2 -12  14
+Peak MNI coordinate region:  // Right Cerebrum // Sub-lobar // Extra-Nuclear // White Matter // undefined // undefined
+Peak intensity: 6.354
+# voxels	structure
+   25	--TOTAL # VOXELS--
+   14	Right Cerebrum
+   10	White Matter
+   10	Inter-Hemispheric
+    8	Sub-lobar
+    5	Extra-Nuclear
+    3	Gray Matter
+    3	Thalamus
+    1	Thalamus_L (aal)
+    1	Thalamus_R (aal)
+    1	Medial Dorsal Nucleus
+    1	Left Cerebrum
+----------------------
+Cluster 4
+Number of voxels: 19
+Peak MNI coordinate: -54  -4  22
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Precentral Gyrus // White Matter // undefined // Precentral_L (aal)
+Peak intensity: 6.6894
+# voxels	structure
+   19	--TOTAL # VOXELS--
+   19	Left Cerebrum
+   18	Precentral Gyrus
+   18	White Matter
+   17	Frontal Lobe
+   14	Postcentral_L (aal)
+    5	Precentral_L (aal)
+    2	Parietal Lobe
+    1	Postcentral Gyrus
+    1	brodmann area 6
+    1	Gray Matter
