@@ -1,0 +1,88 @@
+Angry;;;;;Fear;;;;;Baseline;;;
+PT19;PV48;PV49;VP18;;PT19;PV48;PV49;VP18;;PT19;PV48;PV49;VP18
+Pos (Control > patient);;;;;;;;;;;;;
+Frontal;;;;;Frontal;;;;;Frontal;;;
+;Frontal inf orb R et L 38;Frontal mid L 10;Frontal inf orb L 47;;Frontal mid L 10;Postcentral L 43;Precentral R 44;Frontal sup R 6;;Supramarginal R ;Precentral L 44;Frontal mid R 10;Frontal med orb R 11
+;Frontal inf tri L 45-46;Frontal inf tri L 45;Frontal inf orb L 47;;Frontal sup L 6;Postcentral R 6;Frontal mid R 46;;;Supp motor arza R;Frontal sup medial R 10;Frontal 44;
+;Frontal sup medial L 10;Frontal mid R 46;Frontal sup L 6;;;Frontal mid L 8;Frontal sup R 8;;;;Postcentral R 4;Precentral L 6;
+;Frontal mid R 46;Precentral L 6;Paracentral lobule L 4;;;;Supp motor area 6;;;;;Postcentral L ;
+;Temporal sup r 13;Frontal sup L 10;;;;;;;;;;Frontal sup med R 8;
+;;Frontal mid L 46;;;;;;;;;;;
+;;Frontal sup R 6;;;;;;;;;;;
+;;Frontal inf oper L 45;;;;;;;;;;;
+;;Frontal inf tri R 9;;;;;;;;;;;
+;;Precentral R;;;;;;;;;;;
+;;Frontal mid R 9;;;;;;;;;;;
+;;Frontal sup R 8;;;;;;;;;;;
+Temporal;;;;;Temporal;;;;;Temporal;;;
+Temporal mid L 21;Temporal sup r et l 21;Temporal mid R 38;Temporal sup R 47;;Temporal mid L 20;Temporal mid L;Temporal inf R 20;;;Temporal sup L 6;Temporal inf R 20;Temporalsup L 41;
+;Temporal inf L 36;Temporal mid L 21;Calcarine R;;;Temporal sup L 22;Fusiform L 20;;;;Temporal inf L 38;Temporal sup R 41;
+;Temporal sup R 40;Temporal sup R 21;;;;;Temporal mid R 21;;;;Temporal sup L 22;;
+;Heschl R 22;Caudate L et R;;;;;Fusiform R 20;;;;;;
+;;;;;;;Temporal sup L 22;;;;;;
+;;;;;;;Temporal mid L 39;;;;;;
+Occipital;;;;;Occipital;;;;;Occipital;;;
+;Occipital mid L 19;Lingual L 19;;;;Lingual L 19;Occipital mid L 19;Cuneus R 18;;Occipital mid L 19;;;
+;;Occipital mid L 19;;;;Occipital mid L 19;Cuneus R 18;;;;;;
+;;Calcarine L 17;;;;;Occipital mid R 19;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+Parietal;;;;;Parietal;;;;;Parietal;;;
+;Angular L 39;;;;Angular R 40;Parietal inf L 40;Postcentral R 3;Postcentral R 3;;Postcentral R;;Parietal inf L 40;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+Autres;;;;;Autres;;;;;Autres;;;
+;Cerebellum R;Precuneus R;Cerebellum R;;cerebellum L;Thalamus L;Cerebellum L et R;;;Cerebellum R;Cingulum ant R 9;Putamen L;Parahippocampal L
+;Pallidum L;Thalamus L;Parahippocampal L 28;;;;Parahippocampal L 36;;;;;Thalamus R;Insuula R 13
+;Cluster 16 comprenant l’hippocampe;Cingulum ant L 24;Insula R 13;;;;;;;;;Cingulum R 9;
+;Thalamus R;Cingulum ant L 32;Cingulum ant L 32;;;;;;;;;;
+;;;Heschl R 13;;;;;;;;;;
+Neg (patient > control);;;;;;;;;;;;;
+Frontal;;;;;Frontal;;;;;Frontal;;;
+;Frontal sup orb R 47;Frontal mid R 9;Frontal mid R 46;;;Olfactory L;Frontal inf orb L 47;Frontal sup medial R 9;;Frontal mid orb L 10;Frontal inf orb L 47;Frontal mid R 10;Insula R 47
+;Frontal sup L 10;Insula R 13;Frontal sup medial L10;;;Frontal inf tri R 47;Frontal inf tri R 10;Precentral R 6;;Frontal mid L 9;Frontal mid L 10;Precentral L 44;Frontal inf oper L 44
+;Frontal inf tri R  9;Frontal inf oper L 44;Precentral L 6;;;Frontal inf oper L 45;Frontal inf tri R 9;Precentral L 6;;Frontal mid L 8;Frontal mid L 9;Frontal mid L 9;Frontal sup medial R 10
+;Frontal sup R 9;Frontal mid L 10;Frontal sup R 9;;;Frontal sup L 8;Frontal mid R 8;Precentral R 9;;Frontal sup medial L 6;Precentral L 6;Frontal sup L 8;Frontal inf tri R 46
+;Frontal sup med R 9;Precentral L 9;Precentral R 9;;;Precentral L 6;Precentral R 6;Postcentral R 4;;Frontal med orb R 10;Frontal mid R 9;;Frontal sup medial L 10
+;Precentral R 4 et 6;Frontal sup L 6;Frontal sup medial L10;;;Supp motor area L 6;Precentral L 9;Frontal sup L;;;Frontal mid L 8;;Precentral L 6
+;Frontal sup L 8;Frontal sup R 6;Sup motor area R 8;;;Paracentral R 6;Frontal sup L 8;Supp motor area R 6;;;Frontal sup R 8;;Frontal sup R 8
+;Frontal mid L et R 6;Sup motor area L et R 6;Postcentral R;;;Frontal sup R 6;Sup motor area R 24;;;;;;Postcentral R 4
+;Sup motor area R 6;;Frontal sup L 8;;;;Precentral L 6;;;;;;Supp motor area R 6
+;Frontal sup R 6;;Postcentral R 2;;;;Postcentral R 4;;;;;;Paracentral lobule L 6
+;Precentral L 8;;;;;;Supp motor area L 6;;;;;;Supp motor area L 6
+Temporal;;;;;Temporal;;;;;Temporal;;;
+;Temporal inf R 21;Temporal inf L 21;Temporal mid L 21;;;;Temporal sup R 41;Temporal mid L 21;;Temporal mid L 21;Temporal mid L 21;Temporal mid L 21;Temporal mid L 20
+;Temporal mid L & R 38;Temporal inf R 20;Temporal sup R 40;;;;;;;Temporal mid R 21;Temporal mid R 39;Temporal mid L 39;Temporal sup L 38
+;TPJ 39 ? Cluster 31;Temporal mid L 21;Temporal sup L 13;;;;;;;;Temporal sup R 41;;Temporal mid L
+;;Temporal sup R 22;;;;;;;;;;;
+;;Temporal sup L 22;;;;;;;;;;;
+;;Temporal sup R 41;;;;;;;;;;;
+;;Temporal sup L 41;;;;;;;;;;;
+;;Temporal mid L 22;;;;;;;;;;;
+Occipital;;;;;Occipital;;;;;Occipital;;;
+;Occipital mid r 19;Occipital inf L et R 18;Occipital sup L 19;;Occipital sup L 19;Occipital inf L 19;Cuneus L 18;;;;Fusiform L 19;Occipital mid R 19;
+;Lingual R 18;Occipital mid L 19;;;;Lingual R 18;;;;;Lingual R 18;;
+;Occipital inf L 19;Occipital sup R 19;;;;Occipital mid L 18;;;;;Occipital mid L 19;;
+;occipital mid l 19;;;;;;;;;;Occipital sup R 19;;
+;cuneus R 18;;;;;;;;;;;;
+;;;;;;;;;;;;;
+Parietal;;;;;Parietal;;;;;Parietal;;;
+Parietal sup R 40;Postcentral R 3;Postcentral R 40;Supramarginal L  40;;;Precuneus R ;Supramarginal R 40 43;Supramarginal R 40;;Precentral L 44;Supramarginal L 40;Postcentral L ;Supramargnal L 40
+;Precuneus L;Postcentral L ;Parietal inf L 40;;;Parietal inf L 40;Postcentral R 40;Postcentral L 40;;Angular R 40;Parietal sup L 7;Parietal inf L 40;Supramarginal R 40
+;Parietal Inf L 40;Supramarginal R 2;;;;Parietal sup L 7;Parietal inf L40;Parietal inf R 7;;Parietal inf L 40;;Postcentral R;Precuneus L 7
+;Parietal Inf R 7;Angular R 39;;;;;;;;Parietal sup L 7;;Parietal sup L;Parietal inf L 7
+;Parietal sup R 7;Angular L 39;;;;;;;;;;;
+;Paracentral R 4;Prarietal inf r 40;;;;;;;;;;;
+;;Parietal sup R 7;;;;;;;;;;;
+;;Precuneus R 7;;;;;;;;;;;
+Autres;;;;;Autres;;;;;Autres;;;
+;Cerebellum R;Cerebellum L et R;Cerebellum L;;;Cerebellum L;Insula L 13;Cerebellum L;;;Thalamus L;;Parahippocampal L
+;Cingulum ant R 24;Pallidum L;Cingulum ant L 24;;;Caudate L et R;Thalamus R;Cingulum mid R 32;;;;;
+;Sup motor area L 24;Insula L 13;Precuneus L;;;;Cingulum mid R;;;;;;
+;;Thalamus R;Caudate L;;;;Cingulum mid L 24;;;;;;
+;;Hschl 13 R;Cuneus R 19;;;;;;;;;;
+;;Cingulum mid L 32;;;;;;;;;;;
