@@ -1,0 +1,632 @@
+/media/bourginj/Elements/IRM_Gaze/stats/patients/fear-pv48/spmT_0001.nii,1
+Type: T
+df: 13
+Threshold
+-- p value = 0.001
+-- intensity = 3.852
+-- cluster size = 10
+Number of clusters found: 34
+----------------------
+Cluster 1
+Number of voxels: 56
+Peak MNI coordinate: -28 -60 -58
+Peak MNI coordinate region:  // undefined // undefined // undefined // undefined // undefined // Cerebelum_8_L (aal)
+Peak intensity: -4.9945
+# voxels	structure
+   56	--TOTAL # VOXELS--
+   44	Cerebelum_8_L (aal)
+    7	Inferior Semi-Lunar Lobule
+    7	Left Cerebellum
+    7	Cerebellum Posterior Lobe
+    3	Cerebelum_7b_L (aal)
+----------------------
+Cluster 2
+Number of voxels: 65
+Peak MNI coordinate: -22 -40 -36
+Peak MNI coordinate region:  // Left Cerebellum // Cerebellum Anterior Lobe // undefined // undefined // undefined // undefined
+Peak intensity: 5.757
+# voxels	structure
+   65	--TOTAL # VOXELS--
+   58	Left Cerebellum
+   33	Cerebellar Tonsil
+   33	Cerebellum Posterior Lobe
+   25	Cerebellum Anterior Lobe
+   15	Cerebelum_8_L (aal)
+    7	Pons
+    7	Left Brainstem
+    4	Cerebelum_10_L (aal)
+    2	Culmen
+    1	Cerebelum_4_5_L (aal)
+----------------------
+Cluster 3
+Number of voxels: 30
+Peak MNI coordinate: 10 -42 -32
+Peak MNI coordinate region:  // Right Cerebellum // Cerebellum Anterior Lobe // undefined // undefined // undefined // undefined
+Peak intensity: 7.4068
+# voxels	structure
+   30	--TOTAL # VOXELS--
+   18	Right Cerebellum
+   18	Cerebellum Anterior Lobe
+   12	Pons
+   12	Right Brainstem
+    4	Culmen
+----------------------
+Cluster 4
+Number of voxels: 25
+Peak MNI coordinate: -40   4 -28
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Sub-Gyral // White Matter // undefined // Temporal_Mid_L (aal)
+Peak intensity: 5.7697
+# voxels	structure
+   25	--TOTAL # VOXELS--
+   25	Temporal Lobe
+   25	White Matter
+   25	Left Cerebrum
+   15	Sub-Gyral
+   15	Temporal_Mid_L (aal)
+    5	Middle Temporal Gyrus
+    5	Superior Temporal Gyrus
+    1	Temporal_Pole_Sup_L (aal)
+----------------------
+Cluster 5
+Number of voxels: 203
+Peak MNI coordinate: -36 -74 -10
+Peak MNI coordinate region:  // Left Cerebrum // Occipital Lobe // Inferior Occipital Gyrus // White Matter // undefined // Occipital_Inf_L (aal)
+Peak intensity: -8.9915
+# voxels	structure
+  203	--TOTAL # VOXELS--
+  200	Left Cerebrum
+  180	Occipital Lobe
+  175	White Matter
+  134	Occipital_Inf_L (aal)
+   65	Sub-Gyral
+   62	Inferior Occipital Gyrus
+   53	Middle Occipital Gyrus
+   46	Fusiform_L (aal)
+   23	Gray Matter
+   20	Occipital_Mid_L (aal)
+   20	brodmann area 19
+   20	Temporal Lobe
+   12	Inferior Temporal Gyrus
+    7	Fusiform Gyrus
+    3	brodmann area 37
+    3	Cerebelum_6_L (aal)
+    2	Left Cerebellum
+    2	Declive
+    2	Cerebellum Posterior Lobe
+    1	Lingual Gyrus
+----------------------
+Cluster 6
+Number of voxels: 351
+Peak MNI coordinate: 10 -82 -10
+Peak MNI coordinate region:  // Right Cerebrum // Occipital Lobe // Lingual Gyrus // White Matter // undefined // Lingual_R (aal)
+Peak intensity: -8.2317
+# voxels	structure
+  351	--TOTAL # VOXELS--
+  348	Right Cerebrum
+  329	Occipital Lobe
+  190	White Matter
+  128	Gray Matter
+  122	Middle Occipital Gyrus
+  115	Lingual Gyrus
+   82	Occipital_Inf_R (aal)
+   76	Lingual_R (aal)
+   64	Occipital_Mid_R (aal)
+   56	Inferior Occipital Gyrus
+   55	brodmann area 18
+   45	Fusiform_R (aal)
+   43	Inferior Temporal Gyrus
+   40	brodmann area 19
+   38	Temporal_Mid_R (aal)
+   30	Temporal_Inf_R (aal)
+   29	brodmann area 37
+   17	Temporal Lobe
+    8	Sub-Gyral
+    5	Calcarine_R (aal)
+    5	Cerebelum_6_R (aal)
+    3	Middle Temporal Gyrus
+    3	Fusiform Gyrus
+    2	Left Cerebrum
+    1	Calcarine_L (aal)
+----------------------
+Cluster 7
+Number of voxels: 10
+Peak MNI coordinate: -24   8 -16
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Subcallosal Gyrus // White Matter // undefined // Olfactory_L (aal)
+Peak intensity: -4.8597
+# voxels	structure
+   10	--TOTAL # VOXELS--
+   10	Left Cerebrum
+    9	Frontal Lobe
+    9	Olfactory_L (aal)
+    8	Subcallosal Gyrus
+    5	White Matter
+    4	brodmann area 34
+    4	Gray Matter
+    1	Inferior Frontal Gyrus
+    1	Limbic Lobe
+    1	Insula_L (aal)
+    1	Parahippocampa Gyrus
+----------------------
+Cluster 8
+Number of voxels: 19
+Peak MNI coordinate: -52  -4  -6
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Superior Temporal Gyrus // White Matter // undefined // Temporal_Sup_L (aal)
+Peak intensity: 5.537
+# voxels	structure
+   19	--TOTAL # VOXELS--
+   19	Left Cerebrum
+   19	Superior Temporal Gyrus
+   19	Temporal Lobe
+   19	Temporal_Sup_L (aal)
+   15	White Matter
+    4	Gray Matter
+    3	brodmann area 22
+    1	brodmann area 21
+----------------------
+Cluster 9
+Number of voxels: 14
+Peak MNI coordinate: -28 -62  -4
+Peak MNI coordinate region:  // Left Cerebrum // Occipital Lobe // Lingual Gyrus // Gray Matter // brodmann area 19 // Lingual_L (aal)
+Peak intensity: 4.8489
+# voxels	structure
+   14	--TOTAL # VOXELS--
+   14	Left Cerebrum
+   14	Occipital Lobe
+   13	Lingual Gyrus
+   13	Lingual_L (aal)
+   13	Gray Matter
+   10	brodmann area 19
+    1	White Matter
+    1	Fusiform_L (aal)
+    1	Sub-Gyral
+----------------------
+Cluster 10
+Number of voxels: 16
+Peak MNI coordinate: 50  40  -2
+Peak MNI coordinate region:  // Right Cerebrum // Frontal Lobe // Middle Frontal Gyrus // White Matter // undefined // Frontal_Inf_Tri_R (aal)
+Peak intensity: -5.7903
+# voxels	structure
+   16	--TOTAL # VOXELS--
+   16	Frontal Lobe
+   16	Right Cerebrum
+   13	Middle Frontal Gyrus
+   13	Frontal_Inf_Tri_R (aal)
+   10	White Matter
+    6	brodmann area 47
+    6	Gray Matter
+    3	Inferior Frontal Gyrus
+    3	Frontal_Inf_Orb_R (aal)
+----------------------
+Cluster 11
+Number of voxels: 155
+Peak MNI coordinate: -30 -92   2
+Peak MNI coordinate region:  // Left Cerebrum // Occipital Lobe // Middle Occipital Gyrus // White Matter // undefined // Occipital_Mid_L (aal)
+Peak intensity: -9.067
+# voxels	structure
+  155	--TOTAL # VOXELS--
+  155	Left Cerebrum
+  154	Occipital_Mid_L (aal)
+  150	Occipital Lobe
+  147	Middle Occipital Gyrus
+  106	White Matter
+   43	Gray Matter
+   25	brodmann area 18
+   18	brodmann area 19
+    5	Temporal Lobe
+    3	Sub-Gyral
+    3	Middle Temporal Gyrus
+    2	Cuneus
+----------------------
+Cluster 12
+Number of voxels: 20
+Peak MNI coordinate: -10 -22   2
+Peak MNI coordinate region:  // Left Cerebrum // Sub-lobar // Thalamus // Gray Matter // Mammillary Body // Thalamus_L (aal)
+Peak intensity: 4.6442
+# voxels	structure
+   20	--TOTAL # VOXELS--
+   20	Thalamus_L (aal)
+   17	Left Cerebrum
+   17	Sub-lobar
+   17	Thalamus
+   17	Gray Matter
+   14	Mammillary Body
+    3	Left Brainstem
+    3	Midbrain
+----------------------
+Cluster 13
+Number of voxels: 32
+Peak MNI coordinate: 10  26   0
+Peak MNI coordinate region:  // Right Cerebrum // Sub-lobar // Extra-Nuclear // White Matter // Corpus Callosum // undefined
+Peak intensity: 6.8158
+# voxels	structure
+   32	--TOTAL # VOXELS--
+   32	Right Cerebrum
+   26	White Matter
+   20	Sub-lobar
+   14	Corpus Callosum
+   14	Extra-Nuclear
+    9	Anterior Cingulate
+    9	Limbic Lobe
+    5	Lateral Ventricle
+    5	Caudate_R (aal)
+    5	Cerebro-Spinal Fluid
+    3	Sub-Gyral
+    3	Frontal Lobe
+    1	Caudate
+    1	Gray Matter
+    1	Caudate Head
+----------------------
+Cluster 14
+Number of voxels: 418
+Peak MNI coordinate: -20 -32  14
+Peak MNI coordinate region:  // Left Cerebrum // Sub-lobar // Caudate // Gray Matter // Caudate Tail // undefined
+Peak intensity: -13.1785
+# voxels	structure
+  418	--TOTAL # VOXELS--
+  401	Sub-lobar
+  397	Left Cerebrum
+  219	White Matter
+  218	Extra-Nuclear
+  112	Gray Matter
+   88	Thalamus_L (aal)
+   84	Thalamus
+   71	Cerebro-Spinal Fluid
+   71	Lateral Ventricle
+   46	Pulvinar
+   20	Caudate Tail
+   20	Caudate
+   16	Caudate_L (aal)
+   11	Right Cerebrum
+   10	Lateral Posterior Nucleus
+   10	Inter-Hemispheric
+    8	Lateral Dorsal Nucleus
+    5	Claustrum
+    5	Midline Nucleus
+    5	Corpus Callosum
+    3	Ventral Lateral Nucleus
+    3	Lentiform Nucleus
+    3	Putamen
+    1	Putamen_L (aal)
+----------------------
+Cluster 15
+Number of voxels: 34
+Peak MNI coordinate: -60  -8  14
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Precentral Gyrus // Gray Matter // brodmann area 43 // Postcentral_L (aal)
+Peak intensity: 5.69
+# voxels	structure
+   34	--TOTAL # VOXELS--
+   34	Left Cerebrum
+   28	Postcentral_L (aal)
+   23	Gray Matter
+   18	brodmann area 43
+   14	Precentral Gyrus
+   13	Parietal Lobe
+   13	Postcentral Gyrus
+   12	Frontal Lobe
+    9	Temporal Lobe
+    7	Transverse Temporal Gyrus
+    7	White Matter
+    6	Rolandic_Oper_L (aal)
+    5	brodmann area 42
+----------------------
+Cluster 16
+Number of voxels: 119
+Peak MNI coordinate: -58  12  22
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Inferior Frontal Gyrus // White Matter // undefined // Frontal_Inf_Oper_L (aal)
+Peak intensity: -5.4315
+# voxels	structure
+  119	--TOTAL # VOXELS--
+  119	Frontal Lobe
+  119	Left Cerebrum
+  108	Frontal_Inf_Oper_L (aal)
+   94	White Matter
+   73	Inferior Frontal Gyrus
+   46	Sub-Gyral
+   25	Gray Matter
+   17	brodmann area 45
+   11	Frontal_Inf_Tri_L (aal)
+    8	brodmann area 44
+----------------------
+Cluster 17
+Number of voxels: 23
+Peak MNI coordinate: -44 -82  20
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Middle Temporal Gyrus // Gray Matter // brodmann area 19 // Occipital_Mid_L (aal)
+Peak intensity: 5.3999
+# voxels	structure
+   23	--TOTAL # VOXELS--
+   23	Left Cerebrum
+   23	Middle Temporal Gyrus
+   23	Temporal Lobe
+   19	White Matter
+   19	Occipital_Mid_L (aal)
+    4	brodmann area 19
+    4	Gray Matter
+----------------------
+Cluster 18
+Number of voxels: 80
+Peak MNI coordinate: -18   4  22
+Peak MNI coordinate region:  // Left Cerebrum // Sub-lobar // Extra-Nuclear // White Matter // undefined // Caudate_L (aal)
+Peak intensity: -6.0442
+# voxels	structure
+   80	--TOTAL # VOXELS--
+   80	Left Cerebrum
+   78	Caudate_L (aal)
+   78	Sub-lobar
+   55	White Matter
+   53	Extra-Nuclear
+   21	Caudate Body
+   21	Gray Matter
+   21	Caudate
+    4	Cerebro-Spinal Fluid
+    4	Lateral Ventricle
+    2	Sub-Gyral
+    2	Frontal Lobe
+    1	Corpus Callosum
+----------------------
+Cluster 19
+Number of voxels: 11
+Peak MNI coordinate: -12  32  22
+Peak MNI coordinate region:  // Left Cerebrum // Limbic Lobe // Anterior Cingulate // White Matter // undefined // undefined
+Peak intensity: -4.4165
+# voxels	structure
+   11	--TOTAL # VOXELS--
+   11	Left Cerebrum
+   11	Limbic Lobe
+   11	White Matter
+   11	Anterior Cingulate
+    1	Cingulum_Ant_L (aal)
+----------------------
+Cluster 20
+Number of voxels: 31
+Peak MNI coordinate: 14  -4  22
+Peak MNI coordinate region:  // Right Cerebrum // Sub-lobar // Caudate // Gray Matter // Caudate Body // Caudate_R (aal)
+Peak intensity: -5.6461
+# voxels	structure
+   31	--TOTAL # VOXELS--
+   31	Right Cerebrum
+   31	Sub-lobar
+   22	Caudate_R (aal)
+   22	Gray Matter
+   22	Caudate
+   22	Caudate Body
+    5	White Matter
+    5	Extra-Nuclear
+    4	Cerebro-Spinal Fluid
+    4	Lateral Ventricle
+----------------------
+Cluster 21
+Number of voxels: 13
+Peak MNI coordinate: -36 -64  26
+Peak MNI coordinate region:  // Left Cerebrum // Temporal Lobe // Middle Temporal Gyrus // Gray Matter // brodmann area 39 // undefined
+Peak intensity: -4.3964
+# voxels	structure
+   13	--TOTAL # VOXELS--
+   13	Left Cerebrum
+   13	Middle Temporal Gyrus
+   13	Temporal Lobe
+   11	White Matter
+   10	Occipital_Mid_L (aal)
+    2	brodmann area 39
+    2	Gray Matter
+    1	Angular_L (aal)
+----------------------
+Cluster 22
+Number of voxels: 22
+Peak MNI coordinate: 36  20  24
+Peak MNI coordinate region:  // Right Cerebrum // Frontal Lobe // Sub-Gyral // White Matter // undefined // Frontal_Inf_Tri_R (aal)
+Peak intensity: -5.4218
+# voxels	structure
+   22	--TOTAL # VOXELS--
+   22	Right Cerebrum
+   22	Sub-Gyral
+   22	White Matter
+   22	Frontal Lobe
+   16	Frontal_Inf_Tri_R (aal)
+    4	Frontal_Mid_R (aal)
+----------------------
+Cluster 23
+Number of voxels: 32
+Peak MNI coordinate: 14 -60  30
+Peak MNI coordinate region:  // Right Cerebrum // Parietal Lobe // Precuneus // White Matter // undefined // Precuneus_R (aal)
+Peak intensity: -4.8359
+# voxels	structure
+   32	--TOTAL # VOXELS--
+   32	Right Cerebrum
+   31	Precuneus_R (aal)
+   30	Precuneus
+   22	Parietal Lobe
+   18	White Matter
+   14	Gray Matter
+   13	brodmann area 31
+    8	Occipital Lobe
+    2	Cingulate Gyrus
+    2	Limbic Lobe
+    1	brodmann area 7
+----------------------
+Cluster 24
+Number of voxels: 17
+Peak MNI coordinate: -60 -50  38
+Peak MNI coordinate region:  // Left Cerebrum // Parietal Lobe // Supramarginal Gyrus // Gray Matter // brodmann area 40 // Parietal_Inf_L (aal)
+Peak intensity: 4.5957
+# voxels	structure
+   17	--TOTAL # VOXELS--
+   17	Left Cerebrum
+   17	Parietal Lobe
+   16	Gray Matter
+   16	brodmann area 40
+   15	Supramarginal Gyrus
+    8	Parietal_Inf_L (aal)
+    6	SupraMarginal_L (aal)
+    2	Inferior Parietal Lobule
+    1	White Matter
+----------------------
+Cluster 25
+Number of voxels: 89
+Peak MNI coordinate: 48 -12  36
+Peak MNI coordinate region:  // Right Cerebrum // Frontal Lobe // Precentral Gyrus // White Matter // undefined // Postcentral_R (aal)
+Peak intensity: 6.3001
+# voxels	structure
+   89	--TOTAL # VOXELS--
+   89	Frontal Lobe
+   89	Precentral Gyrus
+   89	Right Cerebrum
+   55	Postcentral_R (aal)
+   51	White Matter
+   38	brodmann area 6
+   38	Gray Matter
+   18	Precentral_R (aal)
+----------------------
+Cluster 26
+Number of voxels: 13
+Peak MNI coordinate: -44 -40  42
+Peak MNI coordinate region:  // Left Cerebrum // Parietal Lobe // Inferior Parietal Lobule // White Matter // undefined // Parietal_Inf_L (aal)
+Peak intensity: -4.2358
+# voxels	structure
+   13	--TOTAL # VOXELS--
+   13	Inferior Parietal Lobule
+   13	Left Cerebrum
+   13	Parietal Lobe
+   13	Parietal_Inf_L (aal)
+   11	White Matter
+    2	brodmann area 40
+    2	Gray Matter
+----------------------
+Cluster 27
+Number of voxels: 20
+Peak MNI coordinate: -22  32  46
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Middle Frontal Gyrus // Gray Matter // brodmann area 8 // Frontal_Sup_L (aal)
+Peak intensity: -5.381
+# voxels	structure
+   20	--TOTAL # VOXELS--
+   20	Frontal Lobe
+   20	Left Cerebrum
+   19	Frontal_Sup_L (aal)
+   11	White Matter
+   10	Middle Frontal Gyrus
+    9	brodmann area 8
+    9	Gray Matter
+    5	Sub-Gyral
+    4	Superior Frontal Gyrus
+    1	Frontal_Mid_L (aal)
+    1	Medial Frontal Gyrus
+----------------------
+Cluster 28
+Number of voxels: 15
+Peak MNI coordinate: -22  26  52
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Superior Frontal Gyrus // Gray Matter // brodmann area 8 // Frontal_Mid_L (aal)
+Peak intensity: 5.1877
+# voxels	structure
+   15	--TOTAL # VOXELS--
+   15	Frontal Lobe
+   15	Left Cerebrum
+   14	Frontal_Mid_L (aal)
+   12	Gray Matter
+   12	brodmann area 8
+    9	Superior Frontal Gyrus
+    6	Middle Frontal Gyrus
+    2	White Matter
+    1	Frontal_Sup_L (aal)
+----------------------
+Cluster 29
+Number of voxels: 13
+Peak MNI coordinate: -40  -2  52
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Middle Frontal Gyrus // Gray Matter // brodmann area 6 // Precentral_L (aal)
+Peak intensity: -4.7868
+# voxels	structure
+   13	--TOTAL # VOXELS--
+   13	Frontal Lobe
+   13	Left Cerebrum
+   13	Middle Frontal Gyrus
+   13	Precentral_L (aal)
+    9	Gray Matter
+    9	brodmann area 6
+    4	White Matter
+----------------------
+Cluster 30
+Number of voxels: 23
+Peak MNI coordinate: -2  28  64
+Peak MNI coordinate region:  // Left Cerebrum // Frontal Lobe // Superior Frontal Gyrus // undefined // undefined // Supp_Motor_Area_L (aal)
+Peak intensity: -5.326
+# voxels	structure
+   23	--TOTAL # VOXELS--
+   12	Frontal_Sup_Medial_L (aal)
+   10	Inter-Hemispheric
+    8	Supp_Motor_Area_L (aal)
+    6	Superior Frontal Gyrus
+    6	Frontal Lobe
+    6	Left Cerebrum
+    4	brodmann area 6
+    4	Gray Matter
+----------------------
+Cluster 31
+Number of voxels: 52
+Peak MNI coordinate: 2 -40  66
+Peak MNI coordinate region:  // Inter-Hemispheric // undefined // undefined // undefined // undefined // Paracentral_Lobule_R (aal)
+Peak intensity: 5.8163
+# voxels	structure
+   52	--TOTAL # VOXELS--
+   38	Right Cerebrum
+   35	Paracentral Lobule
+   33	Paracentral_Lobule_R (aal)
+   25	Parietal Lobe
+   18	Gray Matter
+   18	Frontal Lobe
+   16	White Matter
+   12	brodmann area 4
+   12	Postcentral_R (aal)
+    9	Inter-Hemispheric
+    8	Postcentral Gyrus
+    5	Left Cerebrum
+    3	brodmann area 6
+    3	brodmann area 3
+    2	Precuneus_L (aal)
+----------------------
+Cluster 32
+Number of voxels: 34
+Peak MNI coordinate: -14  10  74
+Peak MNI coordinate region:  // undefined // undefined // undefined // undefined // undefined // undefined
+Peak intensity: 6.6811
+# voxels	structure
+   34	--TOTAL # VOXELS--
+    7	Frontal_Sup_L (aal)
+    7	Left Cerebrum
+    7	Frontal Lobe
+    6	brodmann area 6
+    6	Gray Matter
+    5	Superior Frontal Gyrus
+    4	Supp_Motor_Area_L (aal)
+    1	Middle Frontal Gyrus
+----------------------
+Cluster 33
+Number of voxels: 20
+Peak MNI coordinate: -18 -54  72
+Peak MNI coordinate region:  // undefined // undefined // undefined // undefined // undefined // Parietal_Sup_L (aal)
+Peak intensity: -5.6093
+# voxels	structure
+   20	--TOTAL # VOXELS--
+   18	Parietal_Sup_L (aal)
+   10	Left Cerebrum
+   10	Postcentral Gyrus
+   10	Parietal Lobe
+    7	brodmann area 7
+    7	Gray Matter
+    2	Precuneus_L (aal)
+    1	White Matter
+----------------------
+Cluster 34
+Number of voxels: 58
+Peak MNI coordinate: 14  -2  76
+Peak MNI coordinate region:  // Right Cerebrum // Frontal Lobe // Superior Frontal Gyrus // White Matter // undefined // Frontal_Sup_R (aal)
+Peak intensity: -6.3614
+# voxels	structure
+   58	--TOTAL # VOXELS--
+   56	Right Cerebrum
+   56	Frontal Lobe
+   49	Superior Frontal Gyrus
+   29	Frontal_Sup_R (aal)
+   23	White Matter
+   20	brodmann area 6
+   20	Gray Matter
+    7	Supp_Motor_Area_R (aal)
+    7	Precentral Gyrus
+    5	Precentral_R (aal)
