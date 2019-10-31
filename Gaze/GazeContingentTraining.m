@@ -17,9 +17,9 @@ numSession = 'Training';
 
 % select subID
 global subID;
-subID = str2double(input('Entrez le numéro du sujet : ', 's'));
+subID = str2double(input('Entrez le numÃ©ro du sujet : ', 's'));
 while isnan(subID) || fix(subID) ~= subID
-  subID = str2double(input('Le numéro n''est pas un entier. Entrez le numéro du sujet: ', 's'));
+  subID = str2double(input('Le numÃ©ro n''est pas un entier. Entrez le numÃ©ro du sujet: ', 's'));
 end
 
 emotionfilename = ['..' filesep 'Results' filesep 'emotion' num2str(subID) '.txt'];
@@ -111,7 +111,7 @@ try
     Screen('FillRect', window, backgroundcolor);
     Screen('Flip', window);
 
-    showTextToPass('Appuyez sur Entrée pour commencer.', 'keyboard');
+    showTextToPass('Appuyez sur EntrÃ©e pour commencer.', 'keyboard');
 
     if dummymode == 0
         showTextToPass(Oculo, 'keyboard');
@@ -195,14 +195,14 @@ try
 
     end
 
-    disp('Appuyez sur Entrée pour continuer.');
+    disp('Appuyez sur EntrÃ©e pour continuer.');
     showTextToPass(Consignes, 'keyboard');
     showTextToPass(Consignes2, 'keyboard');
     
     for numTask = 1:length(taskType)
         % TRAINING
         if numTask == 2
-            disp('Appuyez sur Entrée pour continuer.');
+            disp('Appuyez sur EntrÃ©e pour continuer.');
             showTextToPass(ConsignesGazeTraining, 'keyboard');
             showTextToPass(ConsignesGazeTraining2, 'keyboard');
         end
@@ -263,11 +263,11 @@ try
                 Screen(window, 'FillRect', backgroundcolor);
                 startFeedback = Screen('Flip', window);
                 if strcmp(resp, 'None')
-                    feedbackText = ['Vous n''avez pas répondu.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
+                    feedbackText = ['Vous n''avez pas rÃ©pondu.\nLa bonne rÃ©ponse Ã©tait ', emotionalCategoriesFr{corResp} ,'.'];
                 elseif str2double(resp) ~= corResp
-                    feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2double(resp)} ,'.\nLa bonne réponse était ', emotionalCategoriesFr{corResp} ,'.'];
+                    feedbackText = ['Votre rÃ©ponse Ã©tait ', emotionalCategoriesFr{str2double(resp)} ,'.\nLa bonne rÃ©ponse Ã©tait ', emotionalCategoriesFr{corResp} ,'.'];
                 elseif str2double(resp) == corResp
-                    feedbackText = ['Votre réponse était ', emotionalCategoriesFr{str2double(resp)} ,'. Bonne réponse !'];
+                    feedbackText = ['Votre rÃ©ponse Ã©tait ', emotionalCategoriesFr{str2double(resp)} ,'. Bonne rÃ©ponse !'];
                     trainingScore = trainingScore + 1;
                 end
                 while GetSecs - startFeedback < 5

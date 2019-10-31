@@ -20,9 +20,9 @@ global numSession;
 numSession = 'test';
 %Input subject ID
 global subID;
-subID = str2double(input('Entrez le numéro du sujet : ', 's'));
+subID = str2double(input('Entrez le numÃ©ro du sujet : ', 's'));
 while isnan(subID) || fix(subID) ~= subID
-  subID = str2double(input('Le numéro n''est pas un entier. Entrez le numéro du sujet: ', 's'));
+  subID = str2double(input('Le numÃ©ro n''est pas un entier. Entrez le numÃ©ro du sujet: ', 's'));
 end
 
 %warn if duplicate sub ID
@@ -105,7 +105,7 @@ try
     Screen('FillRect', window, backgroundcolor);
     Screen('Flip', window);
 
-    showTextToPass('Appuyez sur Entrée pour commencer.', 'keyboard');
+    showTextToPass('Appuyez sur EntrÃ©e pour commencer.', 'keyboard');
 
     if dummymode == 0
         showTextToPass(Oculo, 'keyboard');
@@ -195,11 +195,11 @@ try
     for numTask = 1:length(taskType)
         globalTask = taskType(numTask);
         if numTask == 1
-            disp('Appuyez sur Entrée pour continuer.');
+            disp('Appuyez sur EntrÃ©e pour continuer.');
             showTextToPass(Consignes, 'keyboard');
             showTextToPass(Consignes2, 'keyboard');
         else
-            disp('Appuyez sur Entrée pour continuer.');
+            disp('Appuyez sur EntrÃ©e pour continuer.');
             showTextToPass(ConsignesGazeTraining, 'keyboard');
             showTextToPass(ConsignesGazeTraining2, 'keyboard');
         end
