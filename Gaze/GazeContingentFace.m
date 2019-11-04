@@ -13,17 +13,17 @@ end
 
 %Input subject ID
 global subID;
-subID = str2double(input('Entrez le num√©ro du sujet : ', 's'));
+subID = str2double(input('Entrez le numÈro du sujet : ', 's'));
 while isnan(subID) || fix(subID) ~= subID
-  subID = str2double(input('Le num√©ro n''est pas un entier. Entrez le num√©ro du sujet: ', 's'));
+  subID = str2double(input('Le numÈro n''est pas un entier. Entrez le numÈro du sujet: ', 's'));
 end
 
 %Input session number
 global numSession;
-numSession = str2double(input('Entrez le num√©ro de session (1, 2, 3 ou 4): ', 's'));
+numSession = str2double(input('Entrez le numÈro de session (1, 2, 3 ou 4): ', 's'));
 onsetfilename = ['..' filesep 'Results' filesep 'onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
 while exist(onsetfilename, 'file') || isnan(numSession) || fix(numSession) ~= numSession  || numSession > 4 %(floor(log10(numSession)) + 1) ~= 1
-    numSession = str2double(input('Le num√©ro n''est pas un entier ou est trop √©lev√© ou la session existe d√©j√† pour ce sujet. Entrez le num√©ro de session: ', 's'));
+    numSession = str2double(input('Le numÈro n''est pas un entier ou est trop ÈlevÈ ou la session existe dÈj‡† pour ce sujet. Entrez le numÈro de session: ', 's'));
     onsetfilename = ['..' filesep 'Results' filesep 'onsets' num2str(subID) 'Session' num2str(numSession) '.mat'];
 end
 
@@ -43,7 +43,7 @@ elseif numSession == 1
     fprintf(emotionfile, '%s\n%s\n%s\n', emotionalCategories{1}, emotionalCategories{2}, emotionalCategories{3});
     fclose(emotionfile);
 else
-    disp('Il y a un probl√®me : nous sommes apr√®s la premi√®re session et le participant n''a pas de touches fixes assign√©es aux √©motions !')
+    disp('Il y a un problËme : nous sommes aprËs la premiËre session et le participant n''a pas de touches fixes assignÈes aux Èmotions !')
 end
 
 %If we have done sessions before this one, we get the numbers of the images
@@ -182,7 +182,7 @@ try
     Screen('FillRect', window, backgroundcolor);
     Screen('Flip', window);
 
-    showTextToPass('Appuyez sur Entr√©e pour commencer.', 'keyboard');
+    showTextToPass('Appuyez sur EntrÈe pour commencer.', 'keyboard');
 
     if dummymode == 0
         showTextToPass(Oculo, 'keyboard');
@@ -272,12 +272,12 @@ try
     %for numTask = 1:length(taskType)
     if godMode == 0 || godMode == 2
         if numSession < 3
-            disp('Appuyez sur Entr√©e pour continuer.');
+            disp('Appuyez sur EntrÈe pour continuer.');
             showTextToPass(Consignes, 'keyboard');
             showTextToPass(Consignes2, 'keyboard');
             globalTask = taskType(1);
         else
-            disp('Appuyez sur Entr√©e pour continuer.');
+            disp('Appuyez sur EntrÈe pour continuer.');
             showTextToPass(ConsignesGazeTraining, 'keyboard');
             showTextToPass(ConsignesGazeTraining2, 'keyboard');
             globalTask = taskType(2);

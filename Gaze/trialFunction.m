@@ -305,7 +305,7 @@ while GetSecs - startRespTime <= TrialTimeOut
     % Check for response keys
     [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
     if resp ~= 0
-        responseText = ['Vous avez rÃ©pondu ', emotionalCategoriesFr{str2double(resp)}, '.'];
+        responseText = ['Vous avez répondu ', emotionalCategoriesFr{str2double(resp)}, '.'];
         showText(responseText);
     end
     if resp == 0
