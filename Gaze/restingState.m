@@ -10,9 +10,9 @@ emotionalCategories = {'Neutral','Angry','Fear'};
 UnchangingSettingsGaze;
 settingsGaze;
 
-subID = str2double(input('Entrez le numéro du sujet : ', 's'));
+subID = str2double(input('Entrez le numÃ©ro du sujet : ', 's'));
 while isnan(subID) || fix(subID) ~= subID
-  subID = str2double(input('Le numéro n''est pas un entier. Entrez le numéro du sujet: ', 's'));
+  subID = str2double(input('Le numÃ©ro n''est pas un entier. Entrez le numÃ©ro du sujet: ', 's'));
 end
 
 KbQueueCreate(listDevices);
