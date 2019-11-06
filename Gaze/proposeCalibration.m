@@ -5,9 +5,10 @@ function proposeCalibration()
 UnchangingSettingsGaze;
 global el;
 
-disp(FailedFixation);
-showText(AdjCamera);
 while 1
+    %disp(FailedFixation);
+    waitReleaseKeys();
+    showText(AdjCamera);
     WaitSecs(0.01);
     [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
     if pressed && (firstPress(KbName('c')) || firstPress(KbName('C')) || firstPress(KbName('d')) || firstPress(KbName('D')) || firstPress(KbName('n')) || firstPress(KbName('N')))

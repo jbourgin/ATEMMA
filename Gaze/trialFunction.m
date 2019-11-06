@@ -33,30 +33,6 @@ if strcmp('Training', task)
     responseKeys = {49, 66, 50, 89, 51, 71, 97, 98, 99};
 end
 
-if dummymode == 0
-    % Sending a 'TRIALID' message to mark the start of a trial.
-    Eyelink('Message', 'TRIALID %s', num2str(trialCounter));
-
-    % This supplies the title at the bottom of the eyetracker display
-    Eyelink('command', 'record_status_message "TRIAL %s"', num2str(trialCounter));
-
-    % start recording eye position (preceded by a short pause so that
-    % the tracker can finish the mode transition)
-    Eyelink('Command', 'set_idle_mode');
-    WaitSecs(0.05);
-    Eyelink('StartRecording');
-
-    eyeUsed = Eyelink('EyeAvailable'); % get eye that's tracked
-    if eyeUsed == el.BINOCULAR % if both eyes are tracked
-        eyeUsed = el.LEFT_EYE; % use left eye
-    end
-    % record a few samples before we actually start displaying
-    % otherwise you may lose a few msec of data
-    WaitSecs(0.1);
-else
-    eyeUsed = 'None';
-end
-
 %We select the image to display.
 [count, indexImg, randSide, randEmo, randGender] = imageSelection(count, ListImages, emotionalCategories, randEmo);
 
@@ -80,6 +56,50 @@ width = width/3;
 copyImg = img;
 copyImg(:, :, 4) = alpha;
 ListImages(indexImg) = [];%Remove image from list
+
+if dummymode == 0
+    % Sending a 'TRIALID' message to mark the start of a trial.
+    Eyelink('Message', 'TRIALID %s', num2str(trialCounter));
+
+    % This supplies the title at the bottom of the eyetracker display
+    Eyelink('command', 'record_status_message "TRIAL %s"', num2str(trialCounter));
+
+    % start recording eye position (preceded by a short pause so that
+    % the tracker can finish the mode transition)
+    Eyelink('Command', 'set_idle_mode');
+    WaitSecs(0.05);
+    
+    %Show image on tracker screen
+    % clear tracker display and draw box at center
+    Eyelink('Command', 'clear_screen %d', 0);
+        
+    file_split = strsplit(file,'.');
+    file_no_ext = file_split{1};
+    finfo = imfinfo(strcat(fullfile(imFolder,file_no_ext),'.bmp'));
+    disp(finfo.Filename);
+    transferStatus = Eyelink('ImageTransfer',finfo.Filename,finfo.Width,finfo.Height,0,0,round(wW/2 - finfo.Width/2) ,round(wH/2 - finfo.Height/2),16);
+    if transferStatus ~= 0
+        fprintf('Image transfer failed');
+    end
+    
+    WaitSecs(0.05);
+    Eyelink('Command', 'draw_box %d %d %d %d 15', wW/2-50, wH/2-50, wW/2+50, wH/2+50);
+    
+    Eyelink('Command', 'set_idle_mode');
+    WaitSecs(0.05);
+
+    Eyelink('StartRecording');
+
+    eyeUsed = Eyelink('EyeAvailable'); % get eye that's tracked
+    if eyeUsed == el.BINOCULAR % if both eyes are tracked
+        eyeUsed = el.LEFT_EYE; % use left eye
+    end
+    % record a few samples before we actually start displaying
+    % otherwise you may lose a few msec of data
+    WaitSecs(0.1);
+else
+    eyeUsed = 'None';
+end
 
 %We put back the alpha mask by changing the corresponding pixel values for
 %background color
@@ -149,6 +169,7 @@ Priority(priorityLevel);
 %The cross is displayed a little bit (value shiftY) below the vertical center of the
 %screen.
 centerY = wH + shiftY;
+
 %Show fixation cross
 startTrial = waitCross(centerX, centerY, eyeUsed, timeBetweenTrials, 0);
 
@@ -171,6 +192,7 @@ startImage = Screen('Flip', window); % Start of image showing
 if dummymode == 0
     Eyelink('Message', 'start_trial %s %s at time %s', num2str(trialCounter), file, num2str(startImage));
 end
+
 % If we are in dummymode, we display the mouse cursor to simulate
 % eye movement.
 if strcmp(globalTask,'Gaze') && dummymode == 1

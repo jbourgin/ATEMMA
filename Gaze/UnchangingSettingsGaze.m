@@ -2,7 +2,7 @@ dummymode = 0;%1 : mouse; 0 : eye-tracking
 waitForFixation = 0;
 godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
-skipSyncTest = 0;
+skipSyncTest = 1;
 
 sizeText = 38;
 fontText = 'Arial';
@@ -14,8 +14,8 @@ numDummy = 6; %number of dummy trials at the end of each session
 numTrialDummies = 8; %number of dummy trials during session
 DummyTimeOut = 8; %time duration of each dummy trial
 TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + response screen)
-TrialTimeOut = 3; % response time
-ImageTimeOut = 5; %time duration of stimulus presentation
+TrialTimeOut = 1; % response time 3
+ImageTimeOut = 5; %time duration of stimulus presentation 5
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
 numDummyScans = 1;
 
@@ -95,7 +95,7 @@ stopkey=KbName('q'); %Key used to pause the experiment, and possibly quit.
 %Texts used throughout the experiment.
 FailedFixation = 'Souhaitez-vous refaire une calibration ou un drift ? Appuyez sur C pour calibration, sur D pour drift, sur N pour ne rien faire.';
 
-AdjCamera = 'L''expérimentateur va procéder à \nquelques ajustements.\nMerci de patienter.';
+AdjCamera = 'L''expérimentateur va procéder à \nquelques ajustements.\nMerci de patienter.\n\nNote pour l''expérimentateur:\nC: calib; D: drift; N: rien.';
 
 CloseText = 'Do you want to quit the experiment ? Press 0 to confirm, 1 to cancel.';
 
@@ -135,4 +135,4 @@ ConsignesGazeTraining = ['Une croix va apparaître sur l''écran.\n' ...
     'Vous n''allez pas voir apparaître le visage,\nmais un ovale blanc rempli de points noirs.\n' ...
     'Explorez l''intérieur de l''ovale\npour dévoiler les éléments du visage.'];
 
-RedoGazeTest = 'Souhaitez-vous refaire un essai gaze ? Appuyez sur o pour refaire, sur n pour continuer.';
+RedoGazeTest = 'Souhaitez-vous refaire un entraînement ?\nAppuyez sur o pour refaire, sur n pour continuer.';

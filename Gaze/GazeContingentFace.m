@@ -333,7 +333,8 @@ try
                 fakeCountSide = ones(3,2,2);
                 trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 1, 1, 'None');
                 proposeCalibration()
-                disp(RedoGazeTest);
+                %disp(RedoGazeTest);
+                showText(RedoGazeTest);
                 while 1
                     WaitSecs(0.01);
                     [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
