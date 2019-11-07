@@ -63,42 +63,6 @@ if dummymode == 0
 
     % This supplies the title at the bottom of the eyetracker display
     Eyelink('command', 'record_status_message "TRIAL %s"', num2str(trialCounter));
-
-    % start recording eye position (preceded by a short pause so that
-    % the tracker can finish the mode transition)
-    Eyelink('Command', 'set_idle_mode');
-    WaitSecs(0.05);
-    
-    %Show image on tracker screen
-    % clear tracker display and draw box at center
-    Eyelink('Command', 'clear_screen %d', 0);
-        
-    file_split = strsplit(file,'.');
-    file_no_ext = file_split{1};
-    finfo = imfinfo(strcat(fullfile(imFolder,file_no_ext),'.bmp'));
-    disp(finfo.Filename);
-    transferStatus = Eyelink('ImageTransfer',finfo.Filename,finfo.Width,finfo.Height,0,0,round(wW/2 - finfo.Width/2) ,round(wH/2 - finfo.Height/2),16);
-    if transferStatus ~= 0
-        fprintf('Image transfer failed');
-    end
-    
-    WaitSecs(0.05);
-    Eyelink('Command', 'draw_box %d %d %d %d 15', wW/2-50, wH/2-50, wW/2+50, wH/2+50);
-    
-    Eyelink('Command', 'set_idle_mode');
-    WaitSecs(0.05);
-
-    Eyelink('StartRecording');
-
-    eyeUsed = Eyelink('EyeAvailable'); % get eye that's tracked
-    if eyeUsed == el.BINOCULAR % if both eyes are tracked
-        eyeUsed = el.LEFT_EYE; % use left eye
-    end
-    % record a few samples before we actually start displaying
-    % otherwise you may lose a few msec of data
-    WaitSecs(0.1);
-else
-    eyeUsed = 'None';
 end
 
 %We put back the alpha mask by changing the corresponding pixel values for
@@ -121,9 +85,11 @@ end
 centerX = 0;
 if strcmp(randSide,'Left')
     centerX = wW + (wW/3);
+    centerImage = round((wW/2)-((wW/2)/3)-width/2);
     shiftHorizontal = (- wW)/6;
 elseif strcmp(randSide,'Right')
     centerX = wW - (wW/3);
+    centerImage = round((wW/2)*(1+1/3)-width/2);
     shiftHorizontal = wW/6;
 end
 
@@ -136,6 +102,46 @@ tRect=Screen('Rect', imageTexture);
 dx = dx + shiftHorizontal;
 ctRect(1) = ctRect(1) + shiftHorizontal;
 ctRect(3) = ctRect(3) + shiftHorizontal;
+
+if dummymode == 0
+    % start recording eye position (preceded by a short pause so that
+    % the tracker can finish the mode transition)
+    Eyelink('Command', 'set_idle_mode');
+    WaitSecs(0.05);
+    
+    %Show image on tracker screen
+    % clear tracker display and draw box at center
+    Eyelink('Command', 'clear_screen %d', 0);
+        
+    file_split = strsplit(file,'.');
+    file_no_ext = file_split{1};
+    finfo = imfinfo(strcat(fullfile(imFolder,file_no_ext),'.bmp'));
+    disp(finfo.Filename);
+    disp(round(centerImage));
+    disp(round(wH/2-finfo.Height/2));
+    transferStatus = Eyelink('ImageTransfer',finfo.Filename,0,0,0,0,centerImage,round(wH/2-finfo.Height/2),16);
+    if transferStatus ~= 0
+        fprintf('Image transfer failed');
+    end
+    
+    WaitSecs(0.05);
+    Eyelink('Command', 'draw_box %d %d %d %d 15', wW/2-50, wH/2-50, wW/2+50, wH/2+50);
+    
+    Eyelink('Command', 'set_idle_mode');
+    WaitSecs(0.05);
+
+    Eyelink('StartRecording');
+
+    eyeUsed = Eyelink('EyeAvailable'); % get eye that's tracked
+    if eyeUsed == el.BINOCULAR % if both eyes are tracked
+        eyeUsed = el.LEFT_EYE; % use left eye
+    end
+    % record a few samples before we actually start displaying
+    % otherwise you may lose a few msec of data
+    WaitSecs(0.1);
+else
+    eyeUsed = 'None';
+end
 
 if strcmp(globalTask,'Gaze')
     % We create a Luminance+Alpha matrix for use as transparency mask:
