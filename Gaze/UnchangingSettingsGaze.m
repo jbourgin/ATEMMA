@@ -2,7 +2,7 @@ dummymode = 0;%1 : mouse; 0 : eye-tracking
 waitForFixation = 0;
 godMode = 2; %0 : with several MRI scans (instructions passed with keyboard or mouse); 1 : one scan only and instructions passed after a timeout; 2 : 0 + eyetracking options (recalibration, drift)
 MRITest = 1; %0 : no MRI; 1 : MRI (we wait for triggers).
-skipSyncTest = 1;
+skipSyncTest = 0;
 
 sizeText = 38;
 fontText = 'Arial';
@@ -14,8 +14,8 @@ numDummy = 6; %number of dummy trials at the end of each session
 numTrialDummies = 8; %number of dummy trials during session
 DummyTimeOut = 8; %time duration of each dummy trial
 TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + response screen)
-TrialTimeOut = 0.3; % response time 3
-ImageTimeOut = 0.5; %time duration of stimulus presentation 5
+TrialTimeOut = 3; % response time 3
+ImageTimeOut = 5; %time duration of stimulus presentation 5
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
 numDummyScans = 1;
 
