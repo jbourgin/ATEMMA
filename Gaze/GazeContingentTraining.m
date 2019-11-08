@@ -229,7 +229,28 @@ try
                         showTextToPass(TestClassic2, 'keyboard');
                     end
                     fakeCountSide = ones(3,2,2);
-                    trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 0, 1, 'None');
+                    % The subject chooses between a normal trial and an
+                    % infinite trial for the gaze condition
+                    gazeInf = false(1);
+                    if strcmp(globalTask, taskType(2))
+                        showText(ChooseGazeInf);
+                        while 1
+                            WaitSecs(0.01);
+                            [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
+                            if pressed
+                                if firstPress(49) || firstPress(66) || firstPress(97)
+                                    break;
+                                elseif firstPress(50) || firstPress(89) || firstPress(98)
+                                    gazeInf = true(1);
+                                    break;
+                                end
+                            end
+                        end
+                    end
+                    if gazeInf
+                        showTextToPass(TrialGazeInf, 'keyboard');
+                    end
+                    trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, 'GazeVerif', fakeCountSide, TotalListTraining, imageFolderTraining, globalTask, 'Training', timeBetweenTrials, 0, 1, 'None', gazeInf);
                     proposeCalibration();
                     %disp(RedoGazeTest);
                     showText(RedoGazeTest);
@@ -259,7 +280,7 @@ try
             %We perform the training trials.
             trainingScore = 0;
             for trialNum = 1:nTrialsTraining
-                [trialCounter, TotalListTraining, countSideTraining, resp, corResp] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, 0, 0, 'None');
+                [trialCounter, TotalListTraining, countSideTraining, resp, corResp] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, countSideTraining, TotalListTraining, imageFolderTraining, globalTask, task, timeBetweenTrials, 0, 0, 'None', false(1));
                 %We send feedback to the participant on the correctness of his response.
                 Screen(window, 'FillRect', backgroundcolor);
                 startFeedback = Screen('Flip', window);

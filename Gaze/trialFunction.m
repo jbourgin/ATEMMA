@@ -1,5 +1,5 @@
 %Function called to display blocks of trials.
-function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, ListImages, imFolder, globalTask, task, timeBetweenTrials, MRItrial, gazeVerif, randEmo)
+function [trialCounter, ListImages, count, resp, corResp] = trialFunction(Answer, emotionalCategories, emotionalCategoriesFr, trialCounter, count, ListImages, imFolder, globalTask, task, timeBetweenTrials, MRItrial, gazeVerif, randEmo, gazeInf)
 % trialCounter -> int. Trial number.
 % ListImages -> List of char. List of images.
 % count -> matrix of doubles. A given cell is decremented when a trial of a given type (e.g., Fear-Man-Right) is performed.
@@ -28,6 +28,10 @@ global subID;
 global numSession;
 
 UnchangingSettingsGaze;
+
+if gazeInf
+    ImageTimeOut = 99999;
+end
 
 if strcmp('Training', task)
     responseKeys = {49, 66, 50, 89, 51, 71, 97, 98, 99};
@@ -85,13 +89,19 @@ end
 centerX = 0;
 if strcmp(randSide,'Left')
     centerX = wW + (wW/3);
-    centerImage = round((wW/2)-((wW/2)/3)-width/2);
+    centerCross = round((wW/2)*(1+1/3));
+    LeftImage = round((wW/2)-((wW/2)/3)-width/2);
     shiftHorizontal = (- wW)/6;
 elseif strcmp(randSide,'Right')
     centerX = wW - (wW/3);
-    centerImage = round((wW/2)*(1+1/3)-width/2);
+    centerCross = round((wW/2)-((wW/2)/3));
+    LeftImage = round((wW/2)*(1+1/3)-width/2);
     shiftHorizontal = wW/6;
 end
+
+%The cross is displayed a little bit (value shiftY) below the vertical center of the
+%screen.
+centerY = wH + shiftY;
 
 %Image texture.
 imageTexture=Screen('MakeTexture',window, img);
@@ -107,25 +117,22 @@ if dummymode == 0
     % start recording eye position (preceded by a short pause so that
     % the tracker can finish the mode transition)
     Eyelink('Command', 'set_idle_mode');
-    WaitSecs(0.05);
+    %WaitSecs(0.05);
     
     %Show image on tracker screen
-    % clear tracker display and draw box at center
+    % clear tracker display
     Eyelink('Command', 'clear_screen %d', 0);
         
     file_split = strsplit(file,'.');
     file_no_ext = file_split{1};
     finfo = imfinfo(strcat(fullfile(imFolder,file_no_ext),'.bmp'));
-    disp(finfo.Filename);
-    disp(round(centerImage));
-    disp(round(wH/2-finfo.Height/2));
-    transferStatus = Eyelink('ImageTransfer',finfo.Filename,0,0,0,0,centerImage,round(wH/2-finfo.Height/2),16);
+    transferStatus = Eyelink('ImageTransfer',finfo.Filename,0,0,0,0,LeftImage,round(wH/2-finfo.Height/2),16);
     if transferStatus ~= 0
         fprintf('Image transfer failed');
     end
     
     WaitSecs(0.05);
-    Eyelink('Command', 'draw_box %d %d %d %d 15', wW/2-50, wH/2-50, wW/2+50, wH/2+50);
+    Eyelink('Command', 'draw_box %d %d %d %d 15', centerCross-24, wH/2+shiftY-24, centerCross+24, wH/2+shiftY+24);
     
     Eyelink('Command', 'set_idle_mode');
     WaitSecs(0.05);
@@ -171,10 +178,6 @@ HideCursor;
 
 priorityLevel=MaxPriority(window);
 Priority(priorityLevel);
-
-%The cross is displayed a little bit (value shiftY) below the vertical center of the
-%screen.
-centerY = wH + shiftY;
 
 %Show fixation cross
 startTrial = waitCross(centerX, centerY, eyeUsed, timeBetweenTrials, 0);
@@ -306,8 +309,16 @@ while GetSecs - startImage < ImageTimeOut
     % We wait 1 ms each loop-iteration so that we
     % don't overload the system in realtime-priority:
     WaitSecs(0.01);
-
-    KbQueueCheckWrapper(0, 'Informative');
+    
+    if gazeInf
+        [pressed, firstPress] = KbQueueCheckWrapper(0, 'Informative');
+        if firstPress(KbName('return'))
+            waitReleaseKeys();
+            break;
+        end
+    else
+        KbQueueCheckWrapper(0, 'Informative');
+    end
 end
 
 if dummymode == 0
@@ -389,6 +400,9 @@ if dummymode == 0
     Eyelink('Message', 'Variable values: %s %s %s %s %s %s %s %i %s', char(task), num2str(numSession), char(globalTask), char(randEmo), char(randGender), char(randSide), char(resp), corResp, num2str(rt*1000));
     Eyelink('Message', 'stop_trial');
     Eyelink('StopRecording');
+    
+    % clear tracker display
+    Eyelink('Command', 'clear_screen %d', 0);
 end
 if gazeVerif == 0
     trialCounter = trialCounter + 1;

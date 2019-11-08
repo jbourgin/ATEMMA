@@ -14,8 +14,8 @@ numDummy = 6; %number of dummy trials at the end of each session
 numTrialDummies = 8; %number of dummy trials during session
 DummyTimeOut = 8; %time duration of each dummy trial
 TrialDuration = 10; %time duration of a full trial (fixation cross + stimulus + response screen)
-TrialTimeOut = 3; % response time 3
-ImageTimeOut = 5; %time duration of stimulus presentation 5
+TrialTimeOut = 0.3; % response time 3
+ImageTimeOut = 0.5; %time duration of stimulus presentation 5
 shiftY = 150; %value added to vertical center of the screen, used to shift the fixation cross below this center.
 numDummyScans = 1;
 
@@ -124,6 +124,13 @@ waitingDummies = 'Nous finissons quelques réglages.\nLe test va commencer\nd''ic
 TestGaze = ['Avant de commencer,\n' ...
     'Nous allons vérifier que la caméra est\nbien ajustée sur vos yeux.\n\n' ...
     'Pour cela, nous allons vous montrer\nun exemple de la phase suivante de test.\n'];
+
+ChooseGazeInf = ['Appuyez sur 1 pour un essai normal,\n' ...
+    'et sur 2 pour un essai avec temps illimité.'];
+
+TrialGazeInf = ['Cet essai a pour but de vous habituer\n' ...
+    'aux conditions de test.\n'...
+    'Appuyez sur Entrée pour interrompre\nla présentation du visage.'];
 
 TestClassic2 = 'Explorez le visage qui va apparaître\net déterminez l''émotion exprimée.';
 
