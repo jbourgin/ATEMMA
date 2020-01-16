@@ -1,6 +1,5 @@
-Task/*.png
-!Task/Femme_Angry8.png
-!Task/Femme_Fear1.png
-!Task/Homme_Neutral9.png
-Training/*.png
-Results/*
+**/Task/*
+Task/
+Training/
+Gaze/*.edf
+Results/
