@@ -81,11 +81,11 @@ Pause2 = ['Lorsqu''une croix apparaît à gauche\nou à droite de l''écran, vous po
          'Vous verrez parfois apparaître\nune croix au centre de l''écran.\n' ...
          'Fixez cette croix\ntout en vous relaxant.'];
 
-Redo = 'Souhaitez-vous refaire un entraînement ? O pour oui, N pour non';
-RedoTraining = 'Souhaitez-vous refaire un entraînement ? O pour oui, N pour non';
+Redo = 'Souhaitez-vous\nrefaire un entraînement ?\n\nNote pour l''expérimentateur:\nO pour oui, N pour non';
+RedoTraining = 'Souhaitez-vous\nrefaire un entraînement ?\n\nNote pour l''expérimentateur:\nO pour oui, N pour non';
      
-RedoExp = 'Appuyez sur la touche O si vous souhaitez refaire l''entraînement. Appuyez sur N pour passer au test.';
-RedoExpTraining = 'Appuyez sur la touche O si vous souhaitez refaire l''entraînement. Appuyez sur N pour continuer.';
+RedoExp = 'Note pour l''expérimentateur:\nAppuyez sur la touche O\nsi vous souhaitez refaire l''entraînement.\nAppuyez sur N pour passer au test.';
+RedoExpTraining = 'Note pour l''expérimentateur:\nAppuyez sur la touche O\nsi vous souhaitez refaire l''entraînement.\nAppuyez sur N pour continuer.';
 
 Oculo = ['Vous allez passer un test dans lequel\n' ...
     'nous allons mesurer les mouvements de vos yeux.\n' ...

@@ -331,6 +331,7 @@ Screen(window, 'FillRect', backgroundcolor);
 
 % Get keypress response
 resp = 0;
+rt = 0;
 responseAlreadyRecorded = 0;
 HideCursor;
 

@@ -93,7 +93,7 @@ ms = 80; %70
 stopkey=KbName('q'); %Key used to pause the experiment, and possibly quit.
 
 %Texts used throughout the experiment.
-FailedFixation = 'Souhaitez-vous refaire une calibration ou un drift ? Appuyez sur C pour calibration, sur D pour drift, sur N pour ne rien faire.';
+FailedFixation = 'Souhaitez-vous refaire\nune calibration ou un drift ?\n\nNote pour l''expérimentateur:\nC pour calibration, D pour drift, N pour ne rien faire.';
 
 AdjCamera = 'L''expérimentateur va procéder à \nquelques ajustements.\nMerci de patienter.\n\nNote pour l''expérimentateur:\nC: calib; D: drift; N: rien.';
 
@@ -125,12 +125,12 @@ TestGaze = ['Avant de commencer,\n' ...
     'Nous allons vérifier que la caméra est\nbien ajustée sur vos yeux.\n\n' ...
     'Pour cela, nous allons vous montrer\nun exemple de la phase suivante de test.\n'];
 
-ChooseGazeInf = ['Appuyez sur 1 pour un essai normal,\n' ...
+ChooseGazeInf = ['Note pour l''expérimentateur:\nAppuyez sur 1 pour un essai normal,\n' ...
     'et sur 2 pour un essai avec temps illimité.'];
 
 TrialGazeInf = ['Cet essai a pour but de vous habituer\n' ...
     'aux conditions de test.\n'...
-    'Appuyez sur Entrée pour interrompre\nla présentation du visage.'];
+    '\nNote pour l''expérimentateur:\nAppuyez sur Entrée pour interrompre\nla présentation du visage.'];
 
 TestClassic2 = 'Explorez le visage qui va apparaître\net déterminez l''émotion exprimée.';
 
@@ -142,4 +142,4 @@ ConsignesGazeTraining = ['Une croix va apparaître sur l''écran.\n' ...
     'Vous n''allez pas voir apparaître le visage,\nmais un ovale blanc rempli de points noirs.\n' ...
     'Explorez l''intérieur de l''ovale\npour dévoiler les éléments du visage.'];
 
-RedoGazeTest = 'Souhaitez-vous refaire un entraînement ?\nAppuyez sur o pour refaire, sur n pour continuer.';
+RedoGazeTest = 'Souhaitez-vous\nrefaire un entraînement ?\n\nNote pour l''expérimentateur:\nO pour oui, N pour non.';
