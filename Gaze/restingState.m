@@ -45,7 +45,7 @@ try
         WaitSecs(0.1);
         
         [pressed, firstPress, ~, ~, ~] = KbQueueCheck(listDevices);
-        if firstPress(KbName('return'))
+        if firstPress(KbName('x'))
             break;
         end
     end
