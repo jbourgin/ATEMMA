@@ -132,7 +132,7 @@ if dummymode == 0
     end
     
     WaitSecs(0.05);
-    Eyelink('Command', 'draw_box %d %d %d %d 15', centerCross-24, wH/2+shiftY-24, centerCross+24, wH/2+shiftY+24);
+    Eyelink('Command', 'draw_box %d %d %d %d 15', centerX/2-12, centerY/2-12, centerX/2+12, centerY/2+12);
     
     Eyelink('Command', 'set_idle_mode');
     WaitSecs(0.05);
