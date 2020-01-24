@@ -89,7 +89,7 @@ end
 centerX = 0;
 if strcmp(randSide,'Left')
     centerX = wW + (wW/3);
-    centerCross = round((wW/2)*(1+1/3));
+    %centerCross = round((wW/2)*(1+1/3));
     LeftImage = round((wW/2)-((wW/2)/3)-width/2);
     shiftHorizontal = (- wW)/6;
 elseif strcmp(randSide,'Right')
@@ -102,6 +102,9 @@ end
 %The cross is displayed a little bit (value shiftY) below the vertical center of the
 %screen.
 centerY = wH + shiftY;
+
+centerCrossX = round(centerX/2);
+centerCrossY = round(centerY/2);
 
 %Image texture.
 imageTexture=Screen('MakeTexture',window, img);
@@ -132,7 +135,7 @@ if dummymode == 0
     end
     
     WaitSecs(0.05);
-    Eyelink('Command', 'draw_box %d %d %d %d 15', centerX/2-12, centerY/2-12, centerX/2+12, centerY/2+12);
+    Eyelink('Command', 'draw_box %d %d %d %d 15', centerCrossX-12, centerCrossY-12, centerCrossX+12, centerCrossY+12);
     
     Eyelink('Command', 'set_idle_mode');
     WaitSecs(0.05);
