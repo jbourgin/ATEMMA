@@ -1,4 +1,5 @@
 Task/
+!MRI/Task/
 Training/
 Gaze/*.edf
 Results/
