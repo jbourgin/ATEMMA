@@ -6,7 +6,7 @@
 %See multiple regression ?
 % To add : gaze derivation from cross at the beginning of the trial
 % https://www.jiscmail.ac.uk/cgi-bin/webadmin?A3=ind1002&L=SPM&E=quoted-printable&P=4267684&B=--B_3348824016_952061&T=text%2Fhtml;%20charset=UTF-8
-function [matlabbatch] = firstLevelSpecification(filesList, onsetsList, rpList, statDir)
+function [matlabbatch] = firstLevelSpecificationResponse(filesList, onsetsList, rpList, statDir)
 
 global TR_rsfiles;
 nzeros = 6;
@@ -53,107 +53,107 @@ matlabbatch{2}.spm.stats.fmri_est.method.Classical = 1;
 matlabbatch{3}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 % main task
 matlabbatch{3}.spm.stats.con.consess{1}.tcon.name = 'Classic';
-matlabbatch{3}.spm.stats.con.consess{1}.tcon.weights = [1 1 1 zeros(1,nzeros) 1 1 1];
+matlabbatch{3}.spm.stats.con.consess{1}.tcon.weights = [1 0 1 0 1 0 zeros(1,nzeros) 1 0 1 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{2}.tcon.name = 'Gaze';
-matlabbatch{3}.spm.stats.con.consess{2}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 1 1 1 zeros(1,nzeros) 1 1 1];
+matlabbatch{3}.spm.stats.con.consess{2}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 1 0 1 0 1 0 zeros(1,nzeros) 1 0 1 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
 % contrast task
 matlabbatch{3}.spm.stats.con.consess{3}.tcon.name = 'Gaze-Classic';
-matlabbatch{3}.spm.stats.con.consess{3}.tcon.weights = [-1 -1 -1 zeros(1,nzeros) -1 -1 -1 zeros(1,nzeros) 1 1 1 zeros(1,nzeros) 1 1 1];
+matlabbatch{3}.spm.stats.con.consess{3}.tcon.weights = [-1 0 -1 0 -1 0 zeros(1,nzeros) -1 0 -1 0 -1 0 zeros(1,nzeros) 1 0 1 0 1 0 zeros(1,nzeros) 1 0 1 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{4}.tcon.name = 'Classic-Gaze';
-matlabbatch{3}.spm.stats.con.consess{4}.tcon.weights = [1 1 1 zeros(1,nzeros) 1 1 1 zeros(1,nzeros) -1 -1 -1 zeros(1,nzeros) -1 -1 -1];
+matlabbatch{3}.spm.stats.con.consess{4}.tcon.weights = [1 0 1 0 1 0 zeros(1,nzeros) 1 0 1 0 1 0 zeros(1,nzeros) -1 0 -1 0 -1 0 zeros(1,nzeros) -1 0 -1 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
 % emo
 % fear
 matlabbatch{3}.spm.stats.con.consess{5}.tcon.name = 'Fear';
-matlabbatch{3}.spm.stats.con.consess{5}.tcon.weights = [0 1 0 zeros(1,nzeros) 0 1 0 zeros(1,nzeros) 0 1 0 zeros(1,nzeros) 0 1 0];
+matlabbatch{3}.spm.stats.con.consess{5}.tcon.weights = [0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{6}.tcon.name = 'Fear Classic';
-matlabbatch{3}.spm.stats.con.consess{6}.tcon.weights = [0 1 0 zeros(1,nzeros) 0 1 0];
+matlabbatch{3}.spm.stats.con.consess{6}.tcon.weights = [0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{7}.tcon.name = 'Fear Gaze';
-matlabbatch{3}.spm.stats.con.consess{7}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 0 1 0 zeros(1,nzeros) 0 1 0];
+matlabbatch{3}.spm.stats.con.consess{7}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{7}.tcon.sessrep = 'none';
 % angry
 matlabbatch{3}.spm.stats.con.consess{8}.tcon.name = 'Angry';
-matlabbatch{3}.spm.stats.con.consess{8}.tcon.weights = [1 0 0 zeros(1,nzeros) 1 0 0 zeros(1,nzeros) 1 0 0 zeros(1,nzeros) 1 0 0];
+matlabbatch{3}.spm.stats.con.consess{8}.tcon.weights = [1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{8}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{9}.tcon.name = 'Angry Classic';
-matlabbatch{3}.spm.stats.con.consess{9}.tcon.weights = [1 0 0 zeros(1,nzeros) 1 0 0];
+matlabbatch{3}.spm.stats.con.consess{9}.tcon.weights = [1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{9}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{10}.tcon.name = 'Angry Gaze';
-matlabbatch{3}.spm.stats.con.consess{10}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 1 0 0 zeros(1,nzeros) 1 0 0];
+matlabbatch{3}.spm.stats.con.consess{10}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{10}.tcon.sessrep = 'none';
 % neutral
 matlabbatch{3}.spm.stats.con.consess{11}.tcon.name = 'Neutral';
-matlabbatch{3}.spm.stats.con.consess{11}.tcon.weights = [0 0 1 zeros(1,nzeros) 0 0 1 zeros(1,nzeros) 0 0 1 zeros(1,nzeros) 0 0 1];
+matlabbatch{3}.spm.stats.con.consess{11}.tcon.weights = [0 0 0 0 1 0 zeros(1,nzeros) 0 0 0 0 1 0 zeros(1,nzeros) 0 0 0 0 1 0 zeros(1,nzeros) 0 0 0 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{11}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{12}.tcon.name = 'Neutral Classic';
-matlabbatch{3}.spm.stats.con.consess{12}.tcon.weights = [0 0 1 zeros(1,nzeros) 0 0 1];
+matlabbatch{3}.spm.stats.con.consess{12}.tcon.weights = [0 0 0 0 1 0 zeros(1,nzeros) 0 0 0 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{12}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{13}.tcon.name = 'Neutral Gaze';
-matlabbatch{3}.spm.stats.con.consess{13}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 0 0 1 zeros(1,nzeros) 0 0 1];
+matlabbatch{3}.spm.stats.con.consess{13}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 1 0 zeros(1,nzeros) 0 0 0 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{13}.tcon.sessrep = 'none';
 % contrast emo
 % emo
 matlabbatch{3}.spm.stats.con.consess{14}.tcon.name = 'Emotion> Neutre';
-matlabbatch{3}.spm.stats.con.consess{14}.tcon.weights = [1 1 -2 zeros(1,nzeros) 1 1 -2 zeros(1,nzeros) 1 1 -2 zeros(1,nzeros) 1 1 -2];
+matlabbatch{3}.spm.stats.con.consess{14}.tcon.weights = [1 0 1 0 -2 0 zeros(1,nzeros) 1 0 1 0 -2 0 zeros(1,nzeros) 1 0 1 0 -2 0 zeros(1,nzeros) 1 0 1 0 -2 0];
 matlabbatch{3}.spm.stats.con.consess{14}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{15}.tcon.name = 'Emotion_Classic > Neutre_Classic';
-matlabbatch{3}.spm.stats.con.consess{15}.tcon.weights = [1 1 -2 zeros(1,nzeros) 1 1 -2];
+matlabbatch{3}.spm.stats.con.consess{15}.tcon.weights = [1 0 1 0 -2 0 zeros(1,nzeros) 1 0 1 0 -2 0];
 matlabbatch{3}.spm.stats.con.consess{15}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{16}.tcon.name = 'Emotion_Gaze > Neutre_Gaze';
-matlabbatch{3}.spm.stats.con.consess{16}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 1 1 -2 zeros(1,nzeros) 1 1 -2];
+matlabbatch{3}.spm.stats.con.consess{16}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 1 0 1 0 -2 0 zeros(1,nzeros) 1 0 1 0 -2 0];
 matlabbatch{3}.spm.stats.con.consess{16}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{17}.tcon.name = 'Emotion_Gaze > Emotion_Classic';
-matlabbatch{3}.spm.stats.con.consess{17}.tcon.weights = [-1 -1 -1 zeros(1,nzeros) -1 -1 -1 zeros(1,nzeros) 1 1 1 zeros(1,nzeros) 1 1 1];
+matlabbatch{3}.spm.stats.con.consess{17}.tcon.weights = [-1 0 -1 0 -1 0 zeros(1,nzeros) -1 0 -1 0 -1 0 zeros(1,nzeros) 1 0 1 0 1 0 zeros(1,nzeros) 1 0 1 0 1 0];
 matlabbatch{3}.spm.stats.con.consess{17}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{18}.tcon.name = 'Emotion_Classic > Emotion_Gaze';
-matlabbatch{3}.spm.stats.con.consess{18}.tcon.weights = [1 1 1 zeros(1,nzeros) 1 1 1 zeros(1,nzeros) -1 -1 -1 zeros(1,nzeros) -1 -1 -1];
+matlabbatch{3}.spm.stats.con.consess{18}.tcon.weights = [1 0 1 0 1 0 zeros(1,nzeros) 1 0 1 0 1 0 zeros(1,nzeros) -1 0 -1 0 -1 0 zeros(1,nzeros) -1 0 -1 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{18}.tcon.sessrep = 'none';
 % fear
 matlabbatch{3}.spm.stats.con.consess{19}.tcon.name = 'Fear > Neutre';
-matlabbatch{3}.spm.stats.con.consess{19}.tcon.weights = [0 1 -1 zeros(1,nzeros) 0 1 -1 zeros(1,nzeros) 0 1 -1 zeros(1,nzeros) 0 1 -1];
+matlabbatch{3}.spm.stats.con.consess{19}.tcon.weights = [0 0 1 0 -1 0 zeros(1,nzeros) 0 0 1 0 -1 0 zeros(1,nzeros) 0 0 1 0 -1 0 zeros(1,nzeros) 0 0 1 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{19}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{20}.tcon.name = 'Fear_Classic > Neutre_Classic';
-matlabbatch{3}.spm.stats.con.consess{20}.tcon.weights = [0 1 -1 zeros(1,nzeros) 0 1 -1];
+matlabbatch{3}.spm.stats.con.consess{20}.tcon.weights = [0 0 1 0 -1 0 zeros(1,nzeros) 0 0 1 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{20}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{21}.tcon.name = 'Fear_Gaze > Neutre_Gaze';
-matlabbatch{3}.spm.stats.con.consess{21}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 0 1 -1 zeros(1,nzeros) 0 1 -1];
+matlabbatch{3}.spm.stats.con.consess{21}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 0 0 1 0 -1 0 zeros(1,nzeros) 0 0 1 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{21}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{22}.tcon.name = 'Fear_Gaze > Fear_Classic';
-matlabbatch{3}.spm.stats.con.consess{22}.tcon.weights = [0 -1 0 zeros(1,nzeros) 0 -1 0 zeros(1,nzeros) 0 1 0 zeros(1,nzeros) 0 1 0];
+matlabbatch{3}.spm.stats.con.consess{22}.tcon.weights = [0 0 -1 0 0 0 zeros(1,nzeros) 0 0 -1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{22}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{23}.tcon.name = 'Fear_Classic > Fear_Gaze';
-matlabbatch{3}.spm.stats.con.consess{23}.tcon.weights = [0 1 0 zeros(1,nzeros) 0 1 0 zeros(1,nzeros) 0 -1 0 zeros(1,nzeros) 0 -1 0];
+matlabbatch{3}.spm.stats.con.consess{23}.tcon.weights = [0 0 1 0 0 0 zeros(1,nzeros) 0 0 1 0 0 0 zeros(1,nzeros) 0 0 -1 0 0 0 zeros(1,nzeros) 0 0 -1 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{23}.tcon.sessrep = 'none';
 % angry
 matlabbatch{3}.spm.stats.con.consess{24}.tcon.name = 'Angry > Neutre';
-matlabbatch{3}.spm.stats.con.consess{24}.tcon.weights = [1 0 -1 zeros(1,nzeros) 1 0 -1 zeros(1,nzeros) 1 0 -1 zeros(1,nzeros) 1 0 -1];
+matlabbatch{3}.spm.stats.con.consess{24}.tcon.weights = [1 0 0 0 -1 0 zeros(1,nzeros) 1 0 0 0 -1 0 zeros(1,nzeros) 1 0 0 0 -1 0 zeros(1,nzeros) 1 0 0 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{24}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{25}.tcon.name = 'Angry_Classic > Neutre_Classic';
-matlabbatch{3}.spm.stats.con.consess{25}.tcon.weights = [1 0 -1 zeros(1,nzeros) 1 0 -1];
+matlabbatch{3}.spm.stats.con.consess{25}.tcon.weights = [1 0 0 0 -1 0 zeros(1,nzeros) 1 0 0 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{25}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{26}.tcon.name = 'Angry_Gaze > Neutre_Gaze';
-matlabbatch{3}.spm.stats.con.consess{26}.tcon.weights = [0 0 0 zeros(1,nzeros) 0 0 0 zeros(1,nzeros) 1 0 -1 zeros(1,nzeros) 1 0 -1];
+matlabbatch{3}.spm.stats.con.consess{26}.tcon.weights = [0 0 0 0 0 0 zeros(1,nzeros) 0 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 -1 0 zeros(1,nzeros) 1 0 0 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{26}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{27}.tcon.name = 'Angry_Gaze > Angry_Classic';
-matlabbatch{3}.spm.stats.con.consess{27}.tcon.weights = [-1 0 0 zeros(1,nzeros) -1 0 0 zeros(1,nzeros) 1 0 0 zeros(1,nzeros) 1 0 0];
+matlabbatch{3}.spm.stats.con.consess{27}.tcon.weights = [-1 0 0 0 0 0 zeros(1,nzeros) -1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{27}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{28}.tcon.name = 'Angry_Classic > Angry_Gaze';
-matlabbatch{3}.spm.stats.con.consess{28}.tcon.weights = [1 0 0 zeros(1,nzeros) 1 0 0 zeros(1,nzeros) -1 0 0 zeros(1,nzeros) -1 0 0];
+matlabbatch{3}.spm.stats.con.consess{28}.tcon.weights = [1 0 0 0 0 0 zeros(1,nzeros) 1 0 0 0 0 0 zeros(1,nzeros) -1 0 0 0 0 0 zeros(1,nzeros) -1 0 0 0 0 0];
 matlabbatch{3}.spm.stats.con.consess{28}.tcon.sessrep = 'none';
 % inter
 matlabbatch{3}.spm.stats.con.consess{29}.tcon.name = 'Inter_Neu_Emo_Gaze_Classic';
-matlabbatch{3}.spm.stats.con.consess{29}.tcon.weights = [-1 -1 2 zeros(1,nzeros) -1 -1 2 zeros(1,nzeros) 1 1 -2 zeros(1,nzeros) 1 1 -2];
+matlabbatch{3}.spm.stats.con.consess{29}.tcon.weights = [-1 0 -1 0 2 0 zeros(1,nzeros) -1 0 -1 0 2 0 zeros(1,nzeros) 1 0 1 0 -2 0 zeros(1,nzeros) 1 0 1 0 -2 0];
 matlabbatch{3}.spm.stats.con.consess{29}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{30}.tcon.name = 'Inter_Fear_Neu_Gaze_Classic';
-matlabbatch{3}.spm.stats.con.consess{30}.tcon.weights = [0 -1 1 zeros(1,nzeros) 0 -1 1 zeros(1,nzeros) 0 1 -1 zeros(1,nzeros) 0 1 -1];
+matlabbatch{3}.spm.stats.con.consess{30}.tcon.weights = [0 0 -1 0 1 0 zeros(1,nzeros) 0 0 -1 0 1 0 zeros(1,nzeros) 0 0 1 0 -1 0 zeros(1,nzeros) 0 0 1 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{30}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{31}.tcon.name = 'Inter_Angry_Neu_Gaze_Classic';
-matlabbatch{3}.spm.stats.con.consess{31}.tcon.weights = [-1 0 1 zeros(1,nzeros) -1 0 1 zeros(1,nzeros) 1 0 -1 zeros(1,nzeros) 1 0 -1];
+matlabbatch{3}.spm.stats.con.consess{31}.tcon.weights = [-1 0 0 0 1 0 zeros(1,nzeros) -1 0 0 0 1 0 zeros(1,nzeros) 1 0 0 0 -1 0 zeros(1,nzeros) 1 0 0 0 -1 0];
 matlabbatch{3}.spm.stats.con.consess{31}.tcon.sessrep = 'none';
 
 spm('defaults', 'FMRI');

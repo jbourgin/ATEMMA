@@ -112,7 +112,11 @@ thresh = round(threshExclude * number_vol);
 
 if num_outliers > thresh
     exclusion = int16(round((num_outliers/number_vol(1))*100));
-    ExcludedFile = fopen([dataDir 'Excluded_art.txt'], 'a');
+    if isfile('Excluded_art.txt')
+        ExcludedFile = fopen('Excluded_art.txt', 'a');
+    else
+        ExcludedFile = fopen('Excluded_art.txt', 'w');
+    end
     fprintf(ExcludedFile, '%s %d%s \n', char(subj), exclusion, '%');
     fclose(ExcludedFile);
 end

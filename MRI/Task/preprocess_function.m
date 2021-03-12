@@ -48,8 +48,16 @@ function preprocess_function(subj, curDir)
         funFilesList{d} = expand_4d_vols(spmFilesList{d}, 'Ok');
         disp(funFilesList{d});
     end
-    if length(funFilesList) == 4 || contains(char(subj),'PT19')
-        preprocessing_job(funFilesList, anatFile);
+    if length(funFilesList) == 4 || (length(funFilesList) >= 2 && length(funFilesList) < 4)
+        disp('number of sessions is ')
+        disp(length(funFilesList))
+        % normal passation
+        if length(funFilesList) == 4
+            preprocessing_job(funFilesList, anatFile);
+        % at least 2 classic sessions
+        else
+            preprocessing_job_2(funFilesList, anatFile);
+        end
         anatNormFile = getFile(anatDir, '*.nii', sprintf('w%s', char(subj)));
         scanNormFile = getFile(scanDir, '*.nii', sprintf('wmean%s', char(subj)));
         
@@ -61,9 +69,9 @@ function preprocess_function(subj, curDir)
         currentpsfile = getFile(dataDir, '*.ps', 'spm');
         print('-dpsc2', '-f1', '-append', currentpsfile)
         clear checkfiles;
-
     else
-        disp('Number of sessions different from 4');
+        disp('Number of sessions less than 2');
+        %disp('Number of sessions different from 4');
     end
     
 end

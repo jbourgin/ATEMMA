@@ -3,25 +3,28 @@ clear all
 clear classes
 addpath('/home/jessica/ATEMMA/MRI/Task/')
 global dataDir;
-dataDir = '/media/jessica/SSD_DATA/IRM_Gaze/Files_ready/';
+dataDir = "/media/jessica/48243AC9243ABA30/IRM_Gaze/Files_ready/";
 cd(dataDir);
-categories = {'AD', 'CN', 'YA'};
+categories = {'CN', 'YA'}; % remove AD for now
 
 global spmdir;
 spmdir = '/home/jessica/software/spm12/';
 
 global unauthorizedEye;
-unauthorizedEye = ['PT19','CB05','RM01','VM09','RC01','PR02'];
+unauthorizedEye = ['PT19','CB05','RM01','VM09','RC01','PR02', 'DL26', 'LD13', 'MC11', 'BM24', 'GS23', 'PV49', 'VS719'];
+
+global nogaze;
+nogaze = ['DL26', 'SH27', 'PT19', 'FC03'];
 
 preprocess = false(1);
-artprocess = true(1);
+artprocess = false(1);
 
 global TR_rsfiles;
 TR_rsfiles = 2.5;
 global nb_vol_removed;
 nb_vol_removed = 0;
 global baseline;
-baseline = true(1);
+baseline = false(1);
 global duration
 duration = 10;
 
@@ -32,8 +35,9 @@ for category = categories
     curDir = char(strcat(dataDir, category, '/'));
     subjList = createSubjList(category);
     for subj = subjList
-        %Le faire à part en modifiant preprocessing_job
-        %if ~contains(char(subj),'PT19')
+        %We exclude these subjects because they have not enough sessions.
+        %We need to change preprocessing_job for them. Done in
+        %preprocessing_job_2
         disp(strcat('Subject: ', subj));
         if preprocess
             preprocess_function(subj, curDir);
@@ -43,6 +47,5 @@ for category = categories
             art_processing(subj, curDir);
             disp('-------- ART ended --------');
         end
-        %end
     end
 end

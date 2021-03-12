@@ -1,6 +1,7 @@
 function art_processing(subj, curDir)
     
     global unauthorizedEye;
+    global nogaze;
     global baseline;
     scanDir = char(strcat(curDir, subj, '/', 'Task', '/'));
     onsetDuration(subj, curDir);
@@ -11,9 +12,15 @@ function art_processing(subj, curDir)
     onsetFilesList = [];
     artfilesList = [];
     number_vol = 0;
-    %for c = 1:4
-    for c = 1:2
-        spmfilesArt{c} = getFile(scanDir, '*.nii', sprintf('s8wa%s_Task_Session%i', char(subj), c));
+    if ~contains(nogaze, char(subj))
+        tt_nb_sessions = 4;
+    else
+        tt_nb_sessions = 2;
+    end
+    for c = 1:tt_nb_sessions
+    %for c = 1:2  We don't do sessions 3 and 4. Ok for DL26, SH27 and PT19.
+    %Won't be ok for gaze analysis.
+        spmfilesArt{c} = getFile(scanDir, '*.nii', sprintf('s8wa%s_Task_Session%i', char(subj), c)); % smooth 8
         artfilesList{c} = getFile(scanDir, '*.nii', sprintf('wa%s_Task_Session%i', char(subj), c));
         movFilesList{c} = getFile(scanDir, '*.txt', sprintf('rp_%s_Task_Session%i', char(subj), c));
         onsetFilesList{c} = getFile(onsetDir, '*.mat', sprintf('onsets%sSession%i.mat', char(subj), c));
@@ -30,35 +37,63 @@ function art_processing(subj, curDir)
     print('-dpsc2', h, '-append', 'artfile') %,'-bestfit'
     close(h);
     
-    statDir = char(strcat(scanDir, 'stats'));
     statDirResp = char(strcat(scanDir, 'statsResp'));
     statDirEye = char(strcat(scanDir, 'statsEye'));
-    if ~exist(statDir, 'dir')
-        mkdir(statDir)
-    end
-    if length(spmfilesArt) == 2
-        firstLevelSpecificationClassic(spmfilesArt, onsetFilesList, movFilesList, statDir)
+    statDirClassicEye = char(strcat(scanDir, 'statsClassicEye'));
+    statDirClassicResp = char(strcat(scanDir, 'statsClassicResp'));
+    
+    statDirClassic = char(strcat(scanDir, 'statsDirClassic'));
+    statDirGazeClassic = char(strcat(scanDir, 'statsDirGazeClassic'));
+    if length(spmfilesArt) == tt_nb_sessions
+        % not used I think
+        firstLevelSpecificationClassic(spmfilesArt, onsetFilesList, movFilesList, statDirClassic)
         print('-dpsc2', '-f1', '-append', 'artfile')
+        if ~contains(nogaze,char(subj)) && length(spmfilesArt) == 4
+            firstLevelSpecification(spmfilesArt, onsetFilesList, movFilesList, statDirGazeClassic)
+            print('-dpsc2', '-f1', '-append', 'artfile')
+            % add response information to pmod
+            onsetpmod(subj, curDir, false(1));
+            % main. Controls response.
+            firstLevelSpecificationResponse(spmfilesArt, onsetFilesList, movFilesList, statDirResp)
+            print('-dpsc2', '-f1', '-append', 'artfile')
+            % for tracking analyses.
+            if ~contains(unauthorizedEye,char(subj))
+                onsetpmod(subj, curDir, true(1));
+                firstLevelSpecificationEye(spmfilesArt, onsetFilesList, movFilesList, statDirEye)
+                print('-dpsc2', '-f1', '-append', 'artfile')
+            end
+        end
+        % do not use. Set to false in prettt_task. Will not work because
+        % changes onsets.
         if baseline
             statDirBaseline = char(strcat(scanDir, 'statsDirBaseline'));
             onsetbaseline(subj, curDir);
             firstLevelSpecificationClassicBaseline(spmfilesArt, onsetFilesList, movFilesList, statDirBaseline)
             print('-dpsc2', '-f1', '-append', 'artfile')
         end
-        if ~contains(curDir, 'YA')
-            onsetpmod(subj, curDir, false(1));
-            firstLevelSpecificationClassicResponse(spmfilesArt, onsetFilesList, movFilesList, statDirResp)
+        % add response information to pmod
+        onsetpmod(subj, curDir, false(1));
+        % main used in thesis
+        firstLevelSpecificationClassicResponse(spmfilesArt, onsetFilesList, movFilesList, statDirClassicResp)
+        print('-dpsc2', '-f1', '-append', 'artfile')
+        % add response information and eyetracking to pmod
+        if ~contains(unauthorizedEye,char(subj))
+            onsetpmod(subj, curDir, true(1));
+            % main used for tracking analysis in thesis
+            firstLevelSpecificationClassicEye(spmfilesArt, onsetFilesList, movFilesList, statDirClassicEye)
             print('-dpsc2', '-f1', '-append', 'artfile')
-            if ~contains(unauthorizedEye,char(subj))
-                onsetpmod(subj, curDir, true(1));
-                firstLevelSpecificationClassicEye(spmfilesArt, onsetFilesList, movFilesList, statDirEye)
-            end
+        end
+        if ~contains(nogaze,char(subj)) && length(spmfilesArt) == 4
+            matFile = getFile(statDirGazeClassic, '*.mat', 'SPM');
+        else
+            matFile = getFile(statDirClassic, '*.mat', 'SPM');
         end
     else
-        disp('Number of sessions different from 2');
+        disp('Number of sessions different from ');
+        disp (tt_nb_sessions);
     end
     
-    matFile = getFile(statDir, '*.mat', 'SPM');
+    
     
     art_job(subj, number_vol, scanDir, matFile);
                

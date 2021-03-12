@@ -1,5 +1,7 @@
 function onsetbaseline(subj, curDir)
 
+% creates a fourth category of stimuli : baseline. Trials with no image
+% (only fixation cross)
 global duration;
 onsetDir = char(strcat(curDir, subj, '/', 'Onsets', '/'));
 onsetfiles = dir(fullfile(onsetDir, sprintf('*%s*.mat',char(subj))));
@@ -12,7 +14,10 @@ for a = 1:length(onsetfiles)
     disp(onsetfiles(a).name);
     onsetFilesList{a} = fullfile(onsetDir, onsetfiles(a).name);
     load(onsetFilesList{a}, 'durations', 'names', 'onsets');
+    % concatenate fear, neutral and angry arrays vertically
     onsettest = vertcat(onsets{1},onsets{2},onsets{3});
+    disp(onsettest);
+    % one session is 380 s (152 dyn * 2.5). Get baseline trials. To check.
     for i = 0:10:370
         elt_found = false(1);
         for elt = 1:length(onsettest)
