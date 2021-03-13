@@ -1,4 +1,4 @@
-function [matlabbatch] = twottest_job(con_files_group1, con_files_group2, resultDir, contrast12, contrast21)
+function [matlabbatch] = twottest_job(con_files_group1, con_files_group2, resultDir, contrast12)
 
 global spmdir;
 
@@ -24,9 +24,9 @@ matlabbatch{3}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File
 matlabbatch{3}.spm.stats.con.consess{1}.tcon.name = contrast12;
 matlabbatch{3}.spm.stats.con.consess{1}.tcon.weights = [1 -1];
 matlabbatch{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
-matlabbatch{3}.spm.stats.con.consess{2}.tcon.name = contrast21;
-matlabbatch{3}.spm.stats.con.consess{2}.tcon.weights = [-1 1];
-matlabbatch{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
+%matlabbatch{3}.spm.stats.con.consess{2}.tcon.name = contrast21;
+%matlabbatch{3}.spm.stats.con.consess{2}.tcon.weights = [-1 1];
+%matlabbatch{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.delete = 0;
 
 spm('defaults', 'FMRI');

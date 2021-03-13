@@ -24,6 +24,6 @@ function contrast_group(contrast_list, filter_list, finalDir, statDir)
         end
         disp(globalspmFiles{1});
         disp(globalspmFiles{2});
-        twottest_job(globalspmFiles{1}, globalspmFiles{2}, char(strcat(resultDir, finalDir, '/', contrast{2}, sprintf('/%s-%s/', categories{1}, categories{2}))), sprintf('/%s-%s/', categories{1}, categories{2}), sprintf('/%s-%s/', categories{2}, categories{1}));
+        twottest_job(globalspmFiles{1}, globalspmFiles{2}, char(strcat(resultDir, finalDir, '/', contrast{2}, sprintf('/%s-%s/', categories{1}, categories{2}))), sprintf('/%s-%s/', categories{1}, categories{2}));
     end
 end

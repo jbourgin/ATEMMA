@@ -10,6 +10,8 @@ csvfile = readtable(strcat(dataDir, 'para_modul.csv'));
 for a = 1:length(onsetfiles)
     responseVector = {[],[],[]};
     eyeVector = {[],[],[]};
+    % Percent_corrected is time proportion on eyes
+    % First_time_corrected is time before first saccade on eyes
     for elt = 1:length(csvfile.Subject)
         if strcmp(char(subj), csvfile.Subject(elt)) && csvfile.Session(elt) == a
             if strcmp('Angry',csvfile.Emotion(elt))
